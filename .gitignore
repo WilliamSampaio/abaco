@@ -1,3 +1,7 @@
+# Abaco ignore
+*.abaco
+*.abaco.json
+
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
@@ -176,3 +180,6 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python
 
 # Generated using ignr.py - github.com/Antrikshy/ignr.py
+
+# Ignore dynaconf secret files
+.secrets.*
