@@ -11,6 +11,9 @@ python = ">=3.11,<3.13"
 pyinstaller = "^6.0.0"
 tinydb = "^4.8.0"
 dynaconf = "^3.2.3"
+rich = "^13.5.3"
+flask = "^2.3.3"
+flaskwebgui = "^1.0.6"
 
 
 [tool.poetry.group.dev.dependencies]

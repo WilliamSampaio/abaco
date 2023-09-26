@@ -1,32 +1,12 @@
-import os
+from flaskwebgui import FlaskUI
+from rich import print as p
 
-from tinydb import TinyDB
-
-# import pathlib
-from config import settings
+from abaco import create_app
+from abaco.database import database_exists, db_filename
 
 if __name__ == '__main__':
 
-    data_folder = settings.data_folder
-    explain_json_format = settings.explain_json_format
+    def saybye():
+        p('Bye!')
 
-    if not os.path.exists(os.path.join(os.getcwd(), data_folder)):
-        os.mkdir(os.path.join(os.getcwd(), data_folder))
-
-    db_filename = os.path.join(
-        os.getcwd(),
-        data_folder,
-        (
-            os.environ.get('USER')
-            + '.abaco'
-            + ('.json' if explain_json_format is True else '')
-        ),
-    )
-
-    # if not pathlib.Path.is_file(db_filename):
-    db = TinyDB(db_filename)
-    db.default_table_name = 'teste_eilliam'
-
-    db.insert(
-        {'user_config': {'name': 'William Sampaio', 'language': 'pt-BR'}}
-    )
+    FlaskUI(app=create_app(), server='flask', on_shutdown=saybye()).run()
