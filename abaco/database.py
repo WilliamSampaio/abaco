@@ -1,5 +1,7 @@
 import os
 
+from tinydb import TinyDB
+
 db_filename = os.path.join(
     os.environ.get('HOME'), '.abaco', 'database.abaco.json'
 )
@@ -7,6 +9,21 @@ db_filename = os.path.join(
 
 def database_exists():
     return os.path.exists(db_filename)
+
+
+def get_db() -> TinyDB:
+    if not os.path.exists(os.path.join(os.environ.get('HOME'), '.abaco')):
+        os.makedirs(os.path.join(os.environ.get('HOME'), '.abaco'))
+    return TinyDB(db_filename)
+
+
+def get_table(table_name: str, db_instance: TinyDB) -> TinyDB:
+    db_instance.default_table_name = table_name
+    return db_instance
+
+
+def get_user_config() -> TinyDB:
+    return get_table('user_config', get_db())
 
 
 # data_folder = settings.data_folder
