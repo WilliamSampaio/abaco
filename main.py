@@ -2,7 +2,6 @@ from flaskwebgui import FlaskUI
 from rich import print as p
 
 from abaco import create_app
-from abaco.database import database_exists, db_filename
 
 if __name__ == '__main__':
 

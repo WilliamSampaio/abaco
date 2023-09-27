@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from flaskwebgui import close_application
 
-from abaco import APP_NAME
+from abaco.constants import APP_NAME
 from abaco.database import database_exists
 
 web = Blueprint('web', __name__)
