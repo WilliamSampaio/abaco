@@ -26,6 +26,12 @@ def get_user_config() -> TinyDB:
     return get_table('user_config', get_db())
 
 
+def empty_user_config():
+    if len(get_user_config().all()) == 0:
+        return True
+    return False
+
+
 # data_folder = settings.data_folder
 #     explain_json_format = settings.explain_json_format
 
