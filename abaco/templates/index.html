@@ -1,11 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ data['title'] or 'Abaco' }}</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
+
 <body>
-    Olá mundo!
+
+    <nav class="navbar bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                Hello, {{ data['name'] }}
+            </a>
+            <div class="d-flex">
+                <a href="/exit" class="btn btn-danger" role="close">Exit</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col align-self-center">
+                <div class="card text-center">
+                    <div style="width: 20%;margin-left: auto;margin-right: auto;padding: 5px;">
+                        <canvas id="myChart" width="100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Earnings</h5>
+                        <p class="fs-1"> + R$ 1.999,00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Expenses</h5>
+                        <p class="fs-1"> - R$ 999,00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Balance</h5>
+                        <p class="fs-1">R$ 999,01</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <table class="table table-striped table-hover">
+                    <tr class="table-success">
+                        <td>Salary</td>
+                        <td><b>+ BLR: R$ 1.999,00</b></td>
+                        <td>29/09</td>
+                        <td style="width: 1%;white-space: nowrap;">
+                            <button class="btn btn-success btn-sm">Edit</button>
+                            <button class="btn btn-danger btn-sm">Remove</button>
+                        </td>
+                    </tr>
+                    <tr class="table-danger">
+                        <td>Coffee</td>
+                        <td><b>- BLR: R$ 999,99</b></td>
+                        <td>30/09</td>
+                        <td style="width: 1%;white-space: nowrap;">
+                            <button class="btn btn-success btn-sm">Edit</button>
+                            <button class="btn btn-danger btn-sm">Remove</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col text-center">
+                <button class="btn btn-primary btn-lg">Add Register</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chart.umd.min.js') }}"></script>
+    <script type="text/javascript">
+
+        const ctx = document.getElementById('myChart')
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Earnings', 'Expenses'],
+                datasets: [{
+                    label: '# ',
+                    data: [81, 19],
+                    borderWidth: 1
+                }]
+            }
+        })
+
+    </script>
 </body>
+
 </html>
