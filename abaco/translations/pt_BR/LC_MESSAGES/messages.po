@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-28 13:59-0400\n"
+"POT-Creation-Date: 2023-09-28 16:34-0400\n"
 "PO-Revision-Date: 2023-09-28 13:26-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -18,6 +18,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
+#: abaco/blueprints/api/api.py:18
+msgid "App created successfully"
+msgstr "App criado com sucesso"
+
+#: abaco/blueprints/api/api.py:24
+msgid "Database file not sent"
+msgstr "Arquivo de banco de dados não enviado"
+
+#: abaco/blueprints/api/api.py:32
+msgid "Database invalid"
+msgstr "Banco de dados inválido"
+
+#: abaco/blueprints/api/api.py:37
+msgid "Database imported successfully"
+msgstr "Banco de dados importado com sucesso"
+
 #: abaco/blueprints/web/web.py:16
 msgid "Welcome!"
 msgstr "Bem-vindo!"
@@ -26,7 +42,7 @@ msgstr "Bem-vindo!"
 msgid "Hello"
 msgstr "Olá"
 
-#: abaco/templates/index.html:20
+#: abaco/templates/index.html:20 abaco/templates/welcome.html:18
 msgid "Exit"
 msgstr "Sair"
 
@@ -42,19 +58,19 @@ msgstr "Remover"
 msgid "Add Register"
 msgstr "Adicionar Registro"
 
-#: abaco/templates/welcome.html:19
+#: abaco/templates/welcome.html:28
 msgid "Welcome"
 msgstr "Bem-vindo"
 
-#: abaco/templates/welcome.html:20
+#: abaco/templates/welcome.html:29
 msgid "Your minimalist finance manager!"
 msgstr "Seu gerenciador financeiro minimalista!"
 
-#: abaco/templates/welcome.html:22 abaco/templates/welcome.html:36
+#: abaco/templates/welcome.html:31 abaco/templates/welcome.html:45
 msgid "New App"
 msgstr "Novo App"
 
-#: abaco/templates/welcome.html:24 abaco/templates/welcome.html:76
+#: abaco/templates/welcome.html:33 abaco/templates/welcome.html:85
 msgid "Import Data"
 msgstr "Importar Dados"
 

@@ -2,6 +2,7 @@ import json
 from io import BytesIO
 
 from flask import Blueprint, request
+from flask_babel import gettext as _
 
 from abaco.database import db_filename, get_user_config
 from abaco.utils import validate_json
@@ -14,13 +15,13 @@ def newapp():
     data = request.get_json()
     db_user_config = get_user_config()
     db_user_config.insert(data)
-    return {'message': 'App created successfully'}, 201
+    return {'message': _('App created successfully')}, 201
 
 
 @api.route('/importdatabase', methods=['POST'])
 def importdatabase():
     if 'database' not in request.files.keys():
-        return {'message': 'Database file not sent'}, 400
+        return {'message': _('Database file not sent')}, 400
     database = BytesIO(request.files.get('database').stream.read())
     # print(type(database.getvalue().decode()))
     # print(database.getvalue().decode())
@@ -28,9 +29,9 @@ def importdatabase():
     if validate_json(database.getvalue().decode()):
         database_dict = json.loads(database.getvalue().decode())
     else:
-        return {'message': 'Database invalid'}, 400
+        return {'message': _('Database invalid')}, 400
     # print(type(database_dict))
     # print(database_dict)
     with open(db_filename, 'w') as database_file:
         database_file.write(json.dumps(database_dict))
-    return {'message': 'Database imported successfully'}, 201
+    return {'message': _('Database imported successfully')}, 201
