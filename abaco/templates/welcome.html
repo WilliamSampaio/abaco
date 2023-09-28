@@ -86,11 +86,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <h2>coming soon!</h2>
+                    <form id="importdata_form" enctype="multipart/form-data">
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" name="database" id="importdata_database" required>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="submit" form="importdata_form" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -116,6 +120,22 @@
             });
         }
 
+        function import_database(formData) {
+            $.ajax({
+                type: "POST",
+                url: "/api/importdatabase",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+            }).done(function (data) {
+                alert(data.message)
+                location.reload()
+            }).fail((response) => {
+                alert('Error: ' + response.responseJSON.message)
+            });
+        }
+
         $('#newapp_form').submit((e) => {
             e.preventDefault()
             let name = $('#newapp_name').val()
@@ -126,6 +146,13 @@
                 'language': language,
                 'currency': currency
             })
+        })
+
+        $('#importdata_form').submit((e) => {
+            var form = $('#importdata_form')[0]
+            var formData = new FormData(form)
+            formData.append('database', $('#importdata_database').file)
+            import_database(formData)
         })
 
     </script>
