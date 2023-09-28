@@ -1,10 +1,18 @@
+import os
+
+from dynaconf import FlaskDynaconf
 from flask import Flask
 
-from abaco.blueprints import api, web
+base_dir = os.path.abspath(os.path.dirname(__file__))
 
 
 def create_app():
     app = Flask(__name__)
-    api.init_app(app)
-    web.init_app(app)
+    FlaskDynaconf(
+        app=app,
+        extensions_list='EXTENSIONS',
+    )
+    app.config['BABEL_TRANSLATION_DIRECTORIES'] = os.path.join(
+        base_dir, 'translations'
+    )
     return app

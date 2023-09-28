@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from flask_babel import gettext as _
 from flaskwebgui import close_application
 
 from abaco.constants import APP_NAME
@@ -12,7 +13,7 @@ def hello():
 
     if not database_exists() or empty_user_config():
 
-        data = {'title': 'Welcome! | ' + APP_NAME}
+        data = {'title': _('Welcome!') + ' | ' + APP_NAME}
         return render_template('welcome.html', data=data)
 
     data = get_user_config().all()[0]

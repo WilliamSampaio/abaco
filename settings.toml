@@ -1,2 +1,6 @@
-data_folder = "save_me"
-explain_json_format = false
+[default]
+EXTENSIONS = [
+  "abaco.localization:init_app",
+  "abaco.blueprints.api:init_app",
+  "abaco.blueprints.web:init_app",
+]

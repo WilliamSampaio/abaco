@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -14,10 +14,10 @@
     <nav class="navbar bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                Hello, {{ data['name'] }}
+                {{ gettext('Hello') }}, {{ data['name'] }}
             </a>
             <div class="d-flex">
-                <a href="/exit" class="btn btn-danger" role="close">Exit</a>
+                <a href="/exit" class="btn btn-danger" role="close">{{ gettext('Exit') }}</a>
             </div>
         </div>
     </nav>
@@ -68,8 +68,8 @@
                         <td><b>+ BLR: R$ 1.999,00</b></td>
                         <td>29/09</td>
                         <td style="width: 1%;white-space: nowrap;">
-                            <button class="btn btn-success btn-sm">Edit</button>
-                            <button class="btn btn-danger btn-sm">Remove</button>
+                            <button class="btn btn-success btn-sm">{{ gettext('Edit') }}</button>
+                            <button class="btn btn-danger btn-sm">{{ gettext('Remove') }}</button>
                         </td>
                     </tr>
                     <tr class="table-danger">
@@ -87,7 +87,7 @@
 
         <div class="row">
             <div class="col text-center">
-                <button class="btn btn-primary btn-lg">Add Register</button>
+                <button class="btn btn-primary btn-lg">{{ gettext('Add Register') }}</button>
             </div>
         </div>
     </div>
