@@ -14,7 +14,7 @@ def newapp():
     data = request.get_json()
     db_user_config = get_user_config()
     db_user_config.insert(data)
-    return data, 201
+    return {'message': 'App created successfully'}, 201
 
 
 @api.route('/importdatabase', methods=['POST'])

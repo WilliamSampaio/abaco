@@ -113,7 +113,7 @@
                 encode: true,
                 contentType: 'application/json'
             }).done(function (data) {
-                alert('Success!')
+                alert(data.message)
                 location.reload()
             }).fail((response) => {
                 alert('Error: ' + response.responseJSON.message)
