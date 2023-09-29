@@ -4,7 +4,7 @@ from io import BytesIO
 from flask import Blueprint, request
 from flask_babel import gettext as _
 
-from abaco.database import db_filename, get_user_config
+from abaco.database import db_filename, get_user_config, validate_schema
 from abaco.utils import validate_json
 
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -29,6 +29,8 @@ def importdatabase():
     if validate_json(database.getvalue().decode()):
         database_dict = json.loads(database.getvalue().decode())
     else:
+        return {'message': _('Database invalid')}, 400
+    if not validate_schema(database_dict):
         return {'message': _('Database invalid')}, 400
     # print(type(database_dict))
     # print(database_dict)

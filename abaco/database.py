@@ -1,5 +1,7 @@
+import json
 import os
 
+from schema import And, Schema, Use
 from tinydb import TinyDB
 
 db_filename = os.path.join(
@@ -30,6 +32,37 @@ def empty_user_config():
     if len(get_user_config().all()) == 0:
         return True
     return False
+
+
+def validate_schema(schema: dict):
+    def for_over_dict(dictionary: dict):
+        for key, value in dictionary.items():
+            if type(dictionary[key]) == dict:
+                dictionary[key] = for_over_dict(dictionary[key])
+                continue
+            if type(value) == str:
+                dictionary[key] = And(Use(str))
+                continue
+            if type(value) == float:
+                dictionary[key] = And(Use(float))
+                continue
+            if type(value) == int:
+                dictionary[key] = And(Use(int))
+                continue
+            if type(value) == bool:
+                dictionary[key] = And(Use(bool))
+                continue
+        return dictionary
+
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    f = open(os.path.join(base_dir, 'schemas', 'database.json'))
+    valid_schema = json.load(f)
+    _schema = Schema(for_over_dict(valid_schema))
+    if not _schema.validate(
+        schema,
+    ):
+        return False
+    return True
 
 
 # data_folder = settings.data_folder
