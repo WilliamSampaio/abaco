@@ -34,6 +34,7 @@ babel_extract = "pybabel extract -F babel.cfg -o abaco/translations/messages.pot
 babel_init = "pybabel init -i abaco/translations/messages.pot -d abaco/translations -l"
 babel_init_all = "task babel_init en_US && task babel_init pt_BR"
 babel_update = "pybabel update -i abaco/translations/messages.pot -d abaco/translations"
+build = "pyinstaller --clean abaco.spec"
 exec = "task lint && python main.py"
 lint = "blue . && isort ."
 
