@@ -7,6 +7,6 @@ if __name__ == '__main__':
     def saybye():
         print('Bye!')
 
-    FlaskUI(app=create_app(), server='flask', on_shutdown=saybye()).run()
+    FlaskUI(app=create_app(), server='flask', on_shutdown=saybye).run()
 
     # create_app().run(debug=True)
