@@ -7,9 +7,10 @@
 {% block content %}
 <nav class="navbar bg-light mb-2">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            {{ gettext('Hello') }}, {{ data['user_config']['name'] }}
-        </a>
+        <span class="navbar-brand">{{ gettext('Hello') }}, <a class="navbar-brand" href="#" data-bs-toggle="modal"
+                data-bs-target="#settingsModal">{{
+                data['user_config']['name'] }} ⚙</a>
+        </span>
         <div class="d-flex">
             <a href="/exit" class="btn btn-danger" role="close">☢ {{ gettext('Exit') }}</a>
         </div>
@@ -141,6 +142,59 @@
         </div>
     </div>
 
+</div>
+
+<!-- Settings Modal -->
+<div class="modal fade" id="settingsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="settingsModalLabel">{{ gettext('Settings') }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="settings_form">
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control text-uppercase" id="settings_name"
+                            placeholder="{{ gettext('Your Name') }}" value="{{ data['user_config']['name'] }}" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="settings_language">{{ gettext('Language') }}</label>
+                        <select class="form-select" name="language" id="settings_language" required>
+                            {% for country in data['countries']: %}
+                            {% if country['locale'] == data['user_config']['language']: %}
+                            <option value="{{ country['locale'] }}" selected>{{ country['emoji'] }} {{
+                                country['country'] }}
+                            </option>
+                            {% else: %}
+                            <option value="{{ country['locale'] }}">{{ country['emoji'] }} {{ country['country'] }}
+                            </option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="settings_currency">{{ gettext('Currency') }}</label>
+                        <select class="form-select" name="currency" id="settings_currency" required>
+                            {% for currency in data['currencies']: %}
+                            {% if currency['code_iso_4217'] == data['user_config']['currency']: %}
+                            <option value="{{ currency['code_iso_4217'] }}" selected>{{ currency['emoji'] }} ({{
+                                currency['code_iso_4217'] }}) {{ currency['currency'] }}</option>
+                            {% else: %}
+                            <option value="{{ currency['code_iso_4217'] }}">{{ currency['emoji'] }} ({{
+                                currency['code_iso_4217'] }}) {{ currency['currency'] }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
+                <button type="submit" form="settings_form" class="btn btn-primary">{{ gettext('Save') }}</button>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block scripts %}
