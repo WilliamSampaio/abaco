@@ -4,6 +4,7 @@ from flaskwebgui import close_application
 
 from abaco.constants import COUNTRIES, CURRENCIES
 from abaco.database import database_exists, empty_user_config, get_user_config
+from abaco.localization import get_locale
 
 web = Blueprint('web', __name__)
 
@@ -11,9 +12,12 @@ web = Blueprint('web', __name__)
 @web.route('/')
 def index():
 
+    lang = get_locale().replace('_', '-')
+
     if not database_exists() or empty_user_config():
 
         data = {
+            'lang': lang,
             'title': _('Welcome!'),
             'countries': COUNTRIES,
             'currencies': CURRENCIES,
@@ -21,6 +25,7 @@ def index():
         return render_template('welcome.html.jinja', data=data)
 
     data = {
+        'lang': lang,
         'user_config': get_user_config().all()[0],
         'title': _('Home'),
         'countries': COUNTRIES,
@@ -36,4 +41,9 @@ def close_window():
 
 @web.route('/hello', methods=['GET'])
 def hello():
-    return render_template('hello.html.jinja', data={'title': 'Hello!'})
+
+    lang = get_locale().replace('_', '-')
+
+    return render_template(
+        'hello.html.jinja', data={'lang': lang, 'title': 'Hello!'}
+    )

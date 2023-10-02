@@ -1,6 +1,5 @@
 {% extends "base.html.jinja" %}
-{% block lang %}{% if 'language' in data['user_config'] and data['user_config']['language'] != '': %}lang={{ data['user_config']['language'].replace('_','-') }}{% else: %}{{ super() }}{% endif %}
-{% endblock %}
+{% block lang %}{% if 'lang' in data: %}lang={{ data['lang'] }}{% else: %}{{ super() }}{% endif %}{% endblock %}
 {% block title %}{{ data['title'] }}{% endblock %}
 {% block head %}
 {{ super() }}

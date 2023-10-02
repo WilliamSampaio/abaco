@@ -1,4 +1,5 @@
 {% extends "base.html.jinja" %}
+{% block lang %}{% if 'lang' in data: %}lang={{ data['lang'] }}{% else: %}{{ super() }}{% endif %}{% endblock %}
 {% block title %}{{ data['title'] }}{% endblock %}
 {% block head %}
 {{ super() }}
@@ -42,10 +43,10 @@
                 <form id="newapp_form">
                     <div class="mb-3">
                         <input type="text" name="name" class="form-control text-uppercase" id="newapp_name"
-                            placeholder="Your Name" required>
+                            placeholder="{{ gettext('Your Name') }}" required>
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="newapp_language">Language</label>
+                        <label class="input-group-text" for="newapp_language">{{ gettext('Language') }}</label>
                         <select class="form-select" name="language" id="newapp_language" required>
                             <option></option>
                             {% for country in data['countries']: %}
@@ -55,7 +56,7 @@
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="newapp_currency">Currency</label>
+                        <label class="input-group-text" for="newapp_currency">{{ gettext('Currency') }}</label>
                         <select class="form-select" name="currency" id="newapp_currency" required>
                             <option></option>
                             {% for currency in data['currencies']: %}
@@ -67,8 +68,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="newapp_form" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
+                <button type="submit" form="newapp_form" class="btn btn-primary">{{ gettext('Save') }}</button>
             </div>
         </div>
     </div>
@@ -90,8 +91,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="importdata_form" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
+                <button type="submit" form="importdata_form" class="btn btn-primary">{{ gettext('Save') }}</button>
             </div>
         </div>
     </div>

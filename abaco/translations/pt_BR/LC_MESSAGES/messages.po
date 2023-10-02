@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-02 03:00-0400\n"
+"POT-Creation-Date: 2023-10-02 03:55-0400\n"
 "PO-Revision-Date: 2023-10-02 03:00-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -38,7 +38,7 @@ msgstr "Banco de dados Abaco importado com sucesso"
 msgid "Welcome!"
 msgstr "Bem-vindo!"
 
-#: abaco/blueprints/web/web.py:24
+#: abaco/blueprints/web/web.py:25
 msgid "Home"
 msgstr "Início"
 
@@ -50,23 +50,23 @@ msgstr "Olá mundo!"
 msgid "Your minimalist finance manager!"
 msgstr "Seu gerenciador financeiro minimalista!"
 
-#: abaco/templates/index.html.jinja:10
+#: abaco/templates/index.html.jinja:12
 msgid "Hello"
 msgstr "Olá"
 
-#: abaco/templates/index.html.jinja:13 abaco/templates/welcome.html.jinja:11
+#: abaco/templates/index.html.jinja:15 abaco/templates/welcome.html.jinja:11
 msgid "Exit"
 msgstr "Sair"
 
-#: abaco/templates/index.html.jinja:64
+#: abaco/templates/index.html.jinja:66
 msgid "Edit"
 msgstr "Editar"
 
-#: abaco/templates/index.html.jinja:65
+#: abaco/templates/index.html.jinja:67
 msgid "Remove"
 msgstr "Remover"
 
-#: abaco/templates/index.html.jinja:83
+#: abaco/templates/index.html.jinja:85
 msgid "Add Register"
 msgstr "Adicionar Registro"
 
@@ -81,4 +81,24 @@ msgstr "Novo Abaco"
 #: abaco/templates/welcome.html.jinja:26 abaco/templates/welcome.html.jinja:82
 msgid "Import Abaco"
 msgstr "Importar Abaco"
+
+#: abaco/templates/welcome.html.jinja:45
+msgid "Your Name"
+msgstr "Seu Nome"
+
+#: abaco/templates/welcome.html.jinja:48
+msgid "Language"
+msgstr "Idioma"
+
+#: abaco/templates/welcome.html.jinja:58
+msgid "Currency"
+msgstr "Moeda"
+
+#: abaco/templates/welcome.html.jinja:70 abaco/templates/welcome.html.jinja:93
+msgid "Close"
+msgstr "Fechar"
+
+#: abaco/templates/welcome.html.jinja:71 abaco/templates/welcome.html.jinja:94
+msgid "Save"
+msgstr "Salvar"
 
