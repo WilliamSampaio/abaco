@@ -1,7 +1,7 @@
 APP_NAME = 'Abaco'
 
 COUNTRIES = [
-    {'locale': 'es_US', 'emoji': '🇺🇸', 'country': 'English (US)'},
+    {'locale': 'en_US', 'emoji': '🇺🇸', 'country': 'English (US)'},
     {'locale': 'pt_BR', 'emoji': '🇧🇷', 'country': 'Portuguese (BR)'},
 ]
 
