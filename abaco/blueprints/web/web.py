@@ -15,6 +15,7 @@ from abaco.database import (
     get_user_config,
 )
 from abaco.localization import get_locale
+from abaco.utils import purge_temp_files
 
 web = Blueprint('web', __name__)
 
@@ -64,6 +65,7 @@ def backup():
 
 @web.route('/exit', methods=['GET'])
 def close_window():
+    purge_temp_files()
     close_application()
 
 

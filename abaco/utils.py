@@ -1,4 +1,5 @@
 import json
+import os
 
 from abaco.constants import BASE_DIR_TEMP
 
@@ -12,4 +13,5 @@ def validate_json(json_string: str):
 
 
 def purge_temp_files():
-    print(BASE_DIR_TEMP)
+    for file in os.listdir(BASE_DIR_TEMP):
+        os.remove(os.path.join(BASE_DIR_TEMP, file))
