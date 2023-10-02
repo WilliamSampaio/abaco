@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Blueprint, render_template
 from flask_babel import gettext as _
 from flaskwebgui import close_application
@@ -26,6 +28,8 @@ def index():
 
     data = {
         'lang': lang,
+        'initial_date': datetime.today().strftime('%Y-%m-01'),
+        'final_date': datetime.today().strftime('%Y-%m-%d'),
         'user_config': get_user_config().all()[0],
         'title': _('Home'),
         'countries': COUNTRIES,

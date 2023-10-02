@@ -5,7 +5,7 @@
 {{ super() }}
 {% endblock %}
 {% block content %}
-<nav class="navbar bg-light">
+<nav class="navbar bg-light mb-2">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             {{ gettext('Hello') }}, {{ data['user_config']['name'] }}
@@ -17,6 +17,31 @@
 </nav>
 
 <div class="container">
+    <div class="row mb-3">
+        <div class="col align-self-center">
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="input-group">
+                        <span class="input-group-text">Initial Date</span>
+                        <input type="date" class="form-control" name="initial_date" id="initial_date"
+                            value="{{ data['initial_date'] }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col align-self-center">
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="input-group">
+                        <span class="input-group-text">Final Date</span>
+                        <input type="date" class="form-control" name="final_date" id="final_date"
+                            value="{{ data['final_date'] }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row mb-3">
         <div class="col align-self-center">
             <div class="card text-center">
