@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-02 01:50-0400\n"
-"PO-Revision-Date: 2023-09-28 13:26-0400\n"
+"POT-Creation-Date: 2023-10-02 03:00-0400\n"
+"PO-Revision-Date: 2023-10-02 03:00-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
 "Language-Team: en_US <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Generated-By: Babel 2.12.1\n"
 
 #: abaco/blueprints/api/api.py:18
-msgid "App created successfully"
+msgid "Abaco created successfully"
 msgstr ""
 
 #: abaco/blueprints/api/api.py:24
@@ -31,7 +31,7 @@ msgid "Database invalid"
 msgstr ""
 
 #: abaco/blueprints/api/api.py:39
-msgid "Database imported successfully"
+msgid "Abaco database imported successfully"
 msgstr ""
 
 #: abaco/blueprints/web/web.py:17
@@ -75,40 +75,10 @@ msgid "Welcome"
 msgstr ""
 
 #: abaco/templates/welcome.html.jinja:24 abaco/templates/welcome.html.jinja:38
-msgid "New App"
+msgid "New Abaco"
 msgstr ""
 
 #: abaco/templates/welcome.html.jinja:26 abaco/templates/welcome.html.jinja:82
-msgid "Import Data"
+msgid "Import Abaco"
 msgstr ""
-
-#~ msgid "Welcome!"
-#~ msgstr ""
-
-#~ msgid "Hello"
-#~ msgstr ""
-
-#~ msgid "Exit"
-#~ msgstr ""
-
-#~ msgid "Edit"
-#~ msgstr ""
-
-#~ msgid "Remove"
-#~ msgstr ""
-
-#~ msgid "Add Register"
-#~ msgstr ""
-
-#~ msgid "Welcome"
-#~ msgstr ""
-
-#~ msgid "Your minimalist finance manager!"
-#~ msgstr ""
-
-#~ msgid "New App"
-#~ msgstr ""
-
-#~ msgid "Import Data"
-#~ msgstr ""
 

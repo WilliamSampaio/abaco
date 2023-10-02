@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-02 01:50-0400\n"
-"PO-Revision-Date: 2023-09-28 13:26-0400\n"
+"POT-Creation-Date: 2023-10-02 03:00-0400\n"
+"PO-Revision-Date: 2023-10-02 03:00-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
 "Language-Team: pt_BR <LL@li.org>\n"
@@ -19,8 +19,8 @@ msgstr ""
 "Generated-By: Babel 2.12.1\n"
 
 #: abaco/blueprints/api/api.py:18
-msgid "App created successfully"
-msgstr "App criado com sucesso"
+msgid "Abaco created successfully"
+msgstr "Abaco criado com sucesso"
 
 #: abaco/blueprints/api/api.py:24
 msgid "Database file not sent"
@@ -31,13 +31,12 @@ msgid "Database invalid"
 msgstr "Banco de dados inválido"
 
 #: abaco/blueprints/api/api.py:39
-msgid "Database imported successfully"
-msgstr "Banco de dados importado com sucesso"
+msgid "Abaco database imported successfully"
+msgstr "Banco de dados Abaco importado com sucesso"
 
 #: abaco/blueprints/web/web.py:17
-#, fuzzy
 msgid "Welcome!"
-msgstr "Bem-vindo"
+msgstr "Bem-vindo!"
 
 #: abaco/blueprints/web/web.py:24
 msgid "Home"
@@ -76,40 +75,10 @@ msgid "Welcome"
 msgstr "Bem-vindo"
 
 #: abaco/templates/welcome.html.jinja:24 abaco/templates/welcome.html.jinja:38
-msgid "New App"
-msgstr "Novo App"
+msgid "New Abaco"
+msgstr "Novo Abaco"
 
 #: abaco/templates/welcome.html.jinja:26 abaco/templates/welcome.html.jinja:82
-msgid "Import Data"
-msgstr "Importar Dados"
-
-#~ msgid "Welcome!"
-#~ msgstr "Bem-vindo!"
-
-#~ msgid "Hello"
-#~ msgstr "Olá"
-
-#~ msgid "Exit"
-#~ msgstr "Sair"
-
-#~ msgid "Edit"
-#~ msgstr "Editar"
-
-#~ msgid "Remove"
-#~ msgstr "Remover"
-
-#~ msgid "Add Register"
-#~ msgstr "Adicionar Registro"
-
-#~ msgid "Welcome"
-#~ msgstr "Bem-vindo"
-
-#~ msgid "Your minimalist finance manager!"
-#~ msgstr "Seu gerenciador financeiro minimalista!"
-
-#~ msgid "New App"
-#~ msgstr "Novo App"
-
-#~ msgid "Import Data"
-#~ msgstr "Importar Dados"
+msgid "Import Abaco"
+msgstr "Importar Abaco"
 

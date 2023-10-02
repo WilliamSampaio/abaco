@@ -20,10 +20,12 @@ def index():
         }
         return render_template('welcome.html.jinja', data=data)
 
-    data = get_user_config().all()[0]
-    data['title'] = _('Home')
-    data['countries'] = COUNTRIES
-    data['currencies'] = CURRENCIES
+    data = {
+        'user_config': get_user_config().all()[0],
+        'title': _('Home'),
+        'countries': COUNTRIES,
+        'currencies': CURRENCIES,
+    }
     return render_template('index.html.jinja', data=data)
 
 

@@ -1,4 +1,6 @@
 {% extends "base.html.jinja" %}
+{% block lang %}{% if 'language' in data['user_config'] and data['user_config']['language'] != '': %}lang={{ data['user_config']['language'].replace('_','-') }}{% else: %}{{ super() }}{% endif %}
+{% endblock %}
 {% block title %}{{ data['title'] }}{% endblock %}
 {% block head %}
 {{ super() }}
@@ -7,7 +9,7 @@
 <nav class="navbar bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            {{ gettext('Hello') }}, {{ data['name'] }}
+            {{ gettext('Hello') }}, {{ data['user_config']['name'] }}
         </a>
         <div class="d-flex">
             <a href="/exit" class="btn btn-danger" role="close">{{ gettext('Exit') }}</a>

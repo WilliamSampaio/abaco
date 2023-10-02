@@ -7,9 +7,13 @@ from abaco.database import get_user_config
 
 
 def get_locale():
-    if len(get_user_config().all()) == 0:
+    user_configs = get_user_config().all()
+    if len(user_configs) == 0:
         return getdefaultlocale()[0]
-    return get_user_config().all()[0]['language']
+    user_config = user_configs[0]
+    if 'language' not in user_config or user_config['language'] == '':
+        return getdefaultlocale()[0]
+    return user_config['language']
 
 
 def get_timezone():

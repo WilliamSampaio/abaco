@@ -15,7 +15,7 @@ def newapp():
     data = request.get_json()
     db_user_config = get_user_config()
     db_user_config.insert(data)
-    return {'message': _('App created successfully')}, 201
+    return {'message': _('Abaco created successfully')}, 201
 
 
 @api.route('/importdatabase', methods=['POST'])
@@ -36,4 +36,4 @@ def importdatabase():
     # print(database_dict)
     with open(db_filename, 'w') as database_file:
         database_file.write(json.dumps(database_dict))
-    return {'message': _('Database imported successfully')}, 201
+    return {'message': _('Abaco database imported successfully')}, 201
