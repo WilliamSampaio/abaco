@@ -11,12 +11,13 @@ dynaconf = "^3.2.3"
 flask = "^2.3.3"
 flask-babel = "^3.1.0"
 flaskwebgui = "^1.0.6"
+gunicorn = "^21.2.0"
 pyautogui = "^0.9.54"
 pyinstaller = "^6.0.0"
 python = ">=3.11,<3.13"
+schema = "^0.7.5"
 tinydb = "^4.8.0"
 waitress = "^2.1.2"
-schema = "^0.7.5"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
@@ -36,8 +37,9 @@ babel_init = "pybabel init -i abaco/translations/messages.pot -d abaco/translati
 babel_init_all = "task babel_init en_US && task babel_init pt_BR"
 babel_update = "pybabel update -i abaco/translations/messages.pot -d abaco/translations"
 build = "task lint && task babel_compile && pyinstaller --clean abaco.spec"
-exec = "task lint && python main.py"
 lint = "blue . && isort ."
+run = "task lint && python main.py"
+web_run = "task lint && gunicorn -w 4 wsgi:app"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
