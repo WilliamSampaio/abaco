@@ -11,7 +11,7 @@
             {{ gettext('Hello') }}, {{ data['user_config']['name'] }}
         </a>
         <div class="d-flex">
-            <a href="/exit" class="btn btn-danger" role="close">{{ gettext('Exit') }}</a>
+            <a href="/exit" class="btn btn-danger" role="close">☢ {{ gettext('Exit') }}</a>
         </div>
     </div>
 </nav>
@@ -22,7 +22,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <div class="input-group">
-                        <span class="input-group-text">Initial Date</span>
+                        <span class="input-group-text">📆 Initial Date</span>
                         <input type="date" class="form-control" name="initial_date" id="initial_date"
                             value="{{ data['initial_date'] }}">
                     </div>
@@ -33,7 +33,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <div class="input-group">
-                        <span class="input-group-text">Final Date</span>
+                        <span class="input-group-text">📆 Final Date</span>
                         <input type="date" class="form-control" name="final_date" id="final_date"
                             value="{{ data['final_date'] }}">
                     </div>
@@ -54,7 +54,7 @@
 
     <div class="row mb-3">
         <div class="col">
-            <div class="card">
+            <div class="alert alert-success">
                 <div class="card-body">
                     <h5 class="card-title">Earnings</h5>
                     <p class="fs-4"> + R$ 1.999,00</p>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="alert alert-danger">
                 <div class="card-body">
                     <h5 class="card-title">Expenses</h5>
                     <p class="fs-4"> - R$ 999,00</p>
@@ -70,10 +70,10 @@
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="alert alert-info">
                 <div class="card-body">
                     <h5 class="card-title">Balance</h5>
-                    <p class="fs-4">R$ 999,01</p>
+                    <p class="fs-4">R$ 1.000,00</p>
                 </div>
             </div>
         </div>
@@ -91,14 +91,14 @@
                         <div style="width: 30%;">Economias</div>
                         <div style="width: 30%;text-align: left;">Valor (BRL): R$ 10,99</div>
                         <div>
-                            <button class="btn btn-danger btn-sm">{{ gettext('Remove') }}</button>
+                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
                         </div>
                     </div>
                     <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
                         <div style="width: 30%;">Outos</div>
                         <div style="width: 30%;text-align: left;">Percentual (%): 5,0</div>
                         <div>
-                            <button class="btn btn-danger btn-sm">{{ gettext('Remove') }}</button>
+                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
                         </div>
                     </div>
                 </div>
@@ -121,8 +121,8 @@
                             <b style="color: green;">+ BLR: R$ 1.999,00</b>
                         </div>
                         <div>
-                            <button class="btn btn-success btn-sm">{{ gettext('Edit') }}</button>
-                            <button class="btn btn-danger btn-sm">{{ gettext('Remove') }}</button>
+                            <button class="btn btn-success btn-sm">✏ {{ gettext('Edit') }}</button>
+                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
                         </div>
                     </div>
                     <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
@@ -132,8 +132,8 @@
                             <b style="color: red;">- BLR: R$ 999,00</b>
                         </div>
                         <div>
-                            <button class="btn btn-success btn-sm">{{ gettext('Edit') }}</button>
-                            <button class="btn btn-danger btn-sm">{{ gettext('Remove') }}</button>
+                            <button class="btn btn-success btn-sm">✏ {{ gettext('Edit') }}</button>
+                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
                         </div>
                     </div>
                 </div>
