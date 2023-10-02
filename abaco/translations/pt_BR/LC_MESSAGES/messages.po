@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-28 16:34-0400\n"
+"POT-Creation-Date: 2023-10-02 01:50-0400\n"
 "PO-Revision-Date: 2023-09-28 13:26-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -26,51 +26,90 @@ msgstr "App criado com sucesso"
 msgid "Database file not sent"
 msgstr "Arquivo de banco de dados não enviado"
 
-#: abaco/blueprints/api/api.py:32
+#: abaco/blueprints/api/api.py:32 abaco/blueprints/api/api.py:34
 msgid "Database invalid"
 msgstr "Banco de dados inválido"
 
-#: abaco/blueprints/api/api.py:37
+#: abaco/blueprints/api/api.py:39
 msgid "Database imported successfully"
 msgstr "Banco de dados importado com sucesso"
 
-#: abaco/blueprints/web/web.py:16
+#: abaco/blueprints/web/web.py:17
+#, fuzzy
 msgid "Welcome!"
-msgstr "Bem-vindo!"
-
-#: abaco/templates/index.html:17
-msgid "Hello"
-msgstr "Olá"
-
-#: abaco/templates/index.html:20 abaco/templates/welcome.html:18
-msgid "Exit"
-msgstr "Sair"
-
-#: abaco/templates/index.html:71
-msgid "Edit"
-msgstr "Editar"
-
-#: abaco/templates/index.html:72
-msgid "Remove"
-msgstr "Remover"
-
-#: abaco/templates/index.html:90
-msgid "Add Register"
-msgstr "Adicionar Registro"
-
-#: abaco/templates/welcome.html:28
-msgid "Welcome"
 msgstr "Bem-vindo"
 
-#: abaco/templates/welcome.html:29
+#: abaco/blueprints/web/web.py:24
+msgid "Home"
+msgstr "Início"
+
+#: abaco/templates/base.html.jinja:15
+msgid "Hello World!"
+msgstr "Olá mundo!"
+
+#: abaco/templates/hello.html.jinja:8 abaco/templates/welcome.html.jinja:22
 msgid "Your minimalist finance manager!"
 msgstr "Seu gerenciador financeiro minimalista!"
 
-#: abaco/templates/welcome.html:31 abaco/templates/welcome.html:45
+#: abaco/templates/index.html.jinja:10
+msgid "Hello"
+msgstr "Olá"
+
+#: abaco/templates/index.html.jinja:13 abaco/templates/welcome.html.jinja:11
+msgid "Exit"
+msgstr "Sair"
+
+#: abaco/templates/index.html.jinja:64
+msgid "Edit"
+msgstr "Editar"
+
+#: abaco/templates/index.html.jinja:65
+msgid "Remove"
+msgstr "Remover"
+
+#: abaco/templates/index.html.jinja:83
+msgid "Add Register"
+msgstr "Adicionar Registro"
+
+#: abaco/templates/welcome.html.jinja:21
+msgid "Welcome"
+msgstr "Bem-vindo"
+
+#: abaco/templates/welcome.html.jinja:24 abaco/templates/welcome.html.jinja:38
 msgid "New App"
 msgstr "Novo App"
 
-#: abaco/templates/welcome.html:33 abaco/templates/welcome.html:85
+#: abaco/templates/welcome.html.jinja:26 abaco/templates/welcome.html.jinja:82
 msgid "Import Data"
 msgstr "Importar Dados"
+
+#~ msgid "Welcome!"
+#~ msgstr "Bem-vindo!"
+
+#~ msgid "Hello"
+#~ msgstr "Olá"
+
+#~ msgid "Exit"
+#~ msgstr "Sair"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#~ msgid "Remove"
+#~ msgstr "Remover"
+
+#~ msgid "Add Register"
+#~ msgstr "Adicionar Registro"
+
+#~ msgid "Welcome"
+#~ msgstr "Bem-vindo"
+
+#~ msgid "Your minimalist finance manager!"
+#~ msgstr "Seu gerenciador financeiro minimalista!"
+
+#~ msgid "New App"
+#~ msgstr "Novo App"
+
+#~ msgid "Import Data"
+#~ msgstr "Importar Dados"
 

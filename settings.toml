@@ -1,4 +1,5 @@
 [default]
+APP_NAME='Abaco'
 EXTENSIONS = [
   "abaco.localization:init_app",
   "abaco.blueprints.api:init_app",

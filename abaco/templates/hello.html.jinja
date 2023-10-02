@@ -1,0 +1,12 @@
+{% extends "base.html.jinja" %}
+{% block title %}{{ data['title'] }}{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {{ super() }}
+    <h2>{{ gettext('Your minimalist finance manager!') }}</h2>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

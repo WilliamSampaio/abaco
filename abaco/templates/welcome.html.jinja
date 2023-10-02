@@ -1,0 +1,156 @@
+{% extends "base.html.jinja" %}
+{% block title %}{{ data['title'] }}{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<nav class="navbar bg-light">
+    <div class="container-fluid">
+        <div class="navbar-brand"></div>
+        <div class="d-flex">
+            <a href="/exit" class="btn btn-danger" role="close">{{ gettext('Exit') }}</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container text-center">
+    <div class="row align-items-center" style="height: 70vh;">
+        <div class="col">
+            <div class="card shadow p-3 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <h1>{{ gettext('Welcome') }}</h1>
+                    <p>{{ gettext('Your minimalist finance manager!') }}</p>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#newAppModal">{{ gettext('New App') }}</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#importDataModal">{{ gettext('Import Data') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New App Modal -->
+<div class="modal fade" id="newAppModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newAppModalLabel">{{ gettext('New App') }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newapp_form">
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control text-uppercase" id="newapp_name"
+                            placeholder="Your Name" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="newapp_language">Language</label>
+                        <select class="form-select" name="language" id="newapp_language" required>
+                            <option></option>
+                            {% for country in data['countries']: %}
+                            <option value="{{ country['locale'] }}">{{ country['emoji'] }} {{ country['country'] }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="newapp_currency">Currency</label>
+                        <select class="form-select" name="currency" id="newapp_currency" required>
+                            <option></option>
+                            {% for currency in data['currencies']: %}
+                            <option value="{{ currency['code_iso_4217'] }}">{{ currency['emoji'] }} ({{
+                                currency['code_iso_4217'] }}) {{ currency['currency'] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="newapp_form" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Import Data Modal -->
+<div class="modal fade" id="importDataModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="importDataModalLabel">{{ gettext('Import Data') }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="importdata_form" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" name="database" id="importdata_database" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="importdata_form" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+
+    function save_newapp(data) {
+        $.ajax({
+            type: "POST",
+            url: "/api/newapp",
+            data: JSON.stringify(data),
+            dataType: "json",
+            encode: true,
+            contentType: 'application/json'
+        }).done(function (data) {
+            alert(data.message)
+            location.reload()
+        }).fail((response) => {
+            alert('Error: ' + response.responseJSON.message)
+        });
+    }
+
+    function import_database(formData) {
+        $.ajax({
+            type: "POST",
+            url: "/api/importdatabase",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+        }).done(function (data) {
+            alert(data.message)
+            location.reload()
+        }).fail((response) => {
+            alert('Error: ' + response.responseJSON.message)
+        });
+    }
+
+    $('#newapp_form').submit((e) => {
+        e.preventDefault()
+        let name = $('#newapp_name').val()
+        let language = $('#newapp_language').val()
+        let currency = $('#newapp_currency').val()
+        save_newapp({
+            'name': String(name).toUpperCase(),
+            'language': language,
+            'currency': currency
+        })
+    })
+
+    $('#importdata_form').submit((e) => {
+        var form = $('#importdata_form')[0]
+        var formData = new FormData(form)
+        formData.append('database', $('#importdata_database').file)
+        import_database(formData)
+    })
+
+</script>
+{% endblock %}

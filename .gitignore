@@ -1,6 +1,7 @@
 # Abaco ignore
 *.abaco
 *.abaco.json
+*.todo
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python

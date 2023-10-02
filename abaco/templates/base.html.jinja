@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block head %}
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <title>{% block title %}{% endblock %} - {{ config.APP_NAME }}</title>
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}<h1>{{ gettext('Hello World!') }}</h1>{% endblock %}
+
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+</body>
+
+</html>
