@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-02 16:26-0400\n"
+"POT-Creation-Date: 2023-10-02 18:06-0400\n"
 "PO-Revision-Date: 2023-10-02 03:00-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -34,11 +34,11 @@ msgstr "Banco de dados inválido"
 msgid "Abaco database imported successfully"
 msgstr "Banco de dados Abaco importado com sucesso"
 
-#: abaco/blueprints/web/web.py:23
+#: abaco/blueprints/web/web.py:31
 msgid "Welcome!"
 msgstr "Bem-vindo!"
 
-#: abaco/blueprints/web/web.py:34
+#: abaco/blueprints/web/web.py:42
 msgid "Home"
 msgstr "Início"
 
@@ -79,12 +79,16 @@ msgstr "Idioma"
 msgid "Currency"
 msgstr "Moeda"
 
-#: abaco/templates/index.html.jinja:193 abaco/templates/welcome.html.jinja:71
+#: abaco/templates/index.html.jinja:191
+msgid "Save Backup"
+msgstr "Salvar Backup"
+
+#: abaco/templates/index.html.jinja:194 abaco/templates/welcome.html.jinja:71
 #: abaco/templates/welcome.html.jinja:94
 msgid "Close"
 msgstr "Fechar"
 
-#: abaco/templates/index.html.jinja:194 abaco/templates/welcome.html.jinja:72
+#: abaco/templates/index.html.jinja:195 abaco/templates/welcome.html.jinja:72
 #: abaco/templates/welcome.html.jinja:95
 msgid "Save"
 msgstr "Salvar"

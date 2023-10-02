@@ -1,11 +1,19 @@
+import os
+import zipfile
 from datetime import datetime
+from pathlib import Path
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, send_file
 from flask_babel import gettext as _
 from flaskwebgui import close_application
 
-from abaco.constants import COUNTRIES, CURRENCIES
-from abaco.database import database_exists, empty_user_config, get_user_config
+from abaco.constants import BASE_DIR_TEMP, COUNTRIES, CURRENCIES
+from abaco.database import (
+    database_exists,
+    db_filename,
+    empty_user_config,
+    get_user_config,
+)
 from abaco.localization import get_locale
 
 web = Blueprint('web', __name__)
@@ -36,6 +44,22 @@ def index():
         'currencies': CURRENCIES,
     }
     return render_template('index.html.jinja', data=data)
+
+
+@web.route('/backup', methods=['GET'])
+def backup():
+    if os.path.exists(db_filename):
+        if not os.path.exists(BASE_DIR_TEMP):
+            os.mkdir(BASE_DIR_TEMP)
+        output_filename = os.path.join(
+            BASE_DIR_TEMP,
+            datetime.now().strftime('abaco_%Y-%m-%d_%H-%M-%S.zip'),
+        )
+        if not os.path.exists(os.path.basename(output_filename)):
+            os.mkdir(os.path.basename(output_filename))
+        with zipfile.ZipFile(output_filename, mode='w') as zip:
+            zip.write(db_filename, Path(db_filename).name)
+        return send_file(output_filename, mimetype='application/zip')
 
 
 @web.route('/exit', methods=['GET'])
