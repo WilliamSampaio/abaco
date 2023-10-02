@@ -1,7 +1,15 @@
 [default]
-APP_NAME='Abaco'
+ENV = 'production'
+ENV_FOR_DYNACONF = 'production'
 EXTENSIONS = [
   "abaco.localization:init_app",
   "abaco.blueprints.api:init_app",
   "abaco.blueprints.web:init_app",
 ]
+FLASK_DEBUG = false
+
+[development]
+APP_NAME = 'Abaco (dev)'
+
+[production]
+APP_NAME = 'Abaco'
