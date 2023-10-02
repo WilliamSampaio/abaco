@@ -55,16 +55,20 @@
                             <label class="input-group-text" for="newapp_language">Language</label>
                             <select class="form-select" name="language" id="newapp_language" required>
                                 <option></option>
-                                <option value="es_US">🇺🇸 English (US)</option>
-                                <option value="pt_BR">🇧🇷 Portuguese (BR)</option>
+                                {% for country in data['countries']: %}
+                                <option value="{{ country['locale'] }}">{{ country['emoji'] }} {{ country['country'] }}
+                                </option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="newapp_currency">Currency</label>
                             <select class="form-select" name="currency" id="newapp_currency" required>
                                 <option></option>
-                                <option value="USD">🇺🇸 USD</option>
-                                <option value="BRL">🇧🇷 BRL</option>
+                                {% for currency in data['currencies']: %}
+                                <option value="{{ currency['code_iso_4217'] }}">{{ currency['emoji'] }} ({{
+                                    currency['code_iso_4217'] }}) {{ currency['currency'] }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </form>
