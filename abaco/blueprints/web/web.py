@@ -56,8 +56,6 @@ def backup():
             BASE_DIR_TEMP,
             datetime.now().strftime('abaco_%Y-%m-%d_%H-%M-%S.zip'),
         )
-        if not os.path.exists(os.path.basename(output_filename)):
-            os.mkdir(os.path.basename(output_filename))
         with zipfile.ZipFile(output_filename, mode='w') as zip:
             zip.write(db_filename, Path(db_filename).name)
         return send_file(output_filename, mimetype='application/zip')
