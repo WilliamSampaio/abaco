@@ -284,14 +284,22 @@
         });
     }
 
-    function post_fixed_discounts(data) {
+    function post_fixed_discount(data) {
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "/api/fixed-discounts",
             data: JSON.stringify(data),
             dataType: "json",
             encode: true,
-            contentType: 'application/json'
+        }).done(function (data) {
+            if (data.fixed_discounts) {
+                console.log(data.fixed_discounts)
+            }
+        }).fail((response) => {
+            alert('Error: ' + response.responseJSON.message)
+        });
+    }
+
         }).done(function (data) {
             if (data.message) {
                 alert(data.message)
@@ -316,7 +324,7 @@
 
     $('#fixedDiscounts_form').submit((e) => {
         e.preventDefault()
-        post_fixed_discounts({
+        post_fixed_discount({
             'description': $('#fixedDiscounts_description').val(),
             'calculated_in': $('#fixedDiscounts_calculated_in').val(),
             'value': parseFloat($('#fixedDiscounts_value').val())

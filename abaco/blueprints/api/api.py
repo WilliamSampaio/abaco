@@ -62,8 +62,8 @@ def getall_fixed_discounts():
     }, 200
 
 
-@api.route('/fixed-discounts', methods=['POST'])
-def post_fixed_discounts():
+@api.route('/fixed-discount', methods=['POST'])
+def post_fixed_discount():
     data = request.get_json()
     data['deleted'] = False
     db_fixed_discounts = get_fixed_discounts()
@@ -71,8 +71,8 @@ def post_fixed_discounts():
     return {'message': _('Fixed discount successfully registered!')}, 201
 
 
-@api.route('/fixed-discounts/<int:id>', methods=['DELETE'])
-def delete_fixed_discounts(id):
+@api.route('/fixed-discount/<int:id>', methods=['DELETE'])
+def delete_fixed_discount(id):
     db_fixed_discounts = get_fixed_discounts()
     db_fixed_discounts.remove(doc_ids=[id])
     return {'message': _('Fixed discount successfully deleted!')}, 200
