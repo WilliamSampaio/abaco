@@ -2,7 +2,7 @@ import json
 import os
 
 from schema import And, Schema, Use
-from tinydb import TinyDB, Query
+from tinydb import Query, TinyDB
 
 db_filename = os.path.join(
     os.environ.get('HOME'), '.abaco', 'database.abaco.json'
@@ -26,6 +26,10 @@ def get_table(table_name: str, db_instance: TinyDB) -> TinyDB:
 
 def get_user_config() -> TinyDB:
     return get_table('user_config', get_db())
+
+
+def get_fixed_discounts() -> TinyDB:
+    return get_table('fixed_discounts', get_db())
 
 
 def empty_user_config():

@@ -5,5 +5,13 @@
             "language": "",
             "currency": ""
         }
+    },
+    "fixed_discounts": {
+        "1": {
+            "description": "",
+            "calculated_in": "percentage",
+            "value": 1.99,
+            "deleted": true
+        }
     }
 }
