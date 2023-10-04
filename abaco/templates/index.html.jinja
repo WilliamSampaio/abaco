@@ -85,7 +85,8 @@
             <div class="card">
                 <div class="card-header" style="display: inline-flex;">
                     <h5 class="card-title">Fixed Discounts</h5>
-                    <button class="btn btn-primary btn-sm" style="margin-left: auto;">Add</button>
+                    <button class="btn btn-primary btn-sm" style="margin-left: auto;" data-bs-toggle="modal"
+                        data-bs-target="#fixedDiscountsModal">Add</button>
                 </div>
                 <div class="list-group list-group-flush">
                     <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
@@ -147,7 +148,7 @@
             <div class="card">
                 <div class="card-body text-center">
                     💸 <a href="https://github.com/WilliamSampaio/abaco" target="_blank" class="card-title">
-                        Fork me on GitHub.com 
+                        Fork me on GitHub.com
                     </a> 💸
                 </div>
             </div>
@@ -210,6 +211,41 @@
         </div>
     </div>
 </div>
+
+<!-- Fixed Discounts Modal -->
+<div class="modal fade" id="fixedDiscountsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="fixedDiscountsModalLabel">{{ gettext('Add Fixed Discounts') }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="fixedDiscounts_form">
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="description" id="fixedDiscounts_description"
+                            placeholder="{{ gettext('Description') }}" maxlength="100" required>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" name="calculated_in" id="fixedDiscounts_calculated_in" required>
+                            <option value="percentage">{{ gettext('Percentage') }} (%)</option>
+                            <option value="value">{{ gettext('Value') }} ($)</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="fixedDiscounts_value_text">%</span>
+                        <input class="form-control" type="number" step="0.01" max="100" name="value"
+                            id="fixedDiscounts_value" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
+                <button type="submit" form="fixedDiscounts_form" class="btn btn-primary">{{ gettext('Add') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block scripts %}
 {{ super() }}
@@ -248,6 +284,24 @@
         });
     }
 
+    function post_fixed_discounts(data) {
+        $.ajax({
+            type: "POST",
+            url: "/api/fixed-discounts",
+            data: JSON.stringify(data),
+            dataType: "json",
+            encode: true,
+            contentType: 'application/json'
+        }).done(function (data) {
+            if (data.message) {
+                alert(data.message)
+            }
+            location.reload()
+        }).fail((response) => {
+            alert('Error: ' + response.responseJSON.message)
+        });
+    }
+
     $('#settings_form').submit((e) => {
         e.preventDefault()
         let name = $('#settings_name').val()
@@ -258,6 +312,25 @@
             'language': language,
             'currency': currency
         })
+    })
+
+    $('#fixedDiscounts_form').submit((e) => {
+        e.preventDefault()
+        post_fixed_discounts({
+            'description': $('#fixedDiscounts_description').val(),
+            'calculated_in': $('#fixedDiscounts_calculated_in').val(),
+            'value': parseFloat($('#fixedDiscounts_value').val())
+        })
+    })
+
+    $('#fixedDiscounts_calculated_in').on('change', function () {
+        if ($(this).val() == 'percentage') {
+            $('#fixedDiscounts_value_text').text('%')
+            $('#fixedDiscounts_value').attr('max', 100)
+        } else {
+            $('#fixedDiscounts_value_text').text('$')
+            $('#fixedDiscounts_value').removeAttr('max')
+        }
     })
 
 </script>
