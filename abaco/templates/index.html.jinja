@@ -252,6 +252,8 @@
 <script src="{{ url_for('static', filename='js/chart.umd.min.js') }}"></script>
 <script type="text/javascript">
 
+    var label_1 = "{{ gettext('Do you really want to remove this fixed discount?') }}"
+
     const ctx = document.getElementById('abacoChart')
 
     new Chart(ctx, {
@@ -368,21 +370,23 @@
     })
 
     $("body").on("click", "[data-fixed_discount_id]", function () {
-        $.ajax({
-            method: 'DELETE',
-            url: "/api/fixed-discount/" + $(this).data().fixed_discount_id,
-            dataType: "json",
-            encode: true,
-            success: (data) => {
-                if (data.message) {
-                    alert(data.message)
+        if (confirm(label_1)) {
+            $.ajax({
+                method: 'DELETE',
+                url: "/api/fixed-discount/" + $(this).data().fixed_discount_id,
+                dataType: "json",
+                encode: true,
+                success: (data) => {
+                    if (data.message) {
+                        alert(data.message)
+                    }
+                    location.reload()
+                },
+                error: (response) => {
+                    alert(response.responseJSON.message)
                 }
-                location.reload()
-            },
-            error: (response) => {
-                alert(response.responseJSON.message)
-            }
-        })
+            })
+        }
     })
 
     document.addEventListener('DOMContentLoaded', function () {
