@@ -75,7 +75,6 @@ def getall_fixed_discounts():
                 locale=get_locale(),
                 decimal_quantization=False,
             )
-        print(discount['value'] / 100)
         results.append(result)
     return {'fixed_discounts': results}, 200
 

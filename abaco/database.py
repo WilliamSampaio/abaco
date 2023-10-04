@@ -1,7 +1,7 @@
 import json
 import os
 
-from schema import And, Schema, Use
+from schema import And, Schema
 from tinydb import Query, TinyDB
 
 db_filename = os.path.join(
@@ -49,25 +49,27 @@ def validate_schema(schema: dict):
                 dictionary[key] = for_over_dict(dictionary[key])
                 continue
             if type(value) == str:
-                dictionary[key] = And(Use(str))
+                dictionary[key] = And(str)
                 continue
             if type(value) == float:
-                dictionary[key] = And(Use(float))
+                dictionary[key] = And(float)
                 continue
             if type(value) == int:
-                dictionary[key] = And(Use(int))
+                dictionary[key] = And(int)
                 continue
             if type(value) == bool:
-                dictionary[key] = And(Use(bool))
+                dictionary[key] = And(bool)
                 continue
         return dictionary
 
     base_dir = os.path.abspath(os.path.dirname(__file__))
     f = open(os.path.join(base_dir, 'schemas', 'database.json'))
     valid_schema = json.load(f)
-    _schema = Schema(for_over_dict(valid_schema))
-    if not _schema.validate(
-        schema,
-    ):
-        return False
+    for table in dict(valid_schema).keys():
+        valid_row = Schema(for_over_dict(valid_schema[table]['1']))
+        for id in dict(schema[table]).keys():
+            try:
+                valid_row.validate(schema[table][id])
+            except:
+                return False
     return True
