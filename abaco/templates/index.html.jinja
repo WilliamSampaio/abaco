@@ -47,7 +47,7 @@
         <div class="col align-self-center">
             <div class="card text-center">
                 <div style="width: 20%;margin-left: auto;margin-right: auto;padding: 5px;">
-                    <canvas id="myChart" width="100"></canvas>
+                    <canvas id="abacoChart" width="100"></canvas>
                 </div>
             </div>
         </div>
@@ -187,12 +187,13 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <button type="submit" class="btn btn-primary">{{ gettext('Save') }}</button>
                 </form>
+                <hr>
                 <a href="/backup" target="_blank" class="btn btn-primary">{{ gettext('Save Backup') }}</a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
-                <button type="submit" form="settings_form" class="btn btn-primary">{{ gettext('Save') }}</button>
             </div>
         </div>
     </div>
@@ -203,7 +204,7 @@
 <script src="{{ url_for('static', filename='js/chart.umd.min.js') }}"></script>
 <script type="text/javascript">
 
-    const ctx = document.getElementById('myChart')
+    const ctx = document.getElementById('abacoChart')
 
     new Chart(ctx, {
         type: 'doughnut',
@@ -215,7 +216,37 @@
                 borderWidth: 1
             }]
         }
-    });
+    })
+
+    function update_settings(data) {
+        $.ajax({
+            type: "POST",
+            url: "/api/settings",
+            data: JSON.stringify(data),
+            dataType: "json",
+            encode: true,
+            contentType: 'application/json'
+        }).done(function (data) {
+            if(data.message){
+                alert(data.message)
+            }
+            location.reload()
+        }).fail((response) => {
+            alert('Error: ' + response.responseJSON.message)
+        });
+    }
+
+    $('#settings_form').submit((e) => {
+        e.preventDefault()
+        let name = $('#settings_name').val()
+        let language = $('#settings_language').val()
+        let currency = $('#settings_currency').val()
+        update_settings({
+            'name': String(name).toUpperCase(),
+            'language': language,
+            'currency': currency
+        })
+    })
 
 </script>
 {% endblock %}

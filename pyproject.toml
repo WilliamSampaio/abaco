@@ -38,8 +38,7 @@ babel_init_all = "task babel_init en_US && task babel_init pt_BR"
 babel_update = "pybabel update -i abaco/translations/messages.pot -d abaco/translations"
 build = "task lint && task babel_compile && pyinstaller --clean abaco.spec"
 lint = "blue . && isort ."
-run = "task lint && python main.py"
-web_run = "task lint && gunicorn -w 4 wsgi:app"
+run = "task lint && flask run"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"

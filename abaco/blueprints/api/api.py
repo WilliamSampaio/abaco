@@ -37,3 +37,11 @@ def importdatabase():
     with open(db_filename, 'w') as database_file:
         database_file.write(json.dumps(database_dict))
     return {'message': _('Abaco database imported successfully')}, 201
+
+
+@api.route('/settings', methods=['POST'])
+def settings():
+    data = request.get_json()
+    db_user_config = get_user_config()
+    db_user_config.update(data)
+    return {}, 200

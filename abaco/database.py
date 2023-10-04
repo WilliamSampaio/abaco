@@ -2,7 +2,7 @@ import json
 import os
 
 from schema import And, Schema, Use
-from tinydb import TinyDB
+from tinydb import TinyDB, Query
 
 db_filename = os.path.join(
     os.environ.get('HOME'), '.abaco', 'database.abaco.json'
@@ -34,6 +34,10 @@ def empty_user_config():
     return False
 
 
+def get_query():
+    return Query()
+
+
 def validate_schema(schema: dict):
     def for_over_dict(dictionary: dict):
         for key, value in dictionary.items():
@@ -63,28 +67,3 @@ def validate_schema(schema: dict):
     ):
         return False
     return True
-
-
-# data_folder = settings.data_folder
-#     explain_json_format = settings.explain_json_format
-
-#     if not os.path.exists(os.path.join(os.getcwd(), data_folder)):
-#         os.mkdir(os.path.join(os.getcwd(), data_folder))
-
-#     db_filename = os.path.join(
-#         os.getcwd(),
-#         data_folder,
-#         (
-#             os.environ.get('USER')
-#             + '.abaco'
-#             + ('.json' if explain_json_format is True else '')
-#         ),
-#     )
-
-#     # if not pathlib.Path.is_file(db_filename):
-#     db = TinyDB(db_filename)
-#     db.default_table_name = 'teste_eilliam'
-
-#     db.insert(
-#         {'user_config': {'name': 'William Sampaio', 'language': 'pt-BR'}}
-#     )
