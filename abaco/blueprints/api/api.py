@@ -58,7 +58,7 @@ def getall_fixed_discounts():
     db_fixed_discounts = get_fixed_discounts()
     query = get_query()
     return {
-        'fixed_discounts': db_fixed_discounts.search(query.deleted is False)
+        'fixed_discounts': db_fixed_discounts.search(query.deleted == False)
     }, 200
 
 
