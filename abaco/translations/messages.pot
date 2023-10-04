@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-04 01:50-0400\n"
+"POT-Creation-Date: 2023-10-04 12:04-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,11 +33,11 @@ msgstr ""
 msgid "Abaco database imported successfully"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:89
+#: abaco/blueprints/api/api.py:88
 msgid "Fixed discount successfully registered!"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:98
+#: abaco/blueprints/api/api.py:97
 msgid "Fixed discount successfully deleted!"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr ""
 
 #: abaco/templates/index.html.jinja:96 abaco/templates/index.html.jinja:103
 #: abaco/templates/index.html.jinja:127 abaco/templates/index.html.jinja:138
-#: abaco/templates/index.html.jinja:323
+#: abaco/templates/index.html.jinja:313
 msgid "Remove"
 msgstr ""
 
@@ -152,6 +152,10 @@ msgstr ""
 
 #: abaco/templates/index.html.jinja:255
 msgid "Do you really want to remove this fixed discount?"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:256
+msgid "Click add to register a new fixed discount"
 msgstr ""
 
 #: abaco/templates/welcome.html.jinja:22

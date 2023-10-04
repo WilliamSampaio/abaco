@@ -253,6 +253,7 @@
 <script type="text/javascript">
 
     var label_1 = "{{ gettext('Do you really want to remove this fixed discount?') }}"
+    var label_2 = "{{ gettext('Click add to register a new fixed discount') }}"
 
     const ctx = document.getElementById('abacoChart')
 
@@ -316,9 +317,7 @@
                 })
             } else {
                 $('#fixedDiscounts_list').append(`
-                    <div class='list-group-item list-group-item-light text-center'>
-                            Click add to register a new fixed discount
-                    </div>
+                    <div class='list-group-item list-group-item-light text-center'>${label_2}</div>
                 `)
             }
         }
