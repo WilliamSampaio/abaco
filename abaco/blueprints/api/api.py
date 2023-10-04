@@ -92,5 +92,7 @@ def post_fixed_discount():
 @api.route('/fixed-discount/<int:id>', methods=['DELETE'])
 def delete_fixed_discount(id):
     db_fixed_discounts = get_fixed_discounts()
-    db_fixed_discounts.remove(doc_ids=[id])
+    data = db_fixed_discounts.get(doc_id=id)
+    data['deleted'] = True
+    db_fixed_discounts.update(data, doc_ids=[id])
     return {'message': _('Fixed discount successfully deleted!')}, 200
