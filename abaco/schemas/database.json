@@ -9,7 +9,7 @@
     "fixed_discounts": {
         "1": {
             "description": "",
-            "calculated_in": "percentage",
+            "calculated_in": "porcentage",
             "value": 1.99,
             "deleted": true
         }

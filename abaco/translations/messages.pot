@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-02 18:06-0400\n"
+"POT-Creation-Date: 2023-10-04 01:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: abaco/blueprints/api/api.py:18
+#: abaco/blueprints/api/api.py:27
 msgid "Abaco created successfully"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:24
+#: abaco/blueprints/api/api.py:33
 msgid "Database file not sent"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:32 abaco/blueprints/api/api.py:34
+#: abaco/blueprints/api/api.py:41 abaco/blueprints/api/api.py:43
 msgid "Database invalid"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:39
+#: abaco/blueprints/api/api.py:48
 msgid "Abaco database imported successfully"
 msgstr ""
 
-#: abaco/blueprints/web/web.py:31
+#: abaco/blueprints/api/api.py:89
+msgid "Fixed discount successfully registered!"
+msgstr ""
+
+#: abaco/blueprints/api/api.py:96
+msgid "Fixed discount successfully deleted!"
+msgstr ""
+
+#: abaco/blueprints/web/web.py:32
 msgid "Welcome!"
 msgstr ""
 
-#: abaco/blueprints/web/web.py:42
+#: abaco/blueprints/web/web.py:43
 msgid "Home"
 msgstr ""
 
@@ -53,43 +61,93 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:95 abaco/templates/index.html.jinja:102
-#: abaco/templates/index.html.jinja:126 abaco/templates/index.html.jinja:137
+#: abaco/templates/index.html.jinja:26
+msgid "Initial Date"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:37
+msgid "Final Date"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:60
+msgid "Earnings"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:68
+msgid "Expenses"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:76
+msgid "Balance"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:87
+msgid "Fixed Discounts"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:89 abaco/templates/index.html.jinja:116
+#: abaco/templates/index.html.jinja:244
+msgid "Add"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:96 abaco/templates/index.html.jinja:103
+#: abaco/templates/index.html.jinja:127 abaco/templates/index.html.jinja:138
+#: abaco/templates/index.html.jinja:321
 msgid "Remove"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:125 abaco/templates/index.html.jinja:136
+#: abaco/templates/index.html.jinja:115
+msgid "Transactions"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:126 abaco/templates/index.html.jinja:137
 msgid "Edit"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:152
+#: abaco/templates/index.html.jinja:165
 msgid "Settings"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:159 abaco/templates/welcome.html.jinja:46
+#: abaco/templates/index.html.jinja:172 abaco/templates/welcome.html.jinja:46
 msgid "Your Name"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:162 abaco/templates/welcome.html.jinja:49
+#: abaco/templates/index.html.jinja:175 abaco/templates/welcome.html.jinja:49
 msgid "Language"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:177 abaco/templates/welcome.html.jinja:59
+#: abaco/templates/index.html.jinja:190 abaco/templates/welcome.html.jinja:59
 msgid "Currency"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:191
+#: abaco/templates/index.html.jinja:203 abaco/templates/welcome.html.jinja:72
+#: abaco/templates/welcome.html.jinja:95
+msgid "Save"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:206
 msgid "Save Backup"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:194 abaco/templates/welcome.html.jinja:71
-#: abaco/templates/welcome.html.jinja:94
+#: abaco/templates/index.html.jinja:209 abaco/templates/index.html.jinja:243
+#: abaco/templates/welcome.html.jinja:71 abaco/templates/welcome.html.jinja:94
 msgid "Close"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:195 abaco/templates/welcome.html.jinja:72
-#: abaco/templates/welcome.html.jinja:95
-msgid "Save"
+#: abaco/templates/index.html.jinja:220
+msgid "Add Fixed Discounts"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:227
+msgid "Description"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:231
+msgid "Porcentage"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:232
+msgid "Value"
 msgstr ""
 
 #: abaco/templates/welcome.html.jinja:22

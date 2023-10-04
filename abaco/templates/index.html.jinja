@@ -23,7 +23,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <div class="input-group">
-                        <span class="input-group-text">📆 Initial Date</span>
+                        <span class="input-group-text">📆 {{ gettext('Initial Date') }}</span>
                         <input type="date" class="form-control" name="initial_date" id="initial_date"
                             value="{{ data['initial_date'] }}">
                     </div>
@@ -34,7 +34,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <div class="input-group">
-                        <span class="input-group-text">📆 Final Date</span>
+                        <span class="input-group-text">📆 {{ gettext('Final Date') }}</span>
                         <input type="date" class="form-control" name="final_date" id="final_date"
                             value="{{ data['final_date'] }}">
                     </div>
@@ -57,7 +57,7 @@
         <div class="col">
             <div class="alert alert-success">
                 <div class="card-body">
-                    <h5 class="card-title">Earnings</h5>
+                    <h5 class="card-title">{{ gettext('Earnings') }}</h5>
                     <p class="fs-4"> + R$ 1.999,00</p>
                 </div>
             </div>
@@ -65,7 +65,7 @@
         <div class="col">
             <div class="alert alert-danger">
                 <div class="card-body">
-                    <h5 class="card-title">Expenses</h5>
+                    <h5 class="card-title">{{ gettext('Expenses') }}</h5>
                     <p class="fs-4"> - R$ 999,00</p>
                 </div>
             </div>
@@ -73,7 +73,7 @@
         <div class="col">
             <div class="alert alert-info">
                 <div class="card-body">
-                    <h5 class="card-title">Balance</h5>
+                    <h5 class="card-title">{{ gettext('Balance') }}</h5>
                     <p class="fs-4">R$ 1.000,00</p>
                 </div>
             </div>
@@ -84,9 +84,9 @@
         <div class="col">
             <div class="card">
                 <div class="card-header" style="display: inline-flex;">
-                    <h5 class="card-title">Fixed Discounts</h5>
+                    <h5 class="card-title">{{ gettext('Fixed Discounts') }}</h5>
                     <button class="btn btn-primary btn-sm" style="margin-left: auto;" data-bs-toggle="modal"
-                        data-bs-target="#fixedDiscountsModal">Add</button>
+                        data-bs-target="#fixedDiscountsModal">{{ gettext('Add') }}</button>
                 </div>
                 <div class="list-group list-group-flush" id="fixedDiscounts_list">
                     <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
@@ -112,8 +112,8 @@
         <div class="col">
             <div class="card">
                 <div class="card-header" style="display: inline-flex;">
-                    <h5 class="card-title">Transactions</h5>
-                    <button class="btn btn-primary btn-sm" style="margin-left: auto;">Add</button>
+                    <h5 class="card-title">{{ gettext('Transactions') }}</h5>
+                    <button class="btn btn-primary btn-sm" style="margin-left: auto;">{{ gettext('Add') }}</button>
                 </div>
                 <div class="list-group list-group-flush">
                     <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
@@ -228,7 +228,7 @@
                     </div>
                     <div class="mb-3">
                         <select class="form-select" name="calculated_in" id="fixedDiscounts_calculated_in" required>
-                            <option value="percentage">{{ gettext('Percentage') }} (%)</option>
+                            <option value="porcentage">{{ gettext('Porcentage') }} (%)</option>
                             <option value="value">{{ gettext('Value') }} ($)</option>
                         </select>
                     </div>
@@ -358,7 +358,7 @@
     })
 
     $('#fixedDiscounts_calculated_in').on('change', function () {
-        if ($(this).val() == 'percentage') {
+        if ($(this).val() == 'porcentage') {
             $('#fixedDiscounts_value_text').text('%')
             $('#fixedDiscounts_value').attr('max', 100)
         } else {
