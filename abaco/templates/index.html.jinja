@@ -268,11 +268,11 @@
         }
     })
 
-    function update_settings(data) {
+    function ajax_requester(url, data = null, method = 'POST', reload = true, success_callback = null) {
         $.ajax({
-            method: "POST",
-            url: "/api/settings",
-            data: JSON.stringify(data),
+            method: method,
+            url: url,
+            data: data,
             dataType: "json",
             encode: true,
             contentType: 'application/json'
@@ -280,62 +280,52 @@
             if (data.message) {
                 alert(data.message)
             }
-            location.reload()
+            if (success_callback != null) {
+                success_callback(data)
+            }
+            if (reload) {
+                location.reload()
+            }
         }).fail((response) => {
             alert('Error: ' + response.responseJSON.message)
-        });
+        })
+    }
+
+    function update_settings(data) {
+        ajax_requester("/api/settings", JSON.stringify(data))
     }
 
     function post_fixed_discount(data) {
-        $.ajax({
-            method: "POST",
-            url: "/api/fixed-discount",
-            data: JSON.stringify(data),
-            dataType: "json",
-            encode: true,
-            contentType: 'application/json'
-        }).done(function (data) {
-            if (data.message) {
-                alert(data.message)
+        ajax_requester("/api/fixed-discount", JSON.stringify(data))
+    }
+
+    function populate_fixed_discount(data) {
+        if (data.fixed_discounts) {
+            $('#fixedDiscounts_list').empty()
+            if (data.fixed_discounts.length > 0) {
+                data.fixed_discounts.forEach((discounts) => {
+                    $('#fixedDiscounts_list').append(`
+                        <div class='list-group-item' style='display: inline-flex;justify-content: space-between;'>
+                            <div style='width: 30%;'>${discounts.description}</div>
+                            <div style='width: 30%;text-align: left;'>${discounts.value}</div>
+                            <div>
+                                <button class='btn btn-danger btn-sm' data-fixed_discount_id='${discounts.id}'>🗑 {{ gettext('Remove') }}</button>
+                            </div>
+                        </div >
+                    `)
+                })
+            } else {
+                $('#fixedDiscounts_list').append(`
+                    <div class='list-group-item list-group-item-light text-center'>
+                            Click add to register a new fixed discount
+                    </div>
+                `)
             }
-            location.reload()
-        }).fail((response) => {
-            alert('Error: ' + response.responseJSON.message)
-        });
+        }
     }
 
     function getall_fixed_discount() {
-        $.ajax({
-            method: "GET",
-            url: "/api/fixed-discounts",
-            dataType: "json",
-            encode: true,
-        }).done(function (data) {
-            if (data.fixed_discounts) {
-                $('#fixedDiscounts_list').empty()
-                if (data.fixed_discounts.length > 0) {
-                    data.fixed_discounts.forEach((discounts) => {
-                        $('#fixedDiscounts_list').append(`
-                            <div class='list-group-item' style='display: inline-flex;justify-content: space-between;'>
-                                <div style='width: 30%;'>${discounts.description}</div>
-                                <div style='width: 30%;text-align: left;'>${discounts.value}</div>
-                                <div>
-                                    <button class='btn btn-danger btn-sm' data-fixed_discount_id='${discounts.id}'>🗑 {{ gettext('Remove') }}</button>
-                                </div>
-                            </div >
-                        `)
-                    })
-                } else {
-                    $('#fixedDiscounts_list').append(`
-                        <div class='list-group-item list-group-item-light text-center'>
-                                Click add to register a new fixed discount
-                        </div>
-                    `)
-                }
-            }
-        }).fail((response) => {
-            alert('Error: ' + response.responseJSON.message)
-        });
+        ajax_requester("/api/fixed-discounts", null, 'GET', false, populate_fixed_discount)
     }
 
     $('#settings_form').submit((e) => {
@@ -371,21 +361,8 @@
 
     $("body").on("click", "[data-fixed_discount_id]", function () {
         if (confirm(label_1)) {
-            $.ajax({
-                method: 'DELETE',
-                url: "/api/fixed-discount/" + $(this).data().fixed_discount_id,
-                dataType: "json",
-                encode: true,
-                success: (data) => {
-                    if (data.message) {
-                        alert(data.message)
-                    }
-                    location.reload()
-                },
-                error: (response) => {
-                    alert(response.responseJSON.message)
-                }
-            })
+            let url = "/api/fixed-discount/" + $(this).data().fixed_discount_id
+            ajax_requester(url, null, 'DELETE')
         }
     })
 
