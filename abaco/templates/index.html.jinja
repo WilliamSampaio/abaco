@@ -268,7 +268,7 @@
 
     function update_settings(data) {
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: "/api/settings",
             data: JSON.stringify(data),
             dataType: "json",
@@ -286,7 +286,7 @@
 
     function post_fixed_discount(data) {
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: "/api/fixed-discount",
             data: JSON.stringify(data),
             dataType: "json",
@@ -304,7 +304,7 @@
 
     function getall_fixed_discount() {
         $.ajax({
-            type: "GET",
+            method: "GET",
             url: "/api/fixed-discounts",
             dataType: "json",
             encode: true,

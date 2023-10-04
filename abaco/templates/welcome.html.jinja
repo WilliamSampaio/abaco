@@ -104,7 +104,7 @@
 
     function save_newapp(data) {
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: "/api/newapp",
             data: JSON.stringify(data),
             dataType: "json",
@@ -120,7 +120,7 @@
 
     function import_database(formData) {
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: "/api/importdatabase",
             data: formData,
             cache: false,
