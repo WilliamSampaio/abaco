@@ -57,9 +57,12 @@ def settings():
 def getall_fixed_discounts():
     db_fixed_discounts = get_fixed_discounts()
     query = get_query()
-    return {
-        'fixed_discounts': db_fixed_discounts.search(query.deleted == False)
-    }, 200
+    results = []
+    for discount in db_fixed_discounts.search(query.deleted == False):
+        result = discount
+        result['id'] = discount.doc_id
+        results.append(result)
+    return {'fixed_discounts': results}, 200
 
 
 @api.route('/fixed-discount', methods=['POST'])

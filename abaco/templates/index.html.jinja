@@ -88,7 +88,7 @@
                     <button class="btn btn-primary btn-sm" style="margin-left: auto;" data-bs-toggle="modal"
                         data-bs-target="#fixedDiscountsModal">Add</button>
                 </div>
-                <div class="list-group list-group-flush">
+                <div class="list-group list-group-flush" id="fixedDiscounts_list">
                     <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
                         <div style="width: 30%;">Economias</div>
                         <div style="width: 30%;text-align: left;">Valor (BRL): R$ 10,99</div>
@@ -302,6 +302,39 @@
         });
     }
 
+    function getall_fixed_discount() {
+        $.ajax({
+            type: "GET",
+            url: "/api/fixed-discounts",
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            if (data.fixed_discounts) {
+                $('#fixedDiscounts_list').empty()
+                if (data.fixed_discounts.length > 0) {
+                    data.fixed_discounts.forEach((discounts) => {
+                        $('#fixedDiscounts_list').append(`
+                            <div class='list-group-item' style='display: inline-flex;justify-content: space-between;'>
+                                <div style='width: 30%;'>${discounts.description}</div>
+                                <div style='width: 30%;text-align: left;'>${discounts.value}</div>
+                                <div>
+                                    <button class='btn btn-danger btn-sm' data-fixed_discount_id='${discounts.id}'>🗑 {{ gettext('Remove') }}</button>
+                                </div>
+                            </div >
+                        `)
+                    })
+                } else {
+                    $('#fixedDiscounts_list').append(`
+                        <div class='list-group-item list-group-item-light text-center'>
+                                Click add to register a new fixed discount
+                        </div>
+                    `)
+                }
+            }
+        }).fail((response) => {
+            alert('Error: ' + response.responseJSON.message)
+        });
+    }
 
     $('#settings_form').submit((e) => {
         e.preventDefault()
@@ -332,6 +365,28 @@
             $('#fixedDiscounts_value_text').text('$')
             $('#fixedDiscounts_value').removeAttr('max')
         }
+    })
+
+    $("body").on("click", "[data-fixed_discount_id]", function () {
+        $.ajax({
+            method: 'DELETE',
+            url: "/api/fixed-discount/" + $(this).data().fixed_discount_id,
+            dataType: "json",
+            encode: true,
+            success: (data) => {
+                if (data.message) {
+                    alert(data.message)
+                }
+                location.reload()
+            },
+            error: (response) => {
+                alert(response.responseJSON.message)
+            }
+        })
+    })
+
+    document.addEventListener('DOMContentLoaded', function () {
+        getall_fixed_discount()
     })
 
 </script>
