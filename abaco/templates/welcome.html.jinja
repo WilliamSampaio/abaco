@@ -118,7 +118,7 @@
         });
     }
 
-    function import_database(formData) {
+    function import_abaco(formData) {
         $.ajax({
             method: "POST",
             url: "/api/import-abaco",
@@ -147,10 +147,10 @@
     })
 
     $('#import_abaco_form').submit((e) => {
-        var form = $('#import_abaco_form')[0]
-        var formData = new FormData(form)
+        e.preventDefault()
+        let formData = new FormData($('#import_abaco_form')[0])
         formData.append('database', $('#import_abaco_database').file)
-        import_database(formData)
+        import_abaco(formData)
     })
 
 </script>
