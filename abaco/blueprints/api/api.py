@@ -6,7 +6,7 @@ from flask import Blueprint, request
 from flask_babel import format_currency
 from flask_babel import gettext as _
 
-from abaco.classes import UserConfig
+from abaco.models import UserConfig
 from abaco.database import (
     db_filename,
     get_fixed_discounts,
