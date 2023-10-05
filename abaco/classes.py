@@ -33,6 +33,14 @@ class Model:
             self.__setattr__(attr, data[attr])
         return self
 
+    def all(self):
+        results = []
+        for row in self.__get_db().all():
+            row['id'] = row.doc_id
+            results.append(row)
+        return results
+
+
 class UserConfig(Model):
     name: str
     language: str
@@ -48,3 +56,12 @@ class UserConfig(Model):
         self.name = name
         self.language = language
         self.currency = currency
+
+    def save(self):
+        if self.name is None:
+            return None
+        if self.language is None:
+            return None
+        if self.currency is None:
+            return None
+        return super().save()
