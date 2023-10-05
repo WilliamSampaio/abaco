@@ -1,3 +1,5 @@
+from typing import Any
+
 from abaco.database import get_db, get_table
 
 
@@ -18,7 +20,9 @@ class Model:
         if self.id is None:
             self.id = self.__get_db().insert(self.__dict__)
         else:
-            self.__get_db().update(self.__dict__, doc_ids=[self.id])
+            data = self.__dict__.copy()
+            data.pop('id')
+            self.__get_db().update(data, doc_ids=[self.id])[0]
         return self.id
 
     def delete(self):
@@ -33,11 +37,16 @@ class Model:
             self.__setattr__(attr, data[attr])
         return self
 
-    def all(self):
+    def all(self, where: tuple[str, Any] | None = None):
         results = []
         for row in self.__get_db().all():
-            row['id'] = row.doc_id
-            results.append(row)
+            if where is not None:
+                if row[where[0]] == where[1]:
+                    row['id'] = row.doc_id
+                    results.append(row)
+            else:
+                row['id'] = row.doc_id
+                results.append(row)
         return results
 
 
@@ -64,4 +73,37 @@ class UserConfig(Model):
             return None
         if self.currency is None:
             return None
+        return super().save()
+
+
+class FixedDiscount(Model):
+    description: str | None
+    calculated_in: str | None
+    value: float | None
+    deleted: bool | None
+
+    def __init__(
+        self,
+        description: str | None = None,
+        calculated_in: str | None = None,
+        value: float | None = None,
+    ) -> None:
+        super().__init__(table_name='fixed_discounts')
+        self.description = description
+        self.calculated_in = calculated_in
+        self.value = value
+        self.deleted = False
+
+    def save(self):
+        if self.description is None:
+            return None
+        if self.calculated_in is None or self.calculated_in not in [
+            'porcentage',
+            'value',
+        ]:
+            return None
+        if self.value is None:
+            return None
+        if self.deleted is None:
+            self.deleted = False
         return super().save()

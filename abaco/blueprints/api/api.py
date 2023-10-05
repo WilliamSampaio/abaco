@@ -6,15 +6,13 @@ from flask import Blueprint, request
 from flask_babel import format_currency
 from flask_babel import gettext as _
 
-from abaco.models import UserConfig
 from abaco.database import (
     db_filename,
-    get_fixed_discounts,
-    get_query,
     get_user_config,
     validate_schema,
 )
 from abaco.localization import get_locale
+from abaco.models import FixedDiscount, UserConfig
 from abaco.utils import validate_json
 
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -66,40 +64,39 @@ def settings():
 
 @api.route('/fixed-discounts', methods=['GET'])
 def getall_fixed_discounts():
-    db_fixed_discounts = get_fixed_discounts()
-    query = get_query()
     results = []
-    for discount in db_fixed_discounts.search(query.deleted == False):
-        result = {}
-        result['id'] = discount.doc_id
-        result['description'] = discount['description']
+    for discount in FixedDiscount().all(('deleted', False)):
         if discount['calculated_in'] == 'value':
-            result['value'] = format_currency(
+            discount['value'] = format_currency(
                 discount['value'], get_user_config().get(doc_id=1)['currency']
             )
         else:
-            result['value'] = format_percent(
+            discount['value'] = format_percent(
                 discount['value'] / 100,
                 locale=get_locale(),
                 decimal_quantization=False,
             )
-        results.append(result)
+        results.append(discount)
     return {'fixed_discounts': results}, 200
 
 
 @api.route('/fixed-discount', methods=['POST'])
 def post_fixed_discount():
     data = request.get_json()
-    data['deleted'] = False
-    db_fixed_discounts = get_fixed_discounts()
-    db_fixed_discounts.insert(data)
+    fixed_discount = FixedDiscount(
+        data['description'], data['calculated_in'], data['value']
+    )
+    if fixed_discount.save() is None:
+        return {'message': _('Failed to save data')}, 400
     return {'message': _('Fixed discount successfully registered!')}, 201
 
 
 @api.route('/fixed-discount/<int:id>', methods=['DELETE'])
 def delete_fixed_discount(id):
-    db_fixed_discounts = get_fixed_discounts()
-    data = db_fixed_discounts.get(doc_id=id)
-    data['deleted'] = True
-    db_fixed_discounts.update(data, doc_ids=[id])
+    fixed_discount = FixedDiscount().find(id)
+    if fixed_discount is None:
+        return {'message': _('Failed to delete data')}, 404
+    fixed_discount.deleted = True
+    if fixed_discount.save() is None:
+        return {'message': _('Failed to delete data')}, 400
     return {'message': _('Fixed discount successfully deleted!')}, 200
