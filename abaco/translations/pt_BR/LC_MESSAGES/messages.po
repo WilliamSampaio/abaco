@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-05 15:00-0400\n"
+"POT-Creation-Date: 2023-10-05 17:27-0400\n"
 "PO-Revision-Date: 2023-10-04 01:27-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -18,53 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.13.0\n"
 
-#: abaco/blueprints/api/api.py:26 abaco/blueprints/api/api.py:90
+#: abaco/blueprints/api/api.py:22 abaco/blueprints/api/api.py:86
 msgid "Failed to save data"
 msgstr "Falha ao tentar salvar dados"
 
-#: abaco/blueprints/api/api.py:27
+#: abaco/blueprints/api/api.py:23
 msgid "Abaco created successfully"
 msgstr "Abaco criado com sucesso"
 
-#: abaco/blueprints/api/api.py:33
+#: abaco/blueprints/api/api.py:29
 msgid "Database file not sent"
 msgstr "Arquivo de banco de dados não enviado"
 
-#: abaco/blueprints/api/api.py:41 abaco/blueprints/api/api.py:43
+#: abaco/blueprints/api/api.py:37 abaco/blueprints/api/api.py:39
 msgid "Database invalid"
 msgstr "Banco de dados inválido"
 
-#: abaco/blueprints/api/api.py:48
+#: abaco/blueprints/api/api.py:44
 msgid "Abaco database imported successfully"
 msgstr "Banco de dados Abaco importado com sucesso"
 
-#: abaco/blueprints/api/api.py:56 abaco/blueprints/api/api.py:61
+#: abaco/blueprints/api/api.py:52 abaco/blueprints/api/api.py:57
 msgid "Failed to update data"
 msgstr "Falha ao tentar atualizar dados"
 
-#: abaco/blueprints/api/api.py:62
-#, fuzzy
+#: abaco/blueprints/api/api.py:58
 msgid "Abaco database updated successfully"
-msgstr "Banco de dados Abaco importado com sucesso"
+msgstr "Banco de dados Abaco atualizado com sucesso"
 
-#: abaco/blueprints/api/api.py:91
+#: abaco/blueprints/api/api.py:87
 msgid "Fixed discount successfully registered!"
 msgstr "Desconto fixo cadastrado com sucesso!"
 
-#: abaco/blueprints/api/api.py:98 abaco/blueprints/api/api.py:101
-#, fuzzy
+#: abaco/blueprints/api/api.py:94 abaco/blueprints/api/api.py:97
 msgid "Failed to delete data"
-msgstr "Falha ao tentar atualizar dados"
+msgstr "Falha ao tentar deletar dados"
 
-#: abaco/blueprints/api/api.py:102
+#: abaco/blueprints/api/api.py:98
 msgid "Fixed discount successfully deleted!"
 msgstr "Desconto fixo excluído com sucesso!"
 
-#: abaco/blueprints/web/web.py:32
+#: abaco/blueprints/web/web.py:28
 msgid "Welcome!"
 msgstr "Bem-vindo!"
 
-#: abaco/blueprints/web/web.py:43
+#: abaco/blueprints/web/web.py:40
 msgid "Home"
 msgstr "Início"
 
@@ -100,18 +98,18 @@ msgstr "Despesas"
 msgid "Balance"
 msgstr "Saldo"
 
-#: abaco/templates/index.html.jinja:87
+#: abaco/templates/index.html.jinja:87 abaco/templates/index.html.jinja:284
 msgid "Fixed Discounts"
 msgstr "Descontos Fixos"
 
-#: abaco/templates/index.html.jinja:89 abaco/templates/index.html.jinja:116
-#: abaco/templates/index.html.jinja:244
+#: abaco/templates/index.html.jinja:89 abaco/templates/index.html.jinja:117
+#: abaco/templates/index.html.jinja:245 abaco/templates/index.html.jinja:302
 msgid "Add"
 msgstr "Adicionar"
 
 #: abaco/templates/index.html.jinja:96 abaco/templates/index.html.jinja:103
-#: abaco/templates/index.html.jinja:127 abaco/templates/index.html.jinja:138
-#: abaco/templates/index.html.jinja:313
+#: abaco/templates/index.html.jinja:128 abaco/templates/index.html.jinja:139
+#: abaco/templates/index.html.jinja:371
 msgid "Remove"
 msgstr "Remover"
 
@@ -119,61 +117,74 @@ msgstr "Remover"
 msgid "Transactions"
 msgstr "Transações"
 
-#: abaco/templates/index.html.jinja:126 abaco/templates/index.html.jinja:137
+#: abaco/templates/index.html.jinja:127 abaco/templates/index.html.jinja:138
 msgid "Edit"
 msgstr "Editar"
 
-#: abaco/templates/index.html.jinja:165
+#: abaco/templates/index.html.jinja:166
 msgid "Settings"
 msgstr "Configurações"
 
-#: abaco/templates/index.html.jinja:172 abaco/templates/welcome.html.jinja:46
+#: abaco/templates/index.html.jinja:173 abaco/templates/welcome.html.jinja:46
 msgid "Your Name"
 msgstr "Seu Nome"
 
-#: abaco/templates/index.html.jinja:175 abaco/templates/welcome.html.jinja:49
+#: abaco/templates/index.html.jinja:176 abaco/templates/welcome.html.jinja:49
 msgid "Language"
 msgstr "Idioma"
 
-#: abaco/templates/index.html.jinja:190 abaco/templates/welcome.html.jinja:59
+#: abaco/templates/index.html.jinja:191 abaco/templates/welcome.html.jinja:59
 msgid "Currency"
 msgstr "Moeda"
 
-#: abaco/templates/index.html.jinja:203 abaco/templates/welcome.html.jinja:72
+#: abaco/templates/index.html.jinja:204 abaco/templates/welcome.html.jinja:72
 #: abaco/templates/welcome.html.jinja:95
 msgid "Save"
 msgstr "Salvar"
 
-#: abaco/templates/index.html.jinja:206
+#: abaco/templates/index.html.jinja:207
 msgid "Save Backup"
 msgstr "Salvar Backup"
 
-#: abaco/templates/index.html.jinja:209 abaco/templates/index.html.jinja:243
-#: abaco/templates/welcome.html.jinja:71 abaco/templates/welcome.html.jinja:94
+#: abaco/templates/index.html.jinja:210 abaco/templates/index.html.jinja:244
+#: abaco/templates/index.html.jinja:301 abaco/templates/welcome.html.jinja:71
+#: abaco/templates/welcome.html.jinja:94
 msgid "Close"
 msgstr "Fechar"
 
-#: abaco/templates/index.html.jinja:220
+#: abaco/templates/index.html.jinja:221
 msgid "Add Fixed Discounts"
 msgstr "Adicionar descontos fixos"
 
-#: abaco/templates/index.html.jinja:227
+#: abaco/templates/index.html.jinja:228 abaco/templates/index.html.jinja:263
 msgid "Description"
 msgstr "Descrição"
 
-#: abaco/templates/index.html.jinja:231
+#: abaco/templates/index.html.jinja:232
 msgid "Porcentage"
 msgstr "Porcentagem"
 
-#: abaco/templates/index.html.jinja:232
+#: abaco/templates/index.html.jinja:233
 msgid "Value"
 msgstr "Valor"
 
-#: abaco/templates/index.html.jinja:255
+#: abaco/templates/index.html.jinja:256
+msgid "Add Transaction"
+msgstr "Adicionar Transação"
+
+#: abaco/templates/index.html.jinja:266
+msgid "Transaction Date"
+msgstr "Data da Transação"
+
+#: abaco/templates/index.html.jinja:279
+msgid "Expense"
+msgstr "Despesa"
+
+#: abaco/templates/index.html.jinja:313
 msgid "Do you really want to remove this fixed discount?"
 msgstr "Você quer relamente remover esse desconto fixo?"
 
-#: abaco/templates/index.html.jinja:256
+#: abaco/templates/index.html.jinja:314
 msgid "Click add to register a new fixed discount"
 msgstr "Clique em adicionar para registrar um novo desconto fixo"
 
