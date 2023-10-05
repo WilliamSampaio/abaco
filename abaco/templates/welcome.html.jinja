@@ -40,14 +40,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="newapp_form">
+                <form id="new_abaco_form">
                     <div class="mb-3">
-                        <input type="text" name="name" class="form-control text-uppercase" id="newapp_name"
+                        <input type="text" name="name" class="form-control text-uppercase" id="new_abaco_name"
                             placeholder="{{ gettext('Your Name') }}" required>
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="newapp_language">{{ gettext('Language') }}</label>
-                        <select class="form-select" name="language" id="newapp_language" required>
+                        <label class="input-group-text" for="new_abaco_language">{{ gettext('Language') }}</label>
+                        <select class="form-select" name="language" id="new_abaco_language" required>
                             <option></option>
                             {% for country in data['countries']: %}
                             <option value="{{ country['locale'] }}">{{ country['emoji'] }} {{ country['country'] }}
@@ -56,8 +56,8 @@
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="newapp_currency">{{ gettext('Currency') }}</label>
-                        <select class="form-select" name="currency" id="newapp_currency" required>
+                        <label class="input-group-text" for="new_abaco_currency">{{ gettext('Currency') }}</label>
+                        <select class="form-select" name="currency" id="new_abaco_currency" required>
                             <option></option>
                             {% for currency in data['currencies']: %}
                             <option value="{{ currency['code_iso_4217'] }}">{{ currency['emoji'] }} ({{
@@ -69,7 +69,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
-                <button type="submit" form="newapp_form" class="btn btn-primary">{{ gettext('Save') }}</button>
+                <button type="submit" form="new_abaco_form" class="btn btn-primary">{{ gettext('Save') }}</button>
             </div>
         </div>
     </div>
@@ -102,10 +102,10 @@
 {{ super() }}
 <script type="text/javascript">
 
-    function save_newapp(data) {
+    function save_new_abaco(data) {
         $.ajax({
             method: "POST",
-            url: "/api/newapp",
+            url: "/api/new-abaco",
             data: JSON.stringify(data),
             dataType: "json",
             encode: true,
@@ -134,12 +134,12 @@
         });
     }
 
-    $('#newapp_form').submit((e) => {
+    $('#new_abaco_form').submit((e) => {
         e.preventDefault()
-        let name = $('#newapp_name').val()
-        let language = $('#newapp_language').val()
-        let currency = $('#newapp_currency').val()
-        save_newapp({
+        let name = $('#new_abaco_name').val()
+        let language = $('#new_abaco_language').val()
+        let currency = $('#new_abaco_currency').val()
+        save_new_abaco({
             'name': String(name).toUpperCase(),
             'language': language,
             'currency': currency

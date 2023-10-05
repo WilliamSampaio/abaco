@@ -19,8 +19,8 @@ from abaco.utils import validate_json
 api = Blueprint('api', __name__, url_prefix='/api')
 
 
-@api.route('/newapp', methods=['POST'])
-def newapp():
+@api.route('/new-abaco', methods=['POST'])
+def new_abaco():
     data = request.get_json()
     db_user_config = get_user_config()
     db_user_config.insert(data)
