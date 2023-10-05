@@ -24,13 +24,26 @@ class Model:
     def delete(self):
         return self.__get_db().remove(doc_ids=[self.id])[0]
 
+    def find(self, id: int):
+        data = self.__get_db().get(doc_id=id)
+        if data is None:
+            return data
+        self.id = id
+        for attr in data.keys():
+            self.__setattr__(attr, data[attr])
+        return self
 
 class UserConfig(Model):
     name: str
     language: str
     currency: str
 
-    def __init__(self, name: str, language: str, currency: str):
+    def __init__(
+        self,
+        name: str | None = None,
+        language: str | None = None,
+        currency: str | None = None,
+    ):
         super().__init__(table_name='user_config')
         self.name = name
         self.language = language
