@@ -6,11 +6,7 @@ from flask import Blueprint, request
 from flask_babel import format_currency
 from flask_babel import gettext as _
 
-from abaco.database import (
-    db_filename,
-    get_user_config,
-    validate_schema,
-)
+from abaco.database import db_filename, validate_schema
 from abaco.localization import get_locale
 from abaco.models import FixedDiscount, UserConfig
 from abaco.utils import validate_json
@@ -68,7 +64,7 @@ def getall_fixed_discounts():
     for discount in FixedDiscount().all(('deleted', False)):
         if discount['calculated_in'] == 'value':
             discount['value'] = format_currency(
-                discount['value'], get_user_config().get(doc_id=1)['currency']
+                discount['value'], UserConfig().find(1).currency
             )
         else:
             discount['value'] = format_percent(
