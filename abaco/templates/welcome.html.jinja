@@ -84,15 +84,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form id="importdata_form" enctype="multipart/form-data">
+                <form id="import_abaco_form" enctype="multipart/form-data">
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control" name="database" id="importdata_database" required>
+                        <input type="file" class="form-control" name="database" id="import_abaco_database" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
-                <button type="submit" form="importdata_form" class="btn btn-primary">{{ gettext('Save') }}</button>
+                <button type="submit" form="import_abaco_form" class="btn btn-primary">{{ gettext('Save') }}</button>
             </div>
         </div>
     </div>
@@ -121,7 +121,7 @@
     function import_database(formData) {
         $.ajax({
             method: "POST",
-            url: "/api/importdatabase",
+            url: "/api/import-abaco",
             data: formData,
             cache: false,
             contentType: false,
@@ -146,10 +146,10 @@
         })
     })
 
-    $('#importdata_form').submit((e) => {
-        var form = $('#importdata_form')[0]
+    $('#import_abaco_form').submit((e) => {
+        var form = $('#import_abaco_form')[0]
         var formData = new FormData(form)
-        formData.append('database', $('#importdata_database').file)
+        formData.append('database', $('#import_abaco_database').file)
         import_database(formData)
     })
 

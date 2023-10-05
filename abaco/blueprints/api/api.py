@@ -27,8 +27,8 @@ def new_abaco():
     return {'message': _('Abaco created successfully')}, 201
 
 
-@api.route('/importdatabase', methods=['POST'])
-def importdatabase():
+@api.route('/import-abaco', methods=['POST'])
+def import_abaco():
     if 'database' not in request.files.keys():
         return {'message': _('Database file not sent')}, 400
     database = BytesIO(request.files.get('database').stream.read())
