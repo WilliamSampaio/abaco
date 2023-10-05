@@ -272,8 +272,8 @@
                         <input class="form-control" type="number" step="0.01" max="100" name="value"
                             id="transactions_value" required>
                     </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" name="expense" value="true"
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" name="expense" value="true" role="switch"
                             id="transactions_expense">
                         <label class="form-check-label" for="transactions_expense">
                             {{ gettext('Expense') }}
@@ -406,16 +406,6 @@
         })
     })
 
-    $('#fixedDiscounts_calculated_in').on('change', function () {
-        if ($(this).val() == 'porcentage') {
-            $('#fixedDiscounts_value_text').text('%')
-            $('#fixedDiscounts_value').attr('max', 100)
-        } else {
-            $('#fixedDiscounts_value_text').text('$')
-            $('#fixedDiscounts_value').removeAttr('max')
-        }
-    })
-
     $("body").on("click", "[data-fixed_discount_id]", function () {
         if (confirm(label_1)) {
             let url = "/api/fixed-discount/" + $(this).data().fixed_discount_id
@@ -424,6 +414,25 @@
     })
 
     document.addEventListener('DOMContentLoaded', function () {
+
+        $('#fixedDiscounts_calculated_in').on('change', function () {
+            if ($(this).val() == 'porcentage') {
+                $('#fixedDiscounts_value_text').text('%')
+                $('#fixedDiscounts_value').attr('max', 100)
+            } else {
+                $('#fixedDiscounts_value_text').text('$')
+                $('#fixedDiscounts_value').removeAttr('max')
+            }
+        })
+
+        $('#transactions_expense').click(function () {
+            if (this.checked == true) {
+                $('.discount').prop('disabled', true)
+            } else {
+                $('.discount').prop('disabled', false)
+            }
+        })
+
         getall_fixed_discount()
     })
 
