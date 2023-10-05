@@ -61,7 +61,7 @@ def settings():
 @api.route('/fixed-discounts', methods=['GET'])
 def getall_fixed_discounts():
     results = []
-    for discount in FixedDiscount().all(('deleted', False)):
+    for discount in FixedDiscount().available():
         if discount['calculated_in'] == 'value':
             discount['value'] = format_currency(
                 discount['value'], UserConfig().find(1).currency

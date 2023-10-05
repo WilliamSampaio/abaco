@@ -109,6 +109,9 @@ class FixedDiscount(Model):
             self.deleted = False
         return super().save()
 
+    def available(self):
+        return self.all(('deleted', False))
+
 
 class Transaction(Model):
     description: str | None

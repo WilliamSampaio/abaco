@@ -8,13 +8,9 @@ from flask_babel import gettext as _
 from flaskwebgui import close_application
 
 from abaco.constants import BASE_DIR_TEMP, COUNTRIES, CURRENCIES
-from abaco.database import (
-    database_exists,
-    db_filename,
-    empty_user_config,
-    get_user_config,
-)
+from abaco.database import database_exists, db_filename, empty_user_config
 from abaco.localization import get_locale
+from abaco.models import FixedDiscount, UserConfig
 from abaco.utils import purge_temp_files
 
 web = Blueprint('web', __name__)
@@ -39,7 +35,8 @@ def index():
         'lang': lang,
         'initial_date': datetime.today().strftime('%Y-%m-01'),
         'final_date': datetime.today().strftime('%Y-%m-%d'),
-        'user_config': get_user_config().all()[0],
+        'user_config': UserConfig().find(1).as_dict(),
+        'fixed_discounts': FixedDiscount().available(),
         'title': _('Home'),
         'countries': COUNTRIES,
         'currencies': CURRENCIES,
