@@ -43,6 +43,8 @@ def get_query():
 
 
 def validate_schema(schema: dict):
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+
     def for_over_dict(dictionary: dict):
         for key, value in dictionary.items():
             if type(dictionary[key]) == dict:
@@ -62,14 +64,16 @@ def validate_schema(schema: dict):
                 continue
         return dictionary
 
-    base_dir = os.path.abspath(os.path.dirname(__file__))
     f = open(os.path.join(base_dir, 'schemas', 'database.json'))
     valid_schema = json.load(f)
-    for table in dict(valid_schema).keys():
-        valid_row = Schema(for_over_dict(valid_schema[table]['1']))
-        for id in dict(schema[table]).keys():
+    for table in schema.keys():
+        try:
+            valid_row = Schema(for_over_dict(valid_schema[table]['1']))
+        except:
+            return False
+        for key in dict(schema[table]).keys():
             try:
-                valid_row.validate(schema[table][id])
+                valid_row.validate(schema[table][key])
             except:
                 return False
     return True
