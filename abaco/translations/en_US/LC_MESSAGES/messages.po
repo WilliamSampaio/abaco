@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-04 12:04-0400\n"
+"POT-Creation-Date: 2023-10-05 04:59-0400\n"
 "PO-Revision-Date: 2023-10-04 01:27-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,27 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: abaco/blueprints/api/api.py:27
+#: abaco/blueprints/api/api.py:28
+msgid "Failed to save data"
+msgstr ""
+
+#: abaco/blueprints/api/api.py:29
 msgid "Abaco created successfully"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:33
+#: abaco/blueprints/api/api.py:35
 msgid "Database file not sent"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:41 abaco/blueprints/api/api.py:43
+#: abaco/blueprints/api/api.py:43 abaco/blueprints/api/api.py:45
 msgid "Database invalid"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:48
+#: abaco/blueprints/api/api.py:50
 msgid "Abaco database imported successfully"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:88
+#: abaco/blueprints/api/api.py:58 abaco/blueprints/api/api.py:63
+msgid "Failed to update data"
+msgstr ""
+
+#: abaco/blueprints/api/api.py:64
+msgid "Abaco database updated successfully"
+msgstr ""
+
+#: abaco/blueprints/api/api.py:96
 msgid "Fixed discount successfully registered!"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:97
+#: abaco/blueprints/api/api.py:105
 msgid "Fixed discount successfully deleted!"
 msgstr ""
 

@@ -6,6 +6,7 @@ from flask import Blueprint, request
 from flask_babel import format_currency
 from flask_babel import gettext as _
 
+from abaco.classes import UserConfig
 from abaco.database import (
     db_filename,
     get_fixed_discounts,
@@ -22,8 +23,9 @@ api = Blueprint('api', __name__, url_prefix='/api')
 @api.route('/new-abaco', methods=['POST'])
 def new_abaco():
     data = request.get_json()
-    db_user_config = get_user_config()
-    db_user_config.insert(data)
+    user_config = UserConfig(data['name'], data['language'], data['currency'])
+    if user_config.save() is None:
+        return {'message': _('Failed to save data')}, 400
     return {'message': _('Abaco created successfully')}, 201
 
 
@@ -48,12 +50,18 @@ def import_abaco():
     return {'message': _('Abaco database imported successfully')}, 201
 
 
-@api.route('/settings', methods=['POST'])
+@api.route('/settings', methods=['UPDATE'])
 def settings():
     data = request.get_json()
-    db_user_config = get_user_config()
-    db_user_config.update(data)
-    return {}, 200
+    user_config = UserConfig().find(1)
+    if user_config is None:
+        return {'message': _('Failed to update data')}, 400
+    user_config.name = data['name']
+    user_config.language = data['language']
+    user_config.currency = data['currency']
+    if user_config.save() is None:
+        return {'message': _('Failed to update data')}, 400
+    return {'message': _('Abaco database updated successfully')}, 200
 
 
 @api.route('/fixed-discounts', methods=['GET'])

@@ -293,7 +293,7 @@
     }
 
     function update_settings(data) {
-        ajax_requester("/api/settings", JSON.stringify(data))
+        ajax_requester("/api/settings", JSON.stringify(data), 'UPDATE')
     }
 
     function post_fixed_discount(data) {

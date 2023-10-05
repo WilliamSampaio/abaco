@@ -27,7 +27,7 @@ class Model:
     def find(self, id: int):
         data = self.__get_db().get(doc_id=id)
         if data is None:
-            return data
+            return None
         self.id = id
         for attr in data.keys():
             self.__setattr__(attr, data[attr])
