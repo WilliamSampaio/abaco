@@ -113,7 +113,8 @@
             <div class="card">
                 <div class="card-header" style="display: inline-flex;">
                     <h5 class="card-title">{{ gettext('Transactions') }}</h5>
-                    <button class="btn btn-primary btn-sm" style="margin-left: auto;">{{ gettext('Add') }}</button>
+                    <button class="btn btn-primary btn-sm" style="margin-left: auto;" data-bs-toggle="modal"
+                        data-bs-target="#transactionsModal">{{ gettext('Add') }}</button>
                 </div>
                 <div class="list-group list-group-flush">
                     <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
@@ -242,6 +243,63 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
                 <button type="submit" form="fixedDiscounts_form" class="btn btn-primary">{{ gettext('Add') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Transactions Modal -->
+<div class="modal fade" id="transactionsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="transactionsModalLabel">{{ gettext('Add Transaction') }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="transactions_form">
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="description" id="transactions_description"
+                            placeholder="{{ gettext('Description') }}" maxlength="100" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">📆 {{ gettext('Transaction Date') }}</span>
+                        <input class="form-control" type="date" name="date" id="transactions_date"
+                            value="{{ data['final_date'] }}" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="transactions_value_text">$</span>
+                        <input class="form-control" type="number" step="0.01" max="100" name="value"
+                            id="transactions_value" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="expense" value="true"
+                            id="transactions_expense">
+                        <label class="form-check-label" for="transactions_expense">
+                            {{ gettext('Expense') }}
+                        </label>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            {{ gettext('Fixed Discounts') }}
+                        </div>
+                        <div class="card-body">
+                            {% for discount in data['fixed_discounts']: %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input discount" type="checkbox" name="fixed_discounts_ids"
+                                    value="{{ discount['id'] }}" role="switch"
+                                    id="transactions_fixed_discount_{{ discount['id'] }}" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked">{{ discount['description']
+                                    }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ gettext('Close') }}</button>
+                <button type="submit" form="transactions_form" class="btn btn-primary">{{ gettext('Add') }}</button>
             </div>
         </div>
     </div>
