@@ -15,9 +15,12 @@
         }
     },
     "transactions": {
-        "1" : {
+        "1": {
             "description": "",
-            "date": "2023-10-04"
+            "date": "2023-10-04",
+            "value": 0.1,
+            "expense": false,
+            "fixed_discounts_ids": []
         }
     }
 }

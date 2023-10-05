@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any
 
 from abaco.database import get_db, get_table
@@ -107,3 +108,56 @@ class FixedDiscount(Model):
         if self.deleted is None:
             self.deleted = False
         return super().save()
+
+
+class Transaction(Model):
+    description: str | None
+    date: str | None
+    value: float | None
+    expense: bool | None
+    fixed_discounts_ids: list[int] | None
+
+    def __init__(
+        self,
+        description: str | None = None,
+        date: str | None = None,
+        value: float | None = None,
+        expense: bool | None = None,
+        fixed_discounts_ids: list[int] | None = None,
+    ) -> None:
+        super().__init__(table_name='transactions')
+        self.description = description
+        self.date = date
+        self.value = value
+        self.expense = expense
+        self.fixed_discounts_ids = fixed_discounts_ids
+
+    def save(self):
+        if self.description is None or self.description == '':
+            return None
+        try:
+            datetime.strptime(self.date, '%Y-%m-%d')
+        except ValueError:
+            return None
+        if self.value is None or self.value < 0.01:
+            return None
+        if self.expense is None or not isinstance(self.expense, bool):
+            return None
+        if self.fixed_discounts_ids is None:
+            return None
+        if not isinstance(self.fixed_discounts_ids, list):
+            return None
+        return super().save()
+
+    def between(self, initial_date: str, final_date: str):
+        try:
+            initial_date = datetime.strptime(initial_date, '%Y-%m-%d')
+            final_date = datetime.strptime(final_date, '%Y-%m-%d')
+        except ValueError:
+            return False
+        results = []
+        for transaction in self.all():
+            t_date = datetime.strptime(transaction['date'], '%Y-%m-%d').date()
+            if t_date >= initial_date.date() and t_date <= final_date.date():
+                results.append(transaction)
+        return results
