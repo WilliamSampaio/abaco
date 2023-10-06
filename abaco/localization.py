@@ -2,8 +2,10 @@ from locale import getdefaultlocale
 
 from flask import g
 from flask_babel import Babel
+from flask_babel import format_currency as fc
 
 from abaco.database import empty_user_config, get_user_config
+from abaco.models import UserConfig
 
 
 def get_locale():
@@ -19,6 +21,10 @@ def get_timezone():
     user = getattr(g, 'user', None)
     if user is not None:
         return user.timezone
+
+
+def format_currency(value):
+    return fc(value, UserConfig().find(1).currency)
 
 
 def init_app(app):

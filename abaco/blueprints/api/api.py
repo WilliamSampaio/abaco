@@ -3,11 +3,10 @@ from io import BytesIO
 
 from babel.numbers import format_percent
 from flask import Blueprint, request
-from flask_babel import format_currency
 from flask_babel import gettext as _
 
 from abaco.database import db_filename, validate_schema
-from abaco.localization import get_locale
+from abaco.localization import format_currency, get_locale
 from abaco.models import FixedDiscount, Transaction, UserConfig
 from abaco.utils import validate_json
 
@@ -63,9 +62,7 @@ def getall_fixed_discounts():
     results = []
     for discount in FixedDiscount().available():
         if discount['calculated_in'] == 'value':
-            discount['value'] = format_currency(
-                discount['value'], UserConfig().find(1).currency
-            )
+            discount['value'] = format_currency(discount['value'])
         else:
             discount['value'] = format_percent(
                 discount['value'] / 100,
@@ -138,13 +135,9 @@ def getall_transaction():
     results = {
         'transactions': transactions,
         'totals': {
-            'earnings': format_currency(
-                earnings, UserConfig().find(1).currency
-            ),
-            'expenses': format_currency(
-                expenses, UserConfig().find(1).currency
-            ),
-            'balance': format_currency(balance, UserConfig().find(1).currency),
+            'earnings': format_currency(earnings),
+            'expenses': format_currency(expenses),
+            'balance': format_currency(balance),
         },
     }
     return {'results': results}, 200
