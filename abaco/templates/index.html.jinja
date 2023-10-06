@@ -47,7 +47,7 @@
         <div class="col align-self-center">
             <div class="card text-center">
                 <div style="width: 20%;margin-left: auto;margin-right: auto;padding: 5px;">
-                    <canvas id="abacoChart" width="100"></canvas>
+                    <canvas id="abacoChart" style="width:100%;max-width:700px"></canvas>
                 </div>
             </div>
         </div>
@@ -303,6 +303,7 @@
 {% block scripts %}
 {{ super() }}
 <script src="{{ url_for('static', filename='js/chart.umd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/abaco.js') }}"></script>
 <script type="text/javascript">
 
     var label_1 = "{{ gettext('Do you really want to remove this fixed discount?') }}"
@@ -312,8 +313,8 @@
 
     const ctx = document.getElementById('abacoChart')
 
-    new Chart(ctx, {
-        type: 'doughnut',
+    let chart = new Chart(ctx, {
+        type: 'line',
         data: {
             labels: ['Earnings', 'Expenses'],
             datasets: [{
@@ -323,31 +324,6 @@
             }]
         }
     })
-
-    function ajax_requester(url, data = null, method = 'POST', reload = true, success_callback = null) {
-        $.ajax({
-            method: method,
-            url: url,
-            data: data,
-            dataType: "json",
-            encode: true,
-            contentType: 'application/json'
-        }).done(function (data) {
-            if (data.message) {
-                alert(data.message)
-            }
-            if (success_callback != null) {
-                success_callback.forEach(function (func) {
-                    func(data)
-                })
-            }
-            if (reload) {
-                location.reload()
-            }
-        }).fail((response) => {
-            alert('Error: ' + response.responseJSON.message)
-        })
-    }
 
     function update_settings(data) {
         ajax_requester("/api/settings", JSON.stringify(data), 'UPDATE')
