@@ -40,9 +40,14 @@ class Model:
             self.__setattr__(attr, data[attr])
         return self
 
-    def all(self, where: tuple[str, Any] | None = None):
+    def all(
+        self, where: tuple[str, Any] | None = None, order_by: str | None = None
+    ):
         results = []
-        for row in self.__get_db().all():
+        data = self.__get_db().all()
+        if order_by is not None:
+            data = sorted(data, key=lambda d: d[order_by])
+        for row in data:
             if where is not None:
                 if row[where[0]] == where[1]:
                     row['id'] = row.doc_id
@@ -161,7 +166,7 @@ class Transaction(Model):
         except ValueError:
             return False
         results = []
-        for transaction in self.all():
+        for transaction in self.all(order_by='date'):
             t_date = datetime.strptime(transaction['date'], '%Y-%m-%d').date()
             if t_date >= initial_date.date() and t_date <= final_date.date():
                 results.append(transaction)
