@@ -1,12 +1,11 @@
 import json
 from io import BytesIO
 
-from babel.numbers import format_percent
 from flask import Blueprint, request
 from flask_babel import gettext as _
 
 from abaco.database import db_filename, validate_schema
-from abaco.localization import format_currency, get_locale
+from abaco.localization import format_currency, format_percent
 from abaco.models import FixedDiscount, Transaction, UserConfig
 from abaco.utils import validate_json
 
@@ -64,11 +63,7 @@ def getall_fixed_discounts():
         if discount['calculated_in'] == 'value':
             discount['value'] = format_currency(discount['value'])
         else:
-            discount['value'] = format_percent(
-                discount['value'] / 100,
-                locale=get_locale(),
-                decimal_quantization=False,
-            )
+            discount['value'] = format_percent(discount['value'])
         results.append(discount)
     return {'fixed_discounts': results}, 200
 

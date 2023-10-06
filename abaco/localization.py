@@ -1,5 +1,6 @@
 from locale import getdefaultlocale
 
+from babel.numbers import format_percent as fp
 from flask import g
 from flask_babel import Babel
 from flask_babel import format_currency as fc
@@ -23,8 +24,12 @@ def get_timezone():
         return user.timezone
 
 
-def format_currency(value):
+def format_currency(value: float):
     return fc(value, UserConfig().find(1).currency)
+
+
+def format_percent(value: float):
+    return fp(value / 100, locale=get_locale(), decimal_quantization=False)
 
 
 def init_app(app):
