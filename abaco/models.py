@@ -15,16 +15,17 @@ class Model:
         return get_table(self.table_name, get_db())
 
     def as_dict(self):
-        return self.__dict__
+        data = self.__dict__.copy()
+        if 'id' in data:
+            data.pop('id')
+        data.pop('table_name')
+        return data
 
     def save(self):
-        data = self.__dict__.copy()
-        data.pop('table_name')
         if self.id is None:
-            self.id = self.__get_db().insert(data)
+            self.id = self.__get_db().insert(self.as_dict())
         else:
-            data.pop('id')
-            self.__get_db().update(data, doc_ids=[self.id])[0]
+            self.__get_db().update(self.as_dict(), doc_ids=[self.id])[0]
         return self.id
 
     def delete(self):
