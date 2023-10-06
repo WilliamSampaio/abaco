@@ -47,6 +47,10 @@ function create_chart(el, type, labels, datasets) {
         data: {
             labels: labels,
             datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
         }
     })
 }
