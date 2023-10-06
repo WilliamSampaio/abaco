@@ -150,10 +150,18 @@ def getall_transaction():
     return {'results': results}, 200
 
 
+@api.route('/transaction/<int:id>', methods=['GET'])
+def get_transaction(id):
+    transaction = Transaction().find(id)
+    if transaction is None:
+        return {'message': _('Failed to get data')}, 404
+    return {'transaction': transaction.as_dict()}, 200
+
+
 @api.route('/transaction/<int:id>', methods=['UPDATE'])
 def update_transaction(id):
     data = request.get_json()
-    transaction = UserConfig().find(id)
+    transaction = Transaction().find(id)
     if transaction is None:
         return {'message': _('Failed to update data')}, 400
     transaction.description = data['description']

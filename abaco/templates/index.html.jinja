@@ -401,8 +401,8 @@
                             <b style="color:${transaction.expense ? 'red' : 'green'};">${transaction.value}</b>
                         </div>
                         <div>
-                            <button class="btn btn-success btn-sm">✏ {{ gettext('Edit') }}</button>
-                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
+                            <button class="btn btn-success btn-sm" data-transaction_edit="${transaction.id}">✏ {{ gettext('Edit') }}</button>
+                            <button class="btn btn-danger btn-sm" data-transaction_delete="${transaction.id}">🗑 {{ gettext('Remove') }}</button>
                         </div>
                     </div>
                 `)
@@ -412,6 +412,10 @@
                 <div class='list-group-item list-group-item-light text-center'>${label_4}</div>
             `)
         }
+    }
+
+    function populate_modal_transaction(data) {
+        console.log(data)
     }
 
     function populate_totals(data) {
@@ -477,6 +481,23 @@
         }
     })
 
+    $("body").on("click", "[data-transaction_edit]", function () {
+        ajax_requester(
+            '/api/transaction/' + $(this).data().transaction_edit,
+            null,
+            'GET',
+            false,
+            [populate_modal_transaction]
+        )
+    })
+
+    $("body").on("click", "[data-transaction_delete]", function () {
+        if (confirm(label_2)) {
+            let url = "/api/transaction/" + $(this).data().transaction_delete
+            ajax_requester(url, null, 'DELETE')
+        }
+    })
+
     document.addEventListener('DOMContentLoaded', function () {
 
         $('#fixedDiscounts_calculated_in').on('change', function () {
@@ -497,11 +518,11 @@
             }
         })
 
-        /* $('#initial_date').change(function(){
+        $('#initial_date').change(function () {
             get_transactions()
-        }) */
+        })
 
-        $('#final_date').on('change', function(){
+        $('#final_date').on('change', function () {
             get_transactions()
         })
 
