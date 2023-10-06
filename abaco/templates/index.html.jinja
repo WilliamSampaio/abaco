@@ -83,27 +83,27 @@
     <div class="row mb-3">
         <div class="col">
             <div class="card">
+
                 <div class="card-header" style="display: inline-flex;">
                     <h5 class="card-title">{{ gettext('Fixed Discounts') }}</h5>
                     <button class="btn btn-primary btn-sm" style="margin-left: auto;" data-bs-toggle="modal"
                         data-bs-target="#fixedDiscountsModal">{{ gettext('Add') }}</button>
                 </div>
-                <div class="list-group list-group-flush" id="fixedDiscounts_list">
-                    <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
-                        <div style="width: 30%;">Economias</div>
-                        <div style="width: 30%;text-align: left;">Valor (BRL): R$ 10,99</div>
-                        <div>
-                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
-                        </div>
-                    </div>
-                    <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
-                        <div style="width: 30%;">Outos</div>
-                        <div style="width: 30%;text-align: left;">Percentual (%): 5,0</div>
-                        <div>
-                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
-                        </div>
-                    </div>
-                </div>
+
+                <table class="card-body table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col">{{ gettext('Description') }}</th>
+                            <th scope="col">{{ gettext('Value') }}</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="fixedDiscounts_tbody"></tbody>
+                </table>
+
+                <div class="card-footer" id="fixedDiscounts_msg"></div>
+
             </div>
         </div>
     </div>
@@ -365,20 +365,22 @@
         if (data.fixed_discounts) {
             $('#fixedDiscounts_list').empty()
             if (data.fixed_discounts.length > 0) {
+                let count = 1
                 data.fixed_discounts.forEach((discounts) => {
-                    $('#fixedDiscounts_list').append(`
-                        <div class='list-group-item' style='display: inline-flex;justify-content: space-between;'>
-                            <div style='width: 30%;'>${discounts.description}</div>
-                            <div style='width: 30%;text-align: left;'>${discounts.value}</div>
-                            <div>
+                    $('#fixedDiscounts_tbody').append(`
+                        <tr>
+                            <td class="text-center">${count++}</td>
+                            <td>${discounts.description}</td>
+                            <td>${discounts.value}</td>
+                            <td class="text-center" style="width:15%;">
                                 <button class='btn btn-danger btn-sm' data-fixed_discount_id='${discounts.id}'>🗑 {{ gettext('Remove') }}</button>
-                            </div>
-                        </div >
+                            </td>
+                        </tr>
                     `)
                 })
             } else {
-                $('#fixedDiscounts_list').append(`
-                    <div class='list-group-item list-group-item-light text-center'>${label_2}</div>
+                $('#fixedDiscounts_msg').append(`
+                    <div class='text-center'>${label_2}</div>
                 `)
             }
         }
