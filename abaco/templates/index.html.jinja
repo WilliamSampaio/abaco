@@ -46,8 +46,9 @@
     <div class="row mb-3">
         <div class="col align-self-center">
             <div class="card text-center">
-                <div style="width: 20%;margin-left: auto;margin-right: auto;padding: 5px;">
-                    <canvas id="abacoChart" style="width:100%;max-width:700px"></canvas>
+                <div style="padding: 5px;">
+                    <div style="width:100%;max-width:700px;"><canvas id="abacoChart" style="width: 100%;"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -313,17 +314,34 @@
 
     const ctx = document.getElementById('abacoChart')
 
-    let chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Earnings', 'Expenses'],
-            datasets: [{
-                label: '# ',
-                data: [81, 19],
-                borderWidth: 1
-            }]
+    let chart = null
+
+    function populate_chart(data) {
+        earnings = {
+            label: 'Earnings',
+            data: []
         }
-    })
+        expenses = {
+            label: 'Expenses',
+            data: []
+        }
+        labels = []
+        if (data.results.transactions.length > 0) {
+            let locale = data.results.user_config.language
+            data.results.transactions.forEach((item) => {
+                labels.indexOf(item.date) === -1 ? labels.push(format_date(item.date, locale)) : null
+                if (item.expense) {
+                    expenses.data.push(item.value)
+                } else {
+                    earnings.data.push(item.value)
+                }
+            })
+        }
+        if (chart != null) {
+            chart.destroy()
+        }
+        chart = create_chart(ctx, 'line', labels, [earnings, expenses])
+    }
 
     function update_settings(data) {
         ajax_requester("/api/settings", JSON.stringify(data), 'UPDATE')
@@ -415,7 +433,10 @@
             'initial_date': $('#initial_date').val(),
             'final_date': $('#final_date').val(),
         }
-        ajax_requester('/api/transactions', JSON.stringify(data), 'POST', false, [populate_transactions, populate_totals])
+        ajax_requester('/api/transactions', JSON.stringify(data), 'POST', false, [
+            populate_transactions,
+            populate_totals,
+            populate_chart])
     }
 
     $('#settings_form').submit((e) => {
