@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-05 17:27-0400\n"
+"POT-Creation-Date: 2023-10-06 01:22-0400\n"
 "PO-Revision-Date: 2023-10-04 01:27-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,44 +18,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.13.0\n"
 
-#: abaco/blueprints/api/api.py:22 abaco/blueprints/api/api.py:86
+#: abaco/blueprints/api/api.py:20 abaco/blueprints/api/api.py:78
+#: abaco/blueprints/api/api.py:104
 msgid "Failed to save data"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:23
+#: abaco/blueprints/api/api.py:21
 msgid "Abaco created successfully"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:29
+#: abaco/blueprints/api/api.py:27
 msgid "Database file not sent"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:37 abaco/blueprints/api/api.py:39
+#: abaco/blueprints/api/api.py:35 abaco/blueprints/api/api.py:37
 msgid "Database invalid"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:44
+#: abaco/blueprints/api/api.py:42
 msgid "Abaco database imported successfully"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:52 abaco/blueprints/api/api.py:57
+#: abaco/blueprints/api/api.py:50 abaco/blueprints/api/api.py:55
+#: abaco/blueprints/api/api.py:170 abaco/blueprints/api/api.py:177
 msgid "Failed to update data"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:58
+#: abaco/blueprints/api/api.py:56
 msgid "Abaco database updated successfully"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:87
+#: abaco/blueprints/api/api.py:79
 msgid "Fixed discount successfully registered!"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:94 abaco/blueprints/api/api.py:97
+#: abaco/blueprints/api/api.py:86 abaco/blueprints/api/api.py:89
+#: abaco/blueprints/api/api.py:185 abaco/blueprints/api/api.py:187
 msgid "Failed to delete data"
 msgstr ""
 
-#: abaco/blueprints/api/api.py:98
+#: abaco/blueprints/api/api.py:90
 msgid "Fixed discount successfully deleted!"
+msgstr ""
+
+#: abaco/blueprints/api/api.py:105
+msgid "Transaction successfully registered!"
+msgstr ""
+
+#: abaco/blueprints/api/api.py:161
+msgid "Failed to get data"
+msgstr ""
+
+#: abaco/blueprints/api/api.py:178
+msgid "Transaction updated successfully"
+msgstr ""
+
+#: abaco/blueprints/api/api.py:188
+msgid "Transaction successfully deleted!"
 msgstr ""
 
 #: abaco/blueprints/web/web.py:28
@@ -98,94 +117,114 @@ msgstr ""
 msgid "Balance"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:87 abaco/templates/index.html.jinja:284
+#: abaco/templates/index.html.jinja:87 abaco/templates/index.html.jinja:279
 msgid "Fixed Discounts"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:89 abaco/templates/index.html.jinja:117
-#: abaco/templates/index.html.jinja:245 abaco/templates/index.html.jinja:302
+#: abaco/templates/index.html.jinja:89 abaco/templates/index.html.jinja:118
+#: abaco/templates/index.html.jinja:240 abaco/templates/index.html.jinja:297
 msgid "Add"
 msgstr ""
 
 #: abaco/templates/index.html.jinja:96 abaco/templates/index.html.jinja:103
-#: abaco/templates/index.html.jinja:128 abaco/templates/index.html.jinja:139
-#: abaco/templates/index.html.jinja:371
+#: abaco/templates/index.html.jinja:374 abaco/templates/index.html.jinja:402
 msgid "Remove"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:115
+#: abaco/templates/index.html.jinja:116
 msgid "Transactions"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:127 abaco/templates/index.html.jinja:138
-msgid "Edit"
+#: abaco/templates/index.html.jinja:125
+msgid "Date"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:166
+#: abaco/templates/index.html.jinja:126 abaco/templates/index.html.jinja:223
+#: abaco/templates/index.html.jinja:258
+msgid "Description"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:127 abaco/templates/index.html.jinja:228
+msgid "Value"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:128
+msgid "Fixed Discount"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:129
+msgid "Net Value"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:161
 msgid "Settings"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:173 abaco/templates/welcome.html.jinja:46
+#: abaco/templates/index.html.jinja:168 abaco/templates/welcome.html.jinja:46
 msgid "Your Name"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:176 abaco/templates/welcome.html.jinja:49
+#: abaco/templates/index.html.jinja:171 abaco/templates/welcome.html.jinja:49
 msgid "Language"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:191 abaco/templates/welcome.html.jinja:59
+#: abaco/templates/index.html.jinja:186 abaco/templates/welcome.html.jinja:59
 msgid "Currency"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:204 abaco/templates/welcome.html.jinja:72
+#: abaco/templates/index.html.jinja:199 abaco/templates/welcome.html.jinja:72
 #: abaco/templates/welcome.html.jinja:95
 msgid "Save"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:207
+#: abaco/templates/index.html.jinja:202
 msgid "Save Backup"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:210 abaco/templates/index.html.jinja:244
-#: abaco/templates/index.html.jinja:301 abaco/templates/welcome.html.jinja:71
+#: abaco/templates/index.html.jinja:205 abaco/templates/index.html.jinja:239
+#: abaco/templates/index.html.jinja:296 abaco/templates/welcome.html.jinja:71
 #: abaco/templates/welcome.html.jinja:94
 msgid "Close"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:221
+#: abaco/templates/index.html.jinja:216
 msgid "Add Fixed Discounts"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:228 abaco/templates/index.html.jinja:263
-msgid "Description"
-msgstr ""
-
-#: abaco/templates/index.html.jinja:232
+#: abaco/templates/index.html.jinja:227
 msgid "Porcentage"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:233
-msgid "Value"
-msgstr ""
-
-#: abaco/templates/index.html.jinja:256
+#: abaco/templates/index.html.jinja:251
 msgid "Add Transaction"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:266
+#: abaco/templates/index.html.jinja:261
 msgid "Transaction Date"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:279
+#: abaco/templates/index.html.jinja:274
 msgid "Expense"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:313
+#: abaco/templates/index.html.jinja:308
 msgid "Do you really want to remove this fixed discount?"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:314
+#: abaco/templates/index.html.jinja:309
 msgid "Click add to register a new fixed discount"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:310
+msgid "Do you really want to remove this transaction?"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:311
+msgid "Click add to register a new transaction"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:401
+msgid "Edit"
 msgstr ""
 
 #: abaco/templates/welcome.html.jinja:22
