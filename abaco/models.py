@@ -18,10 +18,11 @@ class Model:
         return self.__dict__
 
     def save(self):
+        data = self.__dict__.copy()
+        data.pop('table_name')
         if self.id is None:
-            self.id = self.__get_db().insert(self.__dict__)
+            self.id = self.__get_db().insert(data)
         else:
-            data = self.__dict__.copy()
             data.pop('id')
             self.__get_db().update(data, doc_ids=[self.id])[0]
         return self.id
