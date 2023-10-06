@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-06 01:22-0400\n"
+"POT-Creation-Date: 2023-10-06 01:52-0400\n"
 "PO-Revision-Date: 2023-10-04 01:27-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -117,18 +117,23 @@ msgstr ""
 msgid "Balance"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:87 abaco/templates/index.html.jinja:279
+#: abaco/templates/index.html.jinja:88 abaco/templates/index.html.jinja:279
 msgid "Fixed Discounts"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:89 abaco/templates/index.html.jinja:118
+#: abaco/templates/index.html.jinja:90 abaco/templates/index.html.jinja:118
 #: abaco/templates/index.html.jinja:240 abaco/templates/index.html.jinja:297
 msgid "Add"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:96 abaco/templates/index.html.jinja:103
-#: abaco/templates/index.html.jinja:374 abaco/templates/index.html.jinja:402
-msgid "Remove"
+#: abaco/templates/index.html.jinja:97 abaco/templates/index.html.jinja:126
+#: abaco/templates/index.html.jinja:223 abaco/templates/index.html.jinja:258
+msgid "Description"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:98 abaco/templates/index.html.jinja:127
+#: abaco/templates/index.html.jinja:228
+msgid "Value"
 msgstr ""
 
 #: abaco/templates/index.html.jinja:116
@@ -137,15 +142,6 @@ msgstr ""
 
 #: abaco/templates/index.html.jinja:125
 msgid "Date"
-msgstr ""
-
-#: abaco/templates/index.html.jinja:126 abaco/templates/index.html.jinja:223
-#: abaco/templates/index.html.jinja:258
-msgid "Description"
-msgstr ""
-
-#: abaco/templates/index.html.jinja:127 abaco/templates/index.html.jinja:228
-msgid "Value"
 msgstr ""
 
 #: abaco/templates/index.html.jinja:128
@@ -223,7 +219,11 @@ msgstr ""
 msgid "Click add to register a new transaction"
 msgstr ""
 
-#: abaco/templates/index.html.jinja:401
+#: abaco/templates/index.html.jinja:376 abaco/templates/index.html.jinja:404
+msgid "Remove"
+msgstr ""
+
+#: abaco/templates/index.html.jinja:403
 msgid "Edit"
 msgstr ""
 

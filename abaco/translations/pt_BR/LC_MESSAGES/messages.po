@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-06 01:22-0400\n"
+"POT-Creation-Date: 2023-10-06 01:52-0400\n"
 "PO-Revision-Date: 2023-10-04 01:27-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -117,19 +117,24 @@ msgstr "Despesas"
 msgid "Balance"
 msgstr "Saldo"
 
-#: abaco/templates/index.html.jinja:87 abaco/templates/index.html.jinja:279
+#: abaco/templates/index.html.jinja:88 abaco/templates/index.html.jinja:279
 msgid "Fixed Discounts"
 msgstr "Descontos Fixos"
 
-#: abaco/templates/index.html.jinja:89 abaco/templates/index.html.jinja:118
+#: abaco/templates/index.html.jinja:90 abaco/templates/index.html.jinja:118
 #: abaco/templates/index.html.jinja:240 abaco/templates/index.html.jinja:297
 msgid "Add"
 msgstr "Adicionar"
 
-#: abaco/templates/index.html.jinja:96 abaco/templates/index.html.jinja:103
-#: abaco/templates/index.html.jinja:374 abaco/templates/index.html.jinja:402
-msgid "Remove"
-msgstr "Remover"
+#: abaco/templates/index.html.jinja:97 abaco/templates/index.html.jinja:126
+#: abaco/templates/index.html.jinja:223 abaco/templates/index.html.jinja:258
+msgid "Description"
+msgstr "Descrição"
+
+#: abaco/templates/index.html.jinja:98 abaco/templates/index.html.jinja:127
+#: abaco/templates/index.html.jinja:228
+msgid "Value"
+msgstr "Valor"
 
 #: abaco/templates/index.html.jinja:116
 msgid "Transactions"
@@ -138,15 +143,6 @@ msgstr "Transações"
 #: abaco/templates/index.html.jinja:125
 msgid "Date"
 msgstr "Data"
-
-#: abaco/templates/index.html.jinja:126 abaco/templates/index.html.jinja:223
-#: abaco/templates/index.html.jinja:258
-msgid "Description"
-msgstr "Descrição"
-
-#: abaco/templates/index.html.jinja:127 abaco/templates/index.html.jinja:228
-msgid "Value"
-msgstr "Valor"
 
 #: abaco/templates/index.html.jinja:128
 msgid "Fixed Discount"
@@ -223,7 +219,11 @@ msgstr "Você quer relamente remover essa transação?"
 msgid "Click add to register a new transaction"
 msgstr "Clique em adicionar para registrar uma nova transação"
 
-#: abaco/templates/index.html.jinja:401
+#: abaco/templates/index.html.jinja:376 abaco/templates/index.html.jinja:404
+msgid "Remove"
+msgstr "Remover"
+
+#: abaco/templates/index.html.jinja:403
 msgid "Edit"
 msgstr "Editar"
 
