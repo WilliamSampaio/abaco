@@ -118,7 +118,6 @@ def getall_transaction():
     for transaction in transactions:
         if transaction['expense']:
             expenses += transaction['value']
-            transaction['value'] = format_currency(transaction['value'])
             new_transactions.append(transaction)
             continue
         if len(transaction['fixed_discounts_ids']) > 0:
@@ -132,23 +131,20 @@ def getall_transaction():
                     else:
                         discounts += discount['value']
             earnings += transaction['value'] - discounts
-            transaction['net_value'] = format_currency(
-                transaction['value'] - discounts
-            )
-            transaction['value'] = format_currency(transaction['value'])
-            transaction['discounts'] = format_currency(discounts)
+            transaction['net_value'] = transaction['value'] - discounts
+            transaction['discounts'] = discounts
             new_transactions.append(transaction)
             continue
         earnings += transaction['value']
-        transaction['value'] = format_currency(transaction['value'])
         new_transactions.append(transaction)
     balance = earnings - expenses
     results = {
+        'user_config': UserConfig().find(1).as_dict(),
         'transactions': new_transactions,
         'totals': {
-            'earnings': format_currency(earnings),
-            'expenses': format_currency(expenses),
-            'balance': format_currency(balance),
+            'earnings': earnings,
+            'expenses': expenses,
+            'balance': balance,
         },
     }
     return {'results': results}, 200

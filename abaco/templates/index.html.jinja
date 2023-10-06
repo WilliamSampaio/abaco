@@ -366,16 +366,21 @@
         $('#transactions_tbody').empty()
         if (data.results.transactions.length > 0) {
             let count = 1
+            let locale = data.results.user_config.language
+            let currency = data.results.user_config.currency
             data.results.transactions.forEach((transaction) => {
+                let value = format_currency(transaction.value, locale, currency)
+                let discounts = transaction.discounts ? format_currency(transaction.discounts, locale, currency) : false
+                let net_value = transaction.net_value ? format_currency(transaction.net_value, locale, currency) : false
                 $('#transactions_tbody').append(`
                     <tr>
                         <td class="text-center">${count++}</td>
                         <td style="width:10%;">${transaction.date.split('-').reverse().join('/')}</td>
                         <td>${transaction.description}</td>
-                        <td style="width:15%;"><b style="color:${transaction.expense ? 'red' : 'green'};">${transaction.value}</b></td>
-                        <td style="width:15%;"><span class="badge text-bg-danger">${transaction.discounts ? ' - ' + transaction.discounts : ''}</span></td>
-                        <td style="width:15%;"><b style="color:green;">${transaction.net_value ? transaction.net_value : ''}</b></td>
-                        <td class="text-center" style="width:15%;">
+                        <td style="width:15%;"><b style="color:${transaction.expense ? 'red' : 'green'};">${value}</b></td>
+                        <td style="width:15%;"><span class="badge text-bg-danger">${discounts ? ' - ' + discounts : ''}</span></td>
+                        <td style="width:15%;"><b style="color:green;">${net_value ? net_value : ''}</b></td>
+                        <td class="text-center" style="width:20%;">
                             <button class="btn btn-success btn-sm" data-transaction_edit="${transaction.id}">✏ {{ gettext('Edit') }}</button>
                             <button class="btn btn-danger btn-sm" data-transaction_delete="${transaction.id}">🗑 {{ gettext('Remove') }}</button>
                         </td>
@@ -394,9 +399,11 @@
     }
 
     function populate_totals(data) {
-        $('#earnings').empty().append(data.results.totals.earnings)
-        $('#expenses').empty().append(data.results.totals.expenses)
-        $('#balance').empty().append(data.results.totals.balance)
+        let locale = data.results.user_config.language
+        let currency = data.results.user_config.currency
+        $('#earnings').empty().append(format_currency(data.results.totals.earnings, locale, currency))
+        $('#expenses').empty().append(format_currency(data.results.totals.expenses, locale, currency))
+        $('#balance').empty().append(format_currency(data.results.totals.balance, locale, currency))
     }
 
     function getall_fixed_discount() {
