@@ -281,7 +281,7 @@
                         <div class="card-body">
                             {% for discount in data['fixed_discounts']: %}
                             <div class="form-check form-switch">
-                                <input class="form-check-input discount" type="checkbox" name="fixed_discounts_ids[]"
+                                <input class="form-check-input discount" type="checkbox" name="fixed_discounts_ids"
                                     value="{{ discount['id'] }}" role="switch"
                                     id="transactions_fixed_discount_{{ discount['id'] }}" checked>
                                 <label class="form-check-label" for="flexSwitchCheckChecked">{{ discount['description']
@@ -363,7 +363,7 @@
 
     function populate_fixed_discount(data) {
         if (data.fixed_discounts) {
-            $('#fixedDiscounts_list').empty()
+            $('#fixedDiscounts_tbody').empty()
             if (data.fixed_discounts.length > 0) {
                 let count = 1
                 data.fixed_discounts.forEach((discounts) => {
@@ -387,7 +387,7 @@
     }
 
     function populate_transactions(data) {
-        $('#transactions_list').empty()
+        $('#transactions_tbody').empty()
         if (data.results.transactions.length > 0) {
             let count = 1
             data.results.transactions.forEach((transaction) => {
@@ -460,7 +460,7 @@
         e.preventDefault()
         let fixed_discounts_ids = []
         if (!$('#transactions_expense').is(':checked')) {
-            $('.discount').each(function () {
+            $('.discount[name=fixed_discounts_ids]:checked').each(function () {
                 fixed_discounts_ids.push(parseInt($(this).val()))
             })
         }
