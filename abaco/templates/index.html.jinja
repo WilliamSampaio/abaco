@@ -111,35 +111,30 @@
     <div class="row mb-3">
         <div class="col">
             <div class="card">
+
                 <div class="card-header" style="display: inline-flex;">
                     <h5 class="card-title">{{ gettext('Transactions') }}</h5>
                     <button class="btn btn-primary btn-sm" style="margin-left: auto;" data-bs-toggle="modal"
                         data-bs-target="#transactionsModal">{{ gettext('Add') }}</button>
                 </div>
-                <div class="list-group list-group-flush" id="transactions_list">
-                    <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
-                        <div>29/09/2023</div>
-                        <div>Salary</div>
-                        <div style="width: 25%;text-align: left;">
-                            <b style="color: green;">+ BLR: R$ 1.999,00</b>
-                        </div>
-                        <div>
-                            <button class="btn btn-success btn-sm">✏ {{ gettext('Edit') }}</button>
-                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
-                        </div>
-                    </div>
-                    <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
-                        <div>29/09/2023</div>
-                        <div>Contas</div>
-                        <div style="width: 25%;text-align: left;">
-                            <b style="color: red;">- BLR: R$ 999,00</b>
-                        </div>
-                        <div>
-                            <button class="btn btn-success btn-sm">✏ {{ gettext('Edit') }}</button>
-                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
-                        </div>
-                    </div>
-                </div>
+
+                <table class="card-body table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col">{{ gettext('Date') }}</th>
+                            <th scope="col">{{ gettext('Description') }}</th>
+                            <th scope="col">{{ gettext('Value') }}</th>
+                            <th scope="col">{{ gettext('Fixed Discount') }}</th>
+                            <th scope="col">{{ gettext('Net Value') }}</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions_tbody"></tbody>
+                </table>
+
+                <div class="card-footer" id="transaction_msg"></div>
+
             </div>
         </div>
     </div>
@@ -392,24 +387,26 @@
     function populate_transactions(data) {
         $('#transactions_list').empty()
         if (data.results.transactions.length > 0) {
+            let count = 1
             data.results.transactions.forEach((transaction) => {
-                $('#transactions_list').append(`
-                    <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
-                        <div>${transaction.date.split('-').reverse().join('/')}</div>
-                        <div>${transaction.description}</div>
-                        <div style="text-align: left;">
-                            <b style="color:${transaction.expense ? 'red' : 'green'};">${transaction.value}</b>
-                        </div>
-                        <div>
+                $('#transactions_tbody').append(`
+                    <tr>
+                        <td class="text-center">${count++}</td>
+                        <td style="width:10%;">${transaction.date.split('-').reverse().join('/')}</td>
+                        <td>${transaction.description}</td>
+                        <td style="width:15%;"><b style="color:${transaction.expense ? 'red' : 'green'};">${transaction.value}</b></td>
+                        <td style="width:15%;"><span class="badge text-bg-danger">${transaction.discounts ? ' - ' + transaction.discounts : ''}</span></td>
+                        <td style="width:15%;"><b style="color:green;">${transaction.net_value ? transaction.net_value : ''}</b></td>
+                        <td class="text-center" style="width:15%;">
                             <button class="btn btn-success btn-sm" data-transaction_edit="${transaction.id}">✏ {{ gettext('Edit') }}</button>
                             <button class="btn btn-danger btn-sm" data-transaction_delete="${transaction.id}">🗑 {{ gettext('Remove') }}</button>
-                        </div>
-                    </div>
+                        </td>
+                    </tr>
                 `)
             })
         } else {
-            $('#transactions_list').append(`
-                <div class='list-group-item list-group-item-light text-center'>${label_4}</div>
+            $('#transaction_msg').empty().append(`
+                <div class='text-center'>${label_4}</div>
             `)
         }
     }

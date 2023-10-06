@@ -114,21 +114,38 @@ def getall_transaction():
     fixed_discounts = FixedDiscount().all()
     earnings = 0
     expenses = 0
+    new_transactions = []
     for transaction in transactions:
         if transaction['expense']:
             expenses += transaction['value']
+            transaction['value'] = format_currency(transaction['value'])
+            new_transactions.append(transaction)
             continue
         if len(transaction['fixed_discounts_ids']) > 0:
             discounts = 0
             for discount in fixed_discounts:
                 if discount['id'] in transaction['fixed_discounts_ids']:
-                    discounts += discount['value']
+                    if discount['calculated_in'] == 'porcentage':
+                        discounts += (discount['value'] / 100) * transaction[
+                            'value'
+                        ]
+                    else:
+                        discounts += discount['value']
             earnings += transaction['value'] - discounts
+            transaction['net_value'] = format_currency(
+                transaction['value'] - discounts
+            )
+            transaction['value'] = format_currency(transaction['value'])
+            transaction['discounts'] = format_currency(discounts)
+            new_transactions.append(transaction)
             continue
         earnings += transaction['value']
+        transaction['value'] = format_currency(transaction['value'])
+        new_transactions.append(transaction)
     balance = earnings - expenses
+    print(new_transactions)
     results = {
-        'transactions': transactions,
+        'transactions': new_transactions,
         'totals': {
             'earnings': format_currency(earnings),
             'expenses': format_currency(expenses),
