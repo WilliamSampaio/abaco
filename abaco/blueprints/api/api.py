@@ -8,7 +8,7 @@ from flask_babel import gettext as _
 
 from abaco.database import db_filename, validate_schema
 from abaco.localization import get_locale
-from abaco.models import FixedDiscount, UserConfig
+from abaco.models import FixedDiscount, Transaction, UserConfig
 from abaco.utils import validate_json
 
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -96,3 +96,81 @@ def delete_fixed_discount(id):
     if fixed_discount.save() is None:
         return {'message': _('Failed to delete data')}, 400
     return {'message': _('Fixed discount successfully deleted!')}, 200
+
+
+@api.route('/transaction', methods=['POST'])
+def post_transaction():
+    data = request.get_json()
+    transaction = Transaction(
+        data['description'],
+        data['date'],
+        data['value'],
+        data['expense'],
+        data['fixed_discounts_ids'],
+    )
+    if transaction.save() is None:
+        return {'message': _('Failed to save data')}, 400
+    return {'message': _('Transaction successfully registered!')}, 201
+
+
+@api.route('/transactions', methods=['POST'])
+def getall_transaction():
+    data = request.get_json()
+    transactions = Transaction().between(
+        data['initial_date'], data['final_date']
+    )
+    fixed_discounts = FixedDiscount().all()
+    earnings = 0
+    expenses = 0
+    for transaction in transactions:
+        if transaction['expense']:
+            expenses += transaction['value']
+            continue
+        if len(transaction['fixed_discounts_ids']) > 0:
+            discounts = 0
+            for discount in fixed_discounts:
+                if discount['id'] in transaction['fixed_discounts_ids']:
+                    discounts += discount['value']
+            earnings += transaction['value'] - discounts
+            continue
+        earnings += transaction['value']
+    balance = earnings - expenses
+    results = {
+        'transactions': transactions,
+        'totals': {
+            'earnings': format_currency(
+                earnings, UserConfig().find(1).currency
+            ),
+            'expenses': format_currency(
+                expenses, UserConfig().find(1).currency
+            ),
+            'balance': format_currency(balance, UserConfig().find(1).currency),
+        },
+    }
+    return {'results': results}, 200
+
+
+@api.route('/transaction/<int:id>', methods=['UPDATE'])
+def update_transaction(id):
+    data = request.get_json()
+    transaction = UserConfig().find(id)
+    if transaction is None:
+        return {'message': _('Failed to update data')}, 400
+    transaction.description = data['description']
+    transaction.date = data['date']
+    transaction.value = data['value']
+    transaction.expense = data['expense']
+    transaction.fixed_discounts_ids = data['fixed_discounts_ids']
+    if transaction.save() is None:
+        return {'message': _('Failed to update data')}, 400
+    return {'message': _('Transaction updated successfully')}, 200
+
+
+@api.route('/transaction/<int:id>', methods=['DELETE'])
+def delete_transaction(id):
+    transaction = Transaction().find(id)
+    if transaction is None:
+        return {'message': _('Failed to delete data')}, 404
+    if transaction.delete() is None:
+        return {'message': _('Failed to delete data')}, 400
+    return {'message': _('Transaction successfully deleted!')}, 200

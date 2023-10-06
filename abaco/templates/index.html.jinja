@@ -58,7 +58,7 @@
             <div class="alert alert-success">
                 <div class="card-body">
                     <h5 class="card-title">{{ gettext('Earnings') }}</h5>
-                    <p class="fs-4"> + R$ 1.999,00</p>
+                    <p class="fs-4" id="earnings"></p>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <div class="alert alert-danger">
                 <div class="card-body">
                     <h5 class="card-title">{{ gettext('Expenses') }}</h5>
-                    <p class="fs-4"> - R$ 999,00</p>
+                    <p class="fs-4" id="expenses"></p>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
             <div class="alert alert-info">
                 <div class="card-body">
                     <h5 class="card-title">{{ gettext('Balance') }}</h5>
-                    <p class="fs-4">R$ 1.000,00</p>
+                    <p class="fs-4" id="balance"></p>
                 </div>
             </div>
         </div>
@@ -116,7 +116,7 @@
                     <button class="btn btn-primary btn-sm" style="margin-left: auto;" data-bs-toggle="modal"
                         data-bs-target="#transactionsModal">{{ gettext('Add') }}</button>
                 </div>
-                <div class="list-group list-group-flush">
+                <div class="list-group list-group-flush" id="transactions_list">
                     <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
                         <div>29/09/2023</div>
                         <div>Salary</div>
@@ -268,9 +268,9 @@
                             value="{{ data['final_date'] }}" required>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="transactions_value_text">$</span>
-                        <input class="form-control" type="number" step="0.01" max="100" name="value"
-                            id="transactions_value" required>
+                        <span class="input-group-text">$</span>
+                        <input class="form-control" type="number" step="0.01" name="value" id="transactions_value"
+                            required>
                     </div>
                     <div class="form-check form-switch mb-3">
                         <input class="form-check-input" type="checkbox" name="expense" value="true" role="switch"
@@ -286,7 +286,7 @@
                         <div class="card-body">
                             {% for discount in data['fixed_discounts']: %}
                             <div class="form-check form-switch">
-                                <input class="form-check-input discount" type="checkbox" name="fixed_discounts_ids"
+                                <input class="form-check-input discount" type="checkbox" name="fixed_discounts_ids[]"
                                     value="{{ discount['id'] }}" role="switch"
                                     id="transactions_fixed_discount_{{ discount['id'] }}" checked>
                                 <label class="form-check-label" for="flexSwitchCheckChecked">{{ discount['description']
@@ -312,6 +312,8 @@
 
     var label_1 = "{{ gettext('Do you really want to remove this fixed discount?') }}"
     var label_2 = "{{ gettext('Click add to register a new fixed discount') }}"
+    var label_3 = "{{ gettext('Do you really want to remove this transaction?') }}"
+    var label_4 = "{{ gettext('Click add to register a new transaction') }}"
 
     const ctx = document.getElementById('abacoChart')
 
@@ -340,7 +342,9 @@
                 alert(data.message)
             }
             if (success_callback != null) {
-                success_callback(data)
+                success_callback.forEach(function (func) {
+                    func(data)
+                })
             }
             if (reload) {
                 location.reload()
@@ -356,6 +360,10 @@
 
     function post_fixed_discount(data) {
         ajax_requester("/api/fixed-discount", JSON.stringify(data))
+    }
+
+    function post_transaction(data) {
+        ajax_requester("/api/transaction", JSON.stringify(data))
     }
 
     function populate_fixed_discount(data) {
@@ -381,8 +389,47 @@
         }
     }
 
+    function populate_transactions(data) {
+        $('#transactions_list').empty()
+        if (data.results.transactions.length > 0) {
+            data.results.transactions.forEach((transaction) => {
+                $('#transactions_list').append(`
+                    <div class="list-group-item" style="display: inline-flex;justify-content: space-between;">
+                        <div>${transaction.date.split('-').reverse().join('/')}</div>
+                        <div>${transaction.description}</div>
+                        <div style="text-align: left;">
+                            <b style="color:${transaction.expense ? 'red' : 'green'};">${transaction.value}</b>
+                        </div>
+                        <div>
+                            <button class="btn btn-success btn-sm">✏ {{ gettext('Edit') }}</button>
+                            <button class="btn btn-danger btn-sm">🗑 {{ gettext('Remove') }}</button>
+                        </div>
+                    </div>
+                `)
+            })
+        } else {
+            $('#transactions_list').append(`
+                <div class='list-group-item list-group-item-light text-center'>${label_4}</div>
+            `)
+        }
+    }
+
+    function populate_totals(data) {
+        $('#earnings').empty().append(data.results.totals.earnings)
+        $('#expenses').empty().append(data.results.totals.expenses)
+        $('#balance').empty().append(data.results.totals.balance)
+    }
+
     function getall_fixed_discount() {
-        ajax_requester("/api/fixed-discounts", null, 'GET', false, populate_fixed_discount)
+        ajax_requester("/api/fixed-discounts", null, 'GET', false, [populate_fixed_discount])
+    }
+
+    function get_transactions() {
+        data = {
+            'initial_date': $('#initial_date').val(),
+            'final_date': $('#final_date').val(),
+        }
+        ajax_requester('/api/transactions', JSON.stringify(data), 'POST', false, [populate_transactions, populate_totals])
     }
 
     $('#settings_form').submit((e) => {
@@ -403,6 +450,23 @@
             'description': $('#fixedDiscounts_description').val(),
             'calculated_in': $('#fixedDiscounts_calculated_in').val(),
             'value': parseFloat($('#fixedDiscounts_value').val())
+        })
+    })
+
+    $('#transactions_form').submit((e) => {
+        e.preventDefault()
+        let fixed_discounts_ids = []
+        if (!$('#transactions_expense').is(':checked')) {
+            $('.discount').each(function () {
+                fixed_discounts_ids.push(parseInt($(this).val()))
+            })
+        }
+        post_transaction({
+            'description': $('#transactions_description').val(),
+            'date': $('#transactions_date').val(),
+            'value': parseFloat($('#transactions_value').val()),
+            'expense': $('#transactions_expense').is(':checked'),
+            'fixed_discounts_ids': fixed_discounts_ids
         })
     })
 
@@ -433,7 +497,16 @@
             }
         })
 
+        /* $('#initial_date').change(function(){
+            get_transactions()
+        }) */
+
+        $('#final_date').on('change', function(){
+            get_transactions()
+        })
+
         getall_fixed_discount()
+        get_transactions()
     })
 
 </script>
