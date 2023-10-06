@@ -143,7 +143,6 @@ def getall_transaction():
         transaction['value'] = format_currency(transaction['value'])
         new_transactions.append(transaction)
     balance = earnings - expenses
-    print(new_transactions)
     results = {
         'transactions': new_transactions,
         'totals': {
