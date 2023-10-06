@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-06 01:52-0400\n"
+"POT-Creation-Date: 2023-10-06 13:27-0400\n"
 "PO-Revision-Date: 2023-10-04 01:27-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -40,7 +40,7 @@ msgid "Abaco database imported successfully"
 msgstr "Banco de dados Abaco importado com sucesso"
 
 #: abaco/blueprints/api/api.py:50 abaco/blueprints/api/api.py:55
-#: abaco/blueprints/api/api.py:170 abaco/blueprints/api/api.py:177
+#: abaco/blueprints/api/api.py:166 abaco/blueprints/api/api.py:173
 msgid "Failed to update data"
 msgstr "Falha ao tentar atualizar dados"
 
@@ -53,7 +53,7 @@ msgid "Fixed discount successfully registered!"
 msgstr "Desconto fixo cadastrado com sucesso!"
 
 #: abaco/blueprints/api/api.py:86 abaco/blueprints/api/api.py:89
-#: abaco/blueprints/api/api.py:185 abaco/blueprints/api/api.py:187
+#: abaco/blueprints/api/api.py:181 abaco/blueprints/api/api.py:183
 msgid "Failed to delete data"
 msgstr "Falha ao tentar deletar dados"
 
@@ -65,15 +65,15 @@ msgstr "Desconto fixo excluído com sucesso!"
 msgid "Transaction successfully registered!"
 msgstr "Transação cadastrada com sucesso!"
 
-#: abaco/blueprints/api/api.py:161
+#: abaco/blueprints/api/api.py:157
 msgid "Failed to get data"
 msgstr "Falha ao tentar obter dados"
 
-#: abaco/blueprints/api/api.py:178
+#: abaco/blueprints/api/api.py:174
 msgid "Transaction updated successfully"
 msgstr "Transação atualizada com sucesso"
 
-#: abaco/blueprints/api/api.py:188
+#: abaco/blueprints/api/api.py:184
 msgid "Transaction successfully deleted!"
 msgstr "Transação excluída com sucesso!"
 
@@ -105,11 +105,11 @@ msgstr "Data Inicial"
 msgid "Final Date"
 msgstr "Data Final"
 
-#: abaco/templates/index.html.jinja:60
+#: abaco/templates/index.html.jinja:60 abaco/templates/index.html.jinja:320
 msgid "Earnings"
 msgstr "Ganhos"
 
-#: abaco/templates/index.html.jinja:68
+#: abaco/templates/index.html.jinja:68 abaco/templates/index.html.jinja:324
 msgid "Expenses"
 msgstr "Despesas"
 
@@ -203,27 +203,27 @@ msgstr "Data da Transação"
 msgid "Expense"
 msgstr "Despesa"
 
-#: abaco/templates/index.html.jinja:308
+#: abaco/templates/index.html.jinja:309
 msgid "Do you really want to remove this fixed discount?"
 msgstr "Você quer relamente remover esse desconto fixo?"
 
-#: abaco/templates/index.html.jinja:309
+#: abaco/templates/index.html.jinja:310
 msgid "Click add to register a new fixed discount"
 msgstr "Clique em adicionar para registrar um novo desconto fixo"
 
-#: abaco/templates/index.html.jinja:310
+#: abaco/templates/index.html.jinja:311
 msgid "Do you really want to remove this transaction?"
 msgstr "Você quer relamente remover essa transação?"
 
-#: abaco/templates/index.html.jinja:311
+#: abaco/templates/index.html.jinja:312
 msgid "Click add to register a new transaction"
 msgstr "Clique em adicionar para registrar uma nova transação"
 
-#: abaco/templates/index.html.jinja:376 abaco/templates/index.html.jinja:404
+#: abaco/templates/index.html.jinja:369 abaco/templates/index.html.jinja:402
 msgid "Remove"
 msgstr "Remover"
 
-#: abaco/templates/index.html.jinja:403
+#: abaco/templates/index.html.jinja:401
 msgid "Edit"
 msgstr "Editar"
 
