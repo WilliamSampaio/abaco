@@ -4,19 +4,26 @@ import os
 from schema import And, Schema
 from tinydb import Query, TinyDB
 
-db_filename = os.path.join(
-    os.environ.get('HOME'), '.abaco', 'database.abaco.json'
-)
+from abaco.configuration import settings
+
+db_filename = 'database.abaco.json'
+
+if settings['APP_ENV'] == 'development':
+    db_path = os.path.join(os.getcwd(), 'database.abaco.json')
+elif settings['APP_ENV'] == 'production':
+    db_path = os.path.join(
+        os.environ.get('HOME'), '.abaco', 'database.abaco.json'
+    )
 
 
 def database_exists():
-    return os.path.exists(db_filename)
+    return os.path.exists(db_path)
 
 
 def get_db() -> TinyDB:
     if not os.path.exists(os.path.join(os.environ.get('HOME'), '.abaco')):
         os.makedirs(os.path.join(os.environ.get('HOME'), '.abaco'))
-    return TinyDB(db_filename)
+    return TinyDB(db_path)
 
 
 def get_table(table_name: str, db_instance: TinyDB) -> TinyDB:

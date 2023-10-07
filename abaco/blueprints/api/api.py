@@ -4,7 +4,7 @@ from io import BytesIO
 from flask import Blueprint, request
 from flask_babel import gettext as _
 
-from abaco.database import db_filename, validate_schema
+from abaco.database import db_path, validate_schema
 from abaco.localization import format_currency, format_percent
 from abaco.models import FixedDiscount, Transaction, UserConfig
 from abaco.utils import validate_json
@@ -37,7 +37,7 @@ def import_abaco():
         return {'message': _('Database invalid')}, 400
     # print(type(database_dict))
     # print(database_dict)
-    with open(db_filename, 'w') as database_file:
+    with open(db_path, 'w') as database_file:
         database_file.write(json.dumps(database_dict))
     return {'message': _('Abaco database imported successfully')}, 201
 

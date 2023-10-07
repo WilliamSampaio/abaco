@@ -8,7 +8,7 @@ from flask_babel import gettext as _
 from flaskwebgui import close_application
 
 from abaco.constants import BASE_DIR_TEMP, COUNTRIES, CURRENCIES
-from abaco.database import database_exists, db_filename, empty_user_config
+from abaco.database import database_exists, db_path, empty_user_config
 from abaco.localization import get_locale
 from abaco.models import FixedDiscount, UserConfig
 from abaco.utils import purge_temp_files
@@ -46,7 +46,7 @@ def index():
 
 @web.route('/backup', methods=['GET'])
 def backup():
-    if os.path.exists(db_filename):
+    if os.path.exists(db_path):
         if not os.path.exists(BASE_DIR_TEMP):
             os.mkdir(BASE_DIR_TEMP)
         output_filename = os.path.join(
@@ -54,7 +54,7 @@ def backup():
             datetime.now().strftime('abaco_%Y-%m-%d_%H-%M-%S.zip'),
         )
         with zipfile.ZipFile(output_filename, mode='w') as zip:
-            zip.write(db_filename, Path(db_filename).name)
+            zip.write(db_path, Path(db_path).name)
         return send_file(output_filename, mimetype='application/zip')
 
 
