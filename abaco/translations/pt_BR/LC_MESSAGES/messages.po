@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-06 13:27-0400\n"
+"POT-Creation-Date: 2023-10-07 13:24-0400\n"
 "PO-Revision-Date: 2023-10-04 01:27-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt_BR\n"
@@ -105,11 +105,11 @@ msgstr "Data Inicial"
 msgid "Final Date"
 msgstr "Data Final"
 
-#: abaco/templates/index.html.jinja:60 abaco/templates/index.html.jinja:320
+#: abaco/templates/index.html.jinja:60 abaco/templates/index.html.jinja:345
 msgid "Earnings"
 msgstr "Ganhos"
 
-#: abaco/templates/index.html.jinja:68 abaco/templates/index.html.jinja:324
+#: abaco/templates/index.html.jinja:68 abaco/templates/index.html.jinja:348
 msgid "Expenses"
 msgstr "Despesas"
 
@@ -219,11 +219,11 @@ msgstr "Você quer relamente remover essa transação?"
 msgid "Click add to register a new transaction"
 msgstr "Clique em adicionar para registrar uma nova transação"
 
-#: abaco/templates/index.html.jinja:369 abaco/templates/index.html.jinja:402
+#: abaco/templates/index.html.jinja:378 abaco/templates/index.html.jinja:411
 msgid "Remove"
 msgstr "Remover"
 
-#: abaco/templates/index.html.jinja:401
+#: abaco/templates/index.html.jinja:410
 msgid "Edit"
 msgstr "Editar"
 
