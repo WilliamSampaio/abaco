@@ -316,30 +316,39 @@
     let chart = null
 
     function populate_chart(data) {
-        earnings = {
-            label: "{{ gettext('Earnings') }}",
-            data: []
-        }
-        expenses = {
-            label: "{{ gettext('Expenses') }}",
-            data: []
-        }
-        labels = []
+        let labels = []
+        let earnings = []
+        let expenses = []
+        let locale = data.results.user_config.language
         if (data.results.transactions.length > 0) {
-            let locale = data.results.user_config.language
             data.results.transactions.forEach((item) => {
-                labels.indexOf(item.date) === -1 ? labels.push(format_date(item.date, locale)) : null
-                if (item.expense) {
-                    expenses.data.push(item.value)
+                let date = format_date(item.date, locale)
+                let index = labels.indexOf(date)
+                if (index == -1) {
+                    labels.push(date)
+                    earnings.push(0)
+                    expenses.push(0)
+                    index = labels.indexOf(date)
+                }
+                if (item.expense == true) {
+                    expenses[index] += item.value
                 } else {
-                    item.net_value ? earnings.data.push(item.net_value) : earnings.data.push(item.value)
+                    item.net_value != undefined ? earnings[index] += item.net_value : earnings[index] += item.value
                 }
             })
         }
         if (chart != null) {
             chart.destroy()
         }
-        chart = create_chart(ctx, 'line', labels, [earnings, expenses])
+        chart = create_chart(ctx, 'line', labels, [
+            {
+                label: "{{ gettext('Earnings') }}",
+                data: earnings
+            }, {
+                label: "{{ gettext('Expenses') }}",
+                data: expenses
+            }
+        ])
     }
 
     function update_settings(data) {

@@ -13,7 +13,8 @@ function format_currency(value, locale, currency) {
 }
 
 function format_date(date, locale) {
-    return new Intl.DateTimeFormat(treat_locale(locale)).format(Date.parse(date))
+    date = date.split('-')
+    return new Date(date[0], date[1], date[2]).toLocaleDateString(treat_locale(locale))
 }
 
 function ajax_requester(url, data = null, method = 'POST', reload = true, success_callback = null) {
