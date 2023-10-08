@@ -29,7 +29,11 @@ def format_currency(value: float):
 
 
 def format_percent(value: float):
-    return fp(value / 100, locale=get_locale(), decimal_quantization=False)
+    return fp(
+        round(value / 100, 4),
+        locale=get_locale(),
+        decimal_quantization=False,
+    )
 
 
 def init_app(app):
