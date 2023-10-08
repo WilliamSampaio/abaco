@@ -62,17 +62,20 @@ class UserConfig(Model):
     name: str
     language: str
     currency: str
+    dark_mode: bool
 
     def __init__(
         self,
         name: str | None = None,
         language: str | None = None,
         currency: str | None = None,
+        dark_mode: bool | None = None,
     ):
         super().__init__(table_name='user_config')
         self.name = name
         self.language = language
         self.currency = currency
+        self.dark_mode = dark_mode
 
     def save(self):
         if self.name is None:
@@ -80,6 +83,8 @@ class UserConfig(Model):
         if self.language is None:
             return None
         if self.currency is None:
+            return None
+        if self.dark_mode is None:
             return None
         return super().save()
 

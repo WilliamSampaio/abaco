@@ -51,6 +51,7 @@ def settings():
     user_config.name = data['name']
     user_config.language = data['language']
     user_config.currency = data['currency']
+    user_config.dark_mode = data['dark_mode']
     if user_config.save() is None:
         return {'message': _('Failed to update data')}, 400
     return {'message': _('Abaco database updated successfully')}, 200

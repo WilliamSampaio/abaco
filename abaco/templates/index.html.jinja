@@ -196,6 +196,13 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" name="dark_mode" value="true" role="switch"
+                            id="settings_dark_mode" {% if data['user_config']['dark_mode']: %}checked{% endif %}>
+                        <label class="form-check-label" for="settings_dark_mode">
+                            {{ gettext('Dark Mode') }} ({{ gettext('Develop Me!') }})
+                        </label>
+                    </div>
                     <button type="submit" class="btn btn-primary">{{ gettext('Save') }}</button>
                 </form>
                 <hr>
@@ -452,10 +459,12 @@
         let name = $('#settings_name').val()
         let language = $('#settings_language').val()
         let currency = $('#settings_currency').val()
+        let dark_mode = $('#settings_dark_mode').is(':checked')
         update_settings({
             'name': String(name).toUpperCase(),
             'language': language,
-            'currency': currency
+            'currency': currency,
+            'dark_mode': dark_mode
         })
     })
 

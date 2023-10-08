@@ -3,7 +3,8 @@
         "1": {
             "name": "",
             "language": "",
-            "currency": ""
+            "currency": "",
+            "dark_mode": true
         }
     },
     "fixed_discounts": {
