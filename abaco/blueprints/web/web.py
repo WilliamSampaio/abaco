@@ -7,8 +7,7 @@ from flask import Blueprint, render_template, send_file
 from flask_babel import gettext as _
 from flaskwebgui import close_application
 
-from abaco.configuration import settings
-from abaco.constants import BASE_DIR_TEMP, COUNTRIES, CURRENCIES
+from abaco.constants import APP_ENV, BASE_DIR_TEMP, COUNTRIES, CURRENCIES
 from abaco.database import database_exists, db_path, empty_user_config
 from abaco.localization import get_locale
 from abaco.models import FixedDiscount, UserConfig
@@ -24,7 +23,7 @@ def index():
 
     if not database_exists() or empty_user_config():
 
-        if settings['APP_ENV'] == 'development':
+        if APP_ENV == 'development':
 
             if populate_fake_db():
                 data = {

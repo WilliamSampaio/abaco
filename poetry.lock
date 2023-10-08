@@ -197,27 +197,6 @@ files = [
 toml = ["tomli"]
 
 [[package]]
-name = "dynaconf"
-version = "3.2.3"
-description = "The dynamic configurator for your Python Project"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "dynaconf-3.2.3-py2.py3-none-any.whl", hash = "sha256:df4af8d0f3b068cc6419ceceaae572070a6b8fec38fa51a1f5eb8ea4883e53de"},
-    {file = "dynaconf-3.2.3.tar.gz", hash = "sha256:8a37ba3b16df64cb1db383eaad9c733aece218413be0fad5d785f7a907612106"},
-]
-
-[package.extras]
-all = ["configobj", "hvac", "redis", "ruamel.yaml"]
-configobj = ["configobj"]
-ini = ["configobj"]
-redis = ["redis"]
-test = ["configobj", "django", "flake8", "flake8-debugger", "flake8-print", "flake8-todo", "flask (>=0.12)", "hvac", "pep8-naming", "pytest", "pytest-cov", "pytest-mock", "pytest-xdist", "python-dotenv", "radon", "redis", "toml"]
-toml = ["toml"]
-vault = ["hvac"]
-yaml = ["ruamel.yaml"]
-
-[[package]]
 name = "easyprocess"
 version = "1.1"
 description = "Easy to use Python subprocess interface."
@@ -1140,4 +1119,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.13"
-content-hash = "62ed962d6904561951e89f15f334d64f1d50f0dedd433f5f79aec52730a3fcde"
+content-hash = "3ed2a171df75407952d51b345527e2f00914dcd08093cf2d1b06720ec5cd72da"

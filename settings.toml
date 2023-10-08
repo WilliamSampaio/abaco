@@ -1,9 +1,0 @@
-[default]
-APP_NAME = 'Abaco'
-# APP_ENV: development, production
-APP_ENV = 'development'
-EXTENSIONS = [
-  "abaco.localization:init_app",
-  "abaco.blueprints.api:init_app",
-  "abaco.blueprints.web:init_app",
-]

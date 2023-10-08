@@ -1,6 +1,8 @@
 import os
 
 APP_NAME = 'Abaco'
+# APP_ENV: 'development', 'production'
+APP_ENV = 'development'
 
 COUNTRIES = [
     {'locale': 'en_US', 'emoji': '🇺🇸', 'country': 'English (US)'},

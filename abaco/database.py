@@ -4,13 +4,13 @@ import os
 from schema import And, Schema
 from tinydb import Query, TinyDB
 
-from abaco.configuration import settings
+from abaco.constants import APP_ENV
 
 db_filename = 'database.abaco.json'
 
-if settings['APP_ENV'] == 'development':
+if APP_ENV == 'development':
     db_path = os.path.join(os.getcwd(), 'database.abaco.json')
-elif settings['APP_ENV'] == 'production':
+elif APP_ENV == 'production':
     db_path = os.path.join(
         os.environ.get('HOME'), '.abaco', 'database.abaco.json'
     )

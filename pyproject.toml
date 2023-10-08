@@ -7,7 +7,6 @@ readme = "README.md"
 version = "0.1.0"
 
 [tool.poetry.dependencies]
-dynaconf = "^3.2.3"
 flask = "^2.3.3"
 flask-babel = "^3.1.0"
 flaskwebgui = "^1.0.6"
@@ -21,11 +20,11 @@ waitress = "^2.1.2"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
+faker = "^19.6.2"
 isort = "^5.12.0"
 pytest = "^7.4.2"
 pytest-cov = "^4.1.0"
 taskipy = "^1.12.0"
-faker = "^19.6.2"
 
 [tool.isort]
 line_length = 79
