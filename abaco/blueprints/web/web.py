@@ -29,8 +29,6 @@ def index():
             if populate_fake_db():
                 data = {
                     'lang': lang,
-                    'initial_date': datetime.today().strftime('%Y-%m-01'),
-                    'final_date': datetime.today().strftime('%Y-%m-%d'),
                     'user_config': UserConfig().find(1).as_dict(),
                     'fixed_discounts': FixedDiscount().available(),
                     'title': _('Home'),
@@ -49,8 +47,6 @@ def index():
 
     data = {
         'lang': lang,
-        'initial_date': datetime.today().strftime('%Y-%m-01'),
-        'final_date': datetime.today().strftime('%Y-%m-%d'),
         'user_config': UserConfig().find(1).as_dict(),
         'fixed_discounts': FixedDiscount().available(),
         'title': _('Home'),

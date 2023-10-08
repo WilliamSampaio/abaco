@@ -109,7 +109,7 @@ def post_transaction():
 @api.route('/transactions', methods=['POST'])
 def getall_transaction():
     data = request.get_json()
-    if data['all'] is True:
+    if 'all' in data and data['all'] is True:
         transactions = Transaction().all(order_by='date')
     else:
         transactions = Transaction().between(
