@@ -33,7 +33,7 @@ def populate_fake_db():
             fixed_discount = FixedDiscount(
                 fake.sentence(),
                 random.choice(['porcentage', 'value']),
-                ceil(random.uniform(0.1, 10.0)),
+                round(random.uniform(0.1, 10.0), 2),
             )
             if fixed_discount.save() is None:
                 return False
@@ -44,7 +44,7 @@ def populate_fake_db():
                 transaction = Transaction(
                     fake.sentence(),
                     current_date.strftime('%Y-%m-%d'),
-                    round(random.uniform(10.0, 9999.99)),
+                    round(random.uniform(10.0, 9999.99), 2),
                     random.choice([True, False]),
                     [random.randint(1, 10)],
                 )
