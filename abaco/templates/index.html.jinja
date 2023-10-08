@@ -439,19 +439,28 @@
         $('#balance').empty().append(format_currency(data.results.totals.balance, locale, currency))
     }
 
+    function populate_dates(data) {
+        $('#initial_date').val(data.results.initial_date)
+        $('#final_date').val(data.results.final_date)
+    }
+
     function getall_fixed_discount() {
         ajax_requester("/api/fixed-discounts", null, 'GET', false, [populate_fixed_discount])
     }
 
-    function get_transactions() {
-        data = {
-            'initial_date': $('#initial_date').val(),
-            'final_date': $('#final_date').val(),
+    function get_transactions(all = false) {
+        let data = JSON.stringify({ 'all': all })
+        if (all == false) {
+            data = JSON.stringify({
+                'initial_date': $('#initial_date').val(),
+                'final_date': $('#final_date').val(),
+            })
         }
-        ajax_requester('/api/transactions', JSON.stringify(data), 'POST', false, [
+        ajax_requester('/api/transactions', data, 'POST', false, [
             populate_transactions,
             populate_totals,
-            populate_chart])
+            populate_chart,
+            populate_dates])
     }
 
     $('#settings_form').submit((e) => {
@@ -547,7 +556,7 @@
         })
 
         getall_fixed_discount()
-        get_transactions()
+        get_transactions(true)
     })
 
 </script>

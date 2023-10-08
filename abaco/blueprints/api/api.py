@@ -109,9 +109,12 @@ def post_transaction():
 @api.route('/transactions', methods=['POST'])
 def getall_transaction():
     data = request.get_json()
-    transactions = Transaction().between(
-        data['initial_date'], data['final_date']
-    )
+    if data['all'] is True:
+        transactions = Transaction().all(order_by='date')
+    else:
+        transactions = Transaction().between(
+            data['initial_date'], data['final_date']
+        )
     fixed_discounts = FixedDiscount().all()
     earnings = 0
     expenses = 0
@@ -141,6 +144,8 @@ def getall_transaction():
     balance = earnings - expenses
     results = {
         'user_config': UserConfig().find(1).as_dict(),
+        'initial_date': transactions[0]['date'],
+        'final_date': transactions[-1]['date'],
         'transactions': new_transactions,
         'totals': {
             'earnings': earnings,

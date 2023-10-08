@@ -7,11 +7,12 @@ from flask import Blueprint, render_template, send_file
 from flask_babel import gettext as _
 from flaskwebgui import close_application
 
+from abaco.configuration import settings
 from abaco.constants import BASE_DIR_TEMP, COUNTRIES, CURRENCIES
 from abaco.database import database_exists, db_path, empty_user_config
 from abaco.localization import get_locale
 from abaco.models import FixedDiscount, UserConfig
-from abaco.utils import purge_temp_files
+from abaco.utils import populate_fake_db, purge_temp_files
 
 web = Blueprint('web', __name__)
 
@@ -22,6 +23,21 @@ def index():
     lang = get_locale().replace('_', '-')
 
     if not database_exists() or empty_user_config():
+
+        if settings['APP_ENV'] == 'development':
+
+            if populate_fake_db():
+                data = {
+                    'lang': lang,
+                    'initial_date': datetime.today().strftime('%Y-%m-01'),
+                    'final_date': datetime.today().strftime('%Y-%m-%d'),
+                    'user_config': UserConfig().find(1).as_dict(),
+                    'fixed_discounts': FixedDiscount().available(),
+                    'title': _('Home'),
+                    'countries': COUNTRIES,
+                    'currencies': CURRENCIES,
+                }
+                return render_template('index.html.jinja', data=data)
 
         data = {
             'lang': lang,
