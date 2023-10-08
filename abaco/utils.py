@@ -19,8 +19,9 @@ def validate_json(json_string: str):
 
 
 def purge_temp_files():
-    for file in os.listdir(BASE_DIR_TEMP):
-        os.remove(os.path.join(BASE_DIR_TEMP, file))
+    if os.path.exists(BASE_DIR_TEMP):
+        for file in os.listdir(BASE_DIR_TEMP):
+            os.remove(os.path.join(BASE_DIR_TEMP, file))
 
 
 def populate_fake_db():
