@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from io import BytesIO
 
 from flask import Blueprint, request
@@ -119,6 +120,12 @@ def getall_transaction():
     earnings = 0
     expenses = 0
     new_transactions = []
+    if len(transactions) == 0:
+        initial_date = datetime.today().strftime('%Y-%m-01')
+        final_date = datetime.today().strftime('%Y-%m-%d')
+    else:
+        initial_date = transactions[0]['date']
+        final_date = transactions[-1]['date']
     for transaction in transactions:
         if transaction['expense']:
             expenses += transaction['value']
@@ -144,8 +151,8 @@ def getall_transaction():
     balance = earnings - expenses
     results = {
         'user_config': UserConfig().find(1).as_dict(),
-        'initial_date': transactions[0]['date'],
-        'final_date': transactions[-1]['date'],
+        'initial_date': initial_date,
+        'final_date': final_date,
         'transactions': new_transactions,
         'totals': {
             'earnings': earnings,
