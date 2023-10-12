@@ -149,6 +149,9 @@ def getall_transaction():
         earnings += transaction['value']
         new_transactions.append(transaction)
     balance = earnings - expenses
+    new_transactions.sort(
+        key=lambda d: datetime.strptime(d['date'], '%Y-%m-%d')
+    )
     results = {
         'user_config': UserConfig().find(1).as_dict(),
         'initial_date': initial_date,
