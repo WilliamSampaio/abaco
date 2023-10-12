@@ -78,6 +78,8 @@ class UserConfig(Model):
 
         if dark_mode is None:
             self.dark_mode = False
+        else:
+            self.dark_mode = dark_mode
 
     def save(self):
         if self.name is None:
