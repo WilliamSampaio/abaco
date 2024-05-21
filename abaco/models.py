@@ -75,7 +75,11 @@ class UserConfig(Model):
         self.name = name
         self.language = language
         self.currency = currency
-        self.dark_mode = dark_mode
+
+        if dark_mode is None:
+            self.dark_mode = False
+        else:
+            self.dark_mode = dark_mode
 
     def save(self):
         if self.name is None:

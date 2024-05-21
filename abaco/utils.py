@@ -39,7 +39,7 @@ def populate_fake_db():
             if fixed_discount.save() is None:
                 return False
         today = datetime.today()
-        current_date = today - timedelta(days=90)
+        current_date = today - timedelta(days=30)
         while current_date <= today:
             for _ in range(7, 15):
                 transaction = Transaction(
@@ -52,6 +52,7 @@ def populate_fake_db():
                 if transaction.save() is None:
                     return False
             current_date = current_date + timedelta(days=1)
-    except:
+    except Exception as e:
+        print('Erro: {}'.format(e))
         return False
     return True

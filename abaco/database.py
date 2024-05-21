@@ -9,11 +9,11 @@ from abaco.constants import APP_ENV
 db_filename = 'database.abaco.json'
 
 if APP_ENV == 'development':
-    db_path = os.path.join(os.getcwd(), 'database.abaco.json')
+    dir = os.getcwd()
+    db_path = os.path.join(dir, db_filename)
 elif APP_ENV == 'production':
-    db_path = os.path.join(
-        os.environ.get('HOME'), '.abaco', 'database.abaco.json'
-    )
+    dir = os.path.join(os.environ.get('HOME'), '.abaco')
+    db_path = os.path.join(dir, db_filename)
 
 
 def database_exists():
@@ -21,8 +21,8 @@ def database_exists():
 
 
 def get_db() -> TinyDB:
-    if not os.path.exists(os.path.join(os.environ.get('HOME'), '.abaco')):
-        os.makedirs(os.path.join(os.environ.get('HOME'), '.abaco'))
+    if not os.path.exists(dir):
+        os.makedirs(dir)
     return TinyDB(db_path)
 
 

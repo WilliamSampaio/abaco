@@ -37,6 +37,7 @@ babel_init = "pybabel init -i abaco/translations/messages.pot -d abaco/translati
 babel_init_all = "task babel_init en_US && task babel_init pt_BR"
 babel_update = "pybabel update -i abaco/translations/messages.pot -d abaco/translations"
 build = "task lint && task babel_compile && pyinstaller --clean abaco.spec"
+freeze = "poetry export --output=requirements.txt"
 lint = "blue . && isort ."
 run = "task lint && flask run"
 

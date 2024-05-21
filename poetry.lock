@@ -72,13 +72,13 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "blinker"
-version = "1.6.2"
+version = "1.6.3"
 description = "Fast, simple object-to-object and broadcast signaling"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "blinker-1.6.2-py3-none-any.whl", hash = "sha256:c3d739772abb7bc2860abf5f2ec284223d9ad5c76da018234f6f50d6f31ab1f0"},
-    {file = "blinker-1.6.2.tar.gz", hash = "sha256:4afd3de66ef3a9f8067559fb7a1cbe555c17dcbe15971b05d1b625c3e7abe213"},
+    {file = "blinker-1.6.3-py3-none-any.whl", hash = "sha256:296320d6c28b006eb5e32d4712202dbcdcbf5dc482da298c2f44881c43884aaa"},
+    {file = "blinker-1.6.3.tar.gz", hash = "sha256:152090d27c1c5c722ee7e48504b02d76502811ce02e1523553b4cf8c8b3d3a8d"},
 ]
 
 [[package]]
@@ -220,13 +220,13 @@ files = [
 
 [[package]]
 name = "faker"
-version = "19.6.2"
+version = "19.10.0"
 description = "Faker is a Python package that generates fake data for you."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Faker-19.6.2-py3-none-any.whl", hash = "sha256:8fba91068dc26e3159c1ac9f22444a2338704b0991d86605322e454bda420092"},
-    {file = "Faker-19.6.2.tar.gz", hash = "sha256:d5d5953556b0fb428a46019e03fc2d40eab2980135ddef5a9eb3d054947fdf83"},
+    {file = "Faker-19.10.0-py3-none-any.whl", hash = "sha256:f321e657ed61616fbfe14dbb9ccc6b2e8282652bbcfcb503c1bd0231ff834df6"},
+    {file = "Faker-19.10.0.tar.gz", hash = "sha256:63da90512d0cb3acdb71bd833bb3071cb8a196020d08b8567a01d232954f1820"},
 ]
 
 [package.dependencies]
@@ -289,13 +289,13 @@ pytz = ">=2022.7"
 
 [[package]]
 name = "flaskwebgui"
-version = "1.0.6"
+version = "1.0.8"
 description = "Create desktop applications with Flask/Django/FastAPI!"
 optional = false
 python-versions = "*"
 files = [
-    {file = "flaskwebgui-1.0.6-py3-none-any.whl", hash = "sha256:1c3cc12a6496de8df26eae7ea3ca4aaf913de1b9246d4a7b141c3abc873374c9"},
-    {file = "flaskwebgui-1.0.6.tar.gz", hash = "sha256:82a58daa8f4f9e936b54e392aa3a8b36b5980e404818e8aa7a914f426e7b79a5"},
+    {file = "flaskwebgui-1.0.8-py3-none-any.whl", hash = "sha256:0bb31eac052ea776f2e43620e2ef48b41d203fe1cb4135f1def6c19ca93125ec"},
+    {file = "flaskwebgui-1.0.8.tar.gz", hash = "sha256:24d6957388721ad91a309ba7f22c4311dedb88cc908415b1c61f9fe554bbda0e"},
 ]
 
 [package.dependencies]
