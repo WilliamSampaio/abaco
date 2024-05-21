@@ -1,29 +1,35 @@
-import json
 import os
 
-from schema import And, Schema
 from tinydb import Query, TinyDB
 
-from abaco.constants import APP_ENV
+from .config import settings
 
-db_filename = 'database.abaco.json'
+db_filename_wallets = 'wallets.abaco'
+db_filename_cache = 'cache.abaco.json'
 
-if APP_ENV == 'development':
+if settings.ENV_FOR_DYNACONF == 'DEVELOPMENT':
     dir = os.getcwd()
-    db_path = os.path.join(dir, db_filename)
-elif APP_ENV == 'production':
+    db_path_cache = os.path.join(dir, db_filename_cache)
+elif settings.ENV_FOR_DYNACONF == 'PRODUCTION':
     dir = os.path.join(os.environ.get('HOME'), '.abaco')
-    db_path = os.path.join(dir, db_filename)
+    db_path_cache = os.path.join(dir, db_filename_cache)
+
+
+def get_database_uri() -> str:
+    return settings.SQLALCHEMY_DATABASE_URI.format(
+        dir,
+        db_filename_wallets,
+    )
 
 
 def database_exists():
-    return os.path.exists(db_path)
+    return os.path.exists(db_path_cache)
 
 
 def get_db() -> TinyDB:
     if not os.path.exists(dir):
         os.makedirs(dir)
-    return TinyDB(db_path)
+    return TinyDB(db_path_cache)
 
 
 def get_table(table_name: str, db_instance: TinyDB) -> TinyDB:
@@ -47,40 +53,3 @@ def empty_user_config():
 
 def get_query():
     return Query()
-
-
-def validate_schema(schema: dict):
-    base_dir = os.path.abspath(os.path.dirname(__file__))
-
-    def for_over_dict(dictionary: dict):
-        for key, value in dictionary.items():
-            if type(dictionary[key]) == dict:
-                dictionary[key] = for_over_dict(dictionary[key])
-                continue
-            if type(value) == str:
-                dictionary[key] = And(str)
-                continue
-            if type(value) == float:
-                dictionary[key] = And(float)
-                continue
-            if type(value) == int:
-                dictionary[key] = And(int)
-                continue
-            if type(value) == bool:
-                dictionary[key] = And(bool)
-                continue
-        return dictionary
-
-    f = open(os.path.join(base_dir, 'schemas', 'database.json'))
-    valid_schema = json.load(f)
-    for table in schema.keys():
-        try:
-            valid_row = Schema(for_over_dict(valid_schema[table]['1']))
-        except:
-            return False
-        for key in dict(schema[table]).keys():
-            try:
-                valid_row.validate(schema[table][key])
-            except:
-                return False
-    return True

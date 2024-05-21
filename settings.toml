@@ -2,7 +2,7 @@
 APP_SECRET_KEY = "@8@c0!"
 APP_VERSION = "0.2.0"
 
-SQLALCHEMY_DATABASE_URI = "sqlite://{}/{}"
+SQLALCHEMY_DATABASE_URI = "sqlite:///{}/{}"
 SQLALCHEMY_TRACK_MODIFICATIONS = false
 
 [development]

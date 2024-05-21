@@ -32,15 +32,10 @@ line_length = 79
 profile = "black"
 
 [tool.taskipy.tasks]
-babel_compile = "pybabel compile -d abaco/translations"
-babel_extract = "pybabel extract -F babel.cfg -o abaco/translations/messages.pot ."
-babel_init = "pybabel init -i abaco/translations/messages.pot -d abaco/translations -l"
-babel_init_all = "task babel_init en_US && task babel_init pt_BR"
-babel_update = "pybabel update -i abaco/translations/messages.pot -d abaco/translations"
-build = "task lint && task babel_compile && pyinstaller --clean abaco.spec"
 freeze = "poetry export --output=requirements.txt"
 lint = "blue . && isort ."
-run = "task lint && flask run"
+migrate = "alembic upgrade head"
+run = "task lint && task migrate && streamlit run main.py"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
