@@ -5,9 +5,6 @@ def create_app():
 
     import streamlit as st
 
-    if 'logged' not in st.session_state:
-        st.session_state.logged = False
-
     # st.write(get_database_uri())
     # st.write(settings)
 
@@ -36,7 +33,14 @@ def create_app():
     demo_name = st.sidebar.selectbox(
         'Menu',
         page_names_to_funcs.keys(),
-        disabled=True if st.session_state.logged is False else False,
+        disabled=True if 'wallet' not in st.session_state else False,
     )
+
+    def logout():
+        if 'wallet' in st.session_state:
+            st.session_state.pop('wallet')
+        st.rerun()
+
+    st.sidebar.button('Sair da carteira', 'btn_logout', on_click=logout)
 
     page_names_to_funcs[demo_name]()
