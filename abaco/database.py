@@ -1,5 +1,7 @@
 import os
 
+import sqlalchemy as db
+from sqlalchemy.orm import sessionmaker
 from tinydb import Query, TinyDB
 
 from .config import settings
@@ -20,6 +22,14 @@ def get_database_uri() -> str:
         dir,
         db_filename_wallets,
     )
+
+
+engine = db.create_engine(get_database_uri())
+Session = sessionmaker(bind=engine)
+
+
+def get_database_conn():
+    return engine.connect()
 
 
 def database_exists():
