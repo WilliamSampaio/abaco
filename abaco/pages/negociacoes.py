@@ -35,13 +35,13 @@ def page_negociacoes():
                 )
         return dataset
 
-    st.header(title)
+    st.write('# ' + title)
     st.divider()
 
     btn_add_negociacao = st.button('Cadastrar Negociação')
     if btn_add_negociacao:
         with st.form('add_negociacao'):
-            st.write('teste!')
+            st.write('## Cadastrar Nova Negociação')
 
     st.dataframe(load_negociacoes(), 2000)
 

@@ -36,7 +36,7 @@ def page_wallets():
             st.session_state.message['func'](st.session_state.message['text'])
             st.session_state.pop('message')
 
-    st.header(f':abacus: Bem-vindo ao {settings.APP_NAME}!')
+    st.write(f'# :abacus: Bem-vindo ao {settings.APP_NAME}!')
 
     def access():
 
@@ -44,7 +44,7 @@ def page_wallets():
 
         with st.form('access_form', True):
 
-            st.header('Acessar carteira')
+            st.write('## ' + title)
 
             if settings.ENV_FOR_DYNACONF == 'DEVELOPMENT':
                 st.warning('- Tio Patinhas Wallet **senha**: ```123``` (Dev)')
