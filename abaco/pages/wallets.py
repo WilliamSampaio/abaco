@@ -5,6 +5,8 @@ from abaco.models import Wallet
 from ..config import settings
 from ..database import Session
 
+title = 'Acessar carteira'
+
 
 def page_wallets():
 
@@ -43,6 +45,9 @@ def page_wallets():
         with st.form('access_form', True):
 
             st.header('Acessar carteira')
+
+            if settings.ENV_FOR_DYNACONF == 'DEVELOPMENT':
+                st.warning('- Tio Patinhas Wallet **senha**: ```123``` (Dev)')
 
             options = []
             wallets = session.query(Wallet).all()
