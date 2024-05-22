@@ -47,18 +47,8 @@ def get_table(table_name: str, db_instance: TinyDB) -> TinyDB:
     return db_instance
 
 
-def get_user_config() -> TinyDB:
-    return get_table('user_config', get_db())
-
-
-def get_fixed_discounts() -> TinyDB:
-    return get_table('fixed_discounts', get_db())
-
-
-def empty_user_config():
-    if len(get_user_config().all()) == 0:
-        return True
-    return False
+def get_stocks() -> TinyDB:
+    return get_table('stocks', get_db())
 
 
 def get_query():

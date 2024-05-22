@@ -1,4 +1,5 @@
 from abaco.database import Session
+from abaco.functions import render_ticker_links
 from abaco.models import Negociacoes
 
 title = 'Negociações'
@@ -31,6 +32,7 @@ def page_negociacoes():
                             '%d/%m/%Y'
                         ),
                         'Observação': data['observacao'],
+                        'Consultar': render_ticker_links(data['ticker']),
                     }
                 )
         return dataset
@@ -43,6 +45,8 @@ def page_negociacoes():
         with st.form('add_negociacao'):
             st.write('## Cadastrar Nova Negociação')
 
-    st.dataframe(load_negociacoes(), 2000)
+    df = load_negociacoes()
+
+    st.table(df)
 
     # st.write(load_negociacoes())
