@@ -166,10 +166,15 @@ def page_negociacoes():
         btn_remover_itens = col_btn_remover_itens.button(
             'Remover Itens Selecionados'
         )
-        # btn_cadastrar = col_btn_cadastrar.button('Cadastrar Negociação')
+        btn_cadastrar = col_btn_cadastrar.button('Cadastrar Negociação')
 
         if btn_remover_itens:
-            lista = table.query('Selecionado==True')['Ticker'].to_list()
-            st.write(lista)
+            lista = table.query('Selecionado==True').index.to_list()
+            for index in sorted(lista, reverse=True):
+                del st.session_state.itens_df[index]
+            st.rerun()
+
+        if btn_cadastrar:
+            ...
 
     # st.write(load_negociacoes())
