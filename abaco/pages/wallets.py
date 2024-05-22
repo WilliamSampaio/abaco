@@ -47,7 +47,7 @@ def page_wallets():
             st.write('## ' + title)
 
             if settings.ENV_FOR_DYNACONF == 'DEVELOPMENT':
-                st.warning('- Tio Patinhas Wallet **senha**: ```123``` (Dev)')
+                st.info('- Tio Patinhas Wallet **senha**: ```123``` (Dev)')
 
             options = []
             wallets = session.query(Wallet).all()

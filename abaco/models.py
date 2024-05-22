@@ -20,6 +20,10 @@ class MovimentacaoEnum(enum.Enum):
     Compra = 1
     Venda = 2
 
+    @classmethod
+    def names(cls):
+        return list(map(lambda c: c.name, cls))
+
 
 class Wallet(Base):
     __tablename__ = 'wallet'
