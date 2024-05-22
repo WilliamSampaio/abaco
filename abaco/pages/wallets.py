@@ -2,6 +2,7 @@ from hashlib import md5
 
 from abaco.models import Wallet
 
+from ..config import settings
 from ..database import Session
 
 
@@ -14,28 +15,38 @@ def page_wallets():
     if 'action' not in st.session_state:
         st.session_state.action = 'wallets.access'
 
-    from ..config import settings
-
     def btn_goto_access_form_callback():
         st.session_state.action = 'wallets.access'
+        st.rerun()
 
     def btn_goto_add_form_callback():
         st.session_state.action = 'wallets.add'
+        st.rerun()
+
+    def set_message(alert_func, message):
+        st.session_state.message = {
+            'func': alert_func,
+            'text': message,
+        }
+
+    def echo_message():
+        if 'message' in st.session_state:
+            st.session_state.message['func'](st.session_state.message['text'])
+            st.session_state.pop('message')
 
     st.header(f':abacus: Bem-vindo ao {settings.APP_NAME}!')
 
     def access():
 
-        if 'message' in st.session_state:
-            st.session_state.message['func'](st.session_state.message['text'])
-            st.session_state.pop('message')
+        echo_message()
 
-        with st.form('wallet_access_form', True):
+        with st.form('access_form', True):
 
             st.header('Acessar carteira')
 
             options = []
             wallets = session.query(Wallet).all()
+
             if len(wallets) > 0:
                 for wallet in wallets:
                     data = wallet.__dict__
@@ -46,34 +57,32 @@ def page_wallets():
             description = st.selectbox('Selecione a carteira', options)
             password = st.text_input('Senha de acesso', type='password')
 
-            btn_wallet_access_form_submit = st.form_submit_button('Acessar')
+            btn_access_form_submit = st.form_submit_button('Acessar')
 
-            if btn_wallet_access_form_submit:
+            if btn_access_form_submit:
 
                 if description is None or password == '':
-                    st.session_state.message = {
-                        'func': st.error,
-                        'text': 'Carteira ou senha não informada!',
-                    }
-                else:
-                    id = str(description).split('. ')[0]
-                    m = md5()
-                    m.update(password.encode('utf-8'))
-                    pass_md5 = m.hexdigest()
-                    wallet = session.query(Wallet).get(int(id))
+                    set_message(st.error, 'Carteira ou senha não informada!')
+                    btn_goto_access_form_callback()
 
-                    if not wallet or wallet.__dict__['password'] != pass_md5:
-                        st.session_state.message = {
-                            'func': st.error,
-                            'text': 'Carteira não existe ou senha inválida!',
-                        }
-                    else:
-                        st.session_state.wallet = {
-                            'id': id,
-                            'description': wallet.__dict__['description'],
-                        }
-                        st.session_state.pop('action')
-                        st.rerun()
+                id = str(description).split('. ')[0]
+                m = md5()
+                m.update(password.encode('utf-8'))
+                pass_md5 = m.hexdigest()
+                wallet = session.query(Wallet).get(int(id))
+
+                if not wallet or wallet.__dict__['password'] != pass_md5:
+                    set_message(
+                        st.error, 'Carteira não existe ou senha inválida!'
+                    )
+                    btn_goto_access_form_callback()
+
+                st.session_state.wallet = {
+                    'id': wallet.__dict__['id'],
+                    'description': wallet.__dict__['description'],
+                }
+                st.session_state.pop('action')
+                st.rerun()
 
         st.divider()
 
@@ -85,11 +94,9 @@ def page_wallets():
 
     def add():
 
-        if 'message' in st.session_state:
-            st.session_state.message['func'](st.session_state.message['text'])
-            st.session_state.pop('message')
+        echo_message()
 
-        with st.form('wallet_add_form', True):
+        with st.form('add_form', True):
 
             st.header('Cadastrar nova carteira')
 
@@ -99,35 +106,26 @@ def page_wallets():
             password1 = st.text_input('Senha de acesso', type='password')
             password2 = st.text_input('Repita a senha', type='password')
 
-            btn_wallet_add_form_submit = st.form_submit_button('Salvar')
+            btn_add_form_submit = st.form_submit_button('Salvar')
 
-            if btn_wallet_add_form_submit:
+        if btn_add_form_submit:
 
-                if (
-                    password1 != password2
-                    or password1 == ''
-                    or description == ''
-                ):
-                    st.session_state.message = {
-                        'func': st.error,
-                        'text': 'Descrição vazia ou senhas não coincidem!',
-                    }
-                else:
-                    m = md5()
-                    m.update(password1.encode('utf-8'))
-                    pass_md5 = m.hexdigest()
+            if password1 != password2 or password1 == '' or description == '':
+                set_message(
+                    st.error, 'Descrição vazia ou senhas não coincidem!'
+                )
+                btn_goto_add_form_callback()
 
-                    wallet = Wallet(description=description, password=pass_md5)
-                    session.add(wallet)
-                    session.commit()
+            m = md5()
+            m.update(password1.encode('utf-8'))
+            pass_md5 = m.hexdigest()
 
-                    st.session_state.message = {
-                        'func': st.success,
-                        'text': 'Carteira cadastrada com sucesso!',
-                    }
+            wallet = Wallet(description=description, password=pass_md5)
+            session.add(wallet)
+            session.commit()
 
-                    btn_goto_access_form_callback()
-                    st.rerun()
+            set_message(st.success, 'Carteira cadastrada com sucesso!')
+            btn_goto_access_form_callback()
 
         st.divider()
 
@@ -142,3 +140,6 @@ def page_wallets():
 
     if st.session_state.action == 'wallets.add':
         add()
+
+    # debug
+    # st.write(st.session_state)

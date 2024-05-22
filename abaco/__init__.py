@@ -23,24 +23,26 @@ def create_app():
 
         st.write('# Page 4')
 
-    page_names_to_funcs = {
-        'Wallets': page_wallets,
-        'Plotting Demo': plotting_demo,
-        'Mapping Demo': mapping_demo,
-        'DataFrame Demo': data_frame_demo,
-    }
+    page_names_to_funcs = {}
 
-    demo_name = st.sidebar.selectbox(
-        'Menu',
-        page_names_to_funcs.keys(),
-        disabled=True if 'wallet' not in st.session_state else False,
-    )
+    if 'wallet' not in st.session_state:
 
-    def logout():
+        page_wallets()
+    else:
+
+        page_names_to_funcs['Plotting Demo'] = plotting_demo
+        page_names_to_funcs['Mapping Demo'] = mapping_demo
+        page_names_to_funcs['DataFrame Demo'] = data_frame_demo
+
+        demo_name = st.sidebar.selectbox('Menu', page_names_to_funcs.keys())
+
+        def logout():
+            if 'wallet' in st.session_state:
+                st.session_state.pop('wallet')
+
         if 'wallet' in st.session_state:
-            st.session_state.pop('wallet')
-        st.rerun()
+            st.sidebar.button(
+                'Sair da carteira', 'btn_logout', on_click=logout
+            )
 
-    st.sidebar.button('Sair da carteira', 'btn_logout', on_click=logout)
-
-    page_names_to_funcs[demo_name]()
+        page_names_to_funcs[demo_name]()
