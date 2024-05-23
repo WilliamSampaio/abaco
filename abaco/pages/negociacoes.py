@@ -5,6 +5,7 @@ import pandas as pd
 from abaco.database import Session
 from abaco.functions import render_ticker_links
 from abaco.models import MovimentacaoEnum, Negociacoes
+from abaco.yfinance import get_stock_info
 
 title = 'Negociações'
 
@@ -109,13 +110,19 @@ def page_negociacoes():
                 set_message(st.error, 'Ticker não informado!')
                 st.rerun()
 
+            stock_info = get_stock_info(ticker)
+
+            if stock_info is False:
+                set_message(st.error, 'Ticker não listado na B3!')
+                st.rerun()
+
             st.session_state.itens_df.append(
                 {
                     'wallet_id': wallet_id,
                     'nota': nota,
                     'data_pregao': data_pregao,
                     'observacao': observacao,
-                    'ticker': ticker,
+                    'ticker': ticker.upper(),
                     'movimentacao': movimentacao,
                     'quantidade': quantidade,
                     'preco_unitario': preco_unitario,

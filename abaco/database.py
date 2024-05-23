@@ -47,7 +47,7 @@ def get_table(table_name: str, db_instance: TinyDB) -> TinyDB:
     return db_instance
 
 
-def get_stocks() -> TinyDB:
+def get_stocks_tbl() -> TinyDB:
     return get_table('stocks', get_db())
 
 

@@ -1,22 +1,14 @@
-import streamlit as st
-
-from .api import get_stock_info
 from .config import settings as s
-
-
-@st.cache_data
-def is_fii(ticker: str) -> bool:
-    stock = get_stock_info(ticker)
-    if str(stock['shortName']).split(' ')[0] == 'FII':
-        return True
-    return False
+from .yfinance import get_stock_info
 
 
 def render_ticker_links(ticker: str) -> str:
 
     imglink = '[<img src="{}" style="width: 32px;">]({})'
 
-    fii = is_fii(ticker)
+    stock = get_stock_info()
+    if stock:
+        fii = stock['isFii']
 
     list_links = [
         imglink.format(s.STATUSINVEST_ICON, s.STATUSINVEST_URL2.format(ticker))

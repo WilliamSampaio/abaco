@@ -5,22 +5,23 @@ APP_VERSION = "0.2.0"
 SQLALCHEMY_DATABASE_URI = "sqlite:///{}/{}"
 SQLALCHEMY_TRACK_MODIFICATIONS = false
 
+STATUSINVEST_ICON = "https://statusinvest.com.br/img/favicon/favicon-48x48.png"
 STATUSINVEST_URL1 = "https://statusinvest.com.br/acoes/{}"
 STATUSINVEST_URL2 = "https://statusinvest.com.br/fundos-imobiliarios/{}"
-STATUSINVEST_ICON = "https://statusinvest.com.br/img/favicon/favicon-48x48.png"
 
-FUNDAMENTUS_URL = "https://fundamentus.com.br/detalhes.php?papel={}"
 FUNDAMENTUS_ICON = "https://fundamentus.com.br/img/fundamentus.ico"
+FUNDAMENTUS_URL = "https://fundamentus.com.br/detalhes.php?papel={}"
 
-YAHOOFINANCE_URL = "https://finance.yahoo.com/quote/{}.SA"
 YAHOOFINANCE_ICON = "https://s.yimg.com/cv/apiv2/finance/favicon_y19_32x32_custom.png"
+YAHOOFINANCE_URL = "https://finance.yahoo.com/quote/{}.SA"
 
+INVESTIDOR10_ICON = "https://investidor10.com.br/assets/front/images/icon-48x48.ico"
 INVESTIDOR10_URL1 = "https://investidor10.com.br/acoes/{}/"
 INVESTIDOR10_URL2 = "https://investidor10.com.br/fiis/{}/"
-INVESTIDOR10_ICON = "https://investidor10.com.br/assets/front/images/icon-48x48.ico"
+INVESTIDOR10_URL_BASE = "https://investidor10.com.br"
 
-FUNDSEXPLORER_URL = "https://www.fundsexplorer.com.br/funds/{}"
 FUNDSEXPLORER_ICON = "https://www.fundsexplorer.com.br/wp-content/themes/fundsexplorer/resources/images/favicon.ico"
+FUNDSEXPLORER_URL = "https://www.fundsexplorer.com.br/funds/{}"
 
 [development]
 APP_NAME = "Abaco (Dev)"
