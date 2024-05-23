@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 import pandas as pd
 
@@ -189,6 +189,30 @@ def page_negociacoes():
             st.rerun()
 
         if btn_cadastrar:
-            ...
+            data = []
+            for item in st.session_state.itens_df:
+                data.append(
+                    Negociacoes(
+                        wallet_id=item['wallet_id'],
+                        ticker=item['ticker'],
+                        movimentacao=item['movimentacao'],
+                        quantidade=item['quantidade'],
+                        preco_unitario=item['preco_unitario'],
+                        valor_total=item['valor_total'],
+                        nota=item['nota'],
+                        data_pregao=item['data_pregao'],
+                        observacao=item['observacao'],
+                        created_at=datetime.now(),
+                    )
+                )
+            session.add_all(data)
+            session.commit()
+
+            st.session_state.pop('itens_df')
+            st.session_state.pop('nota')
+            st.session_state.pop('data_pregao')
+
+            set_message(st.success, 'Negociação cadastrada com sucesso!')
+            st.rerun()
 
     # st.write(load_negociacoes())
