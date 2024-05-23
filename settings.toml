@@ -8,6 +8,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = false
 STATUSINVEST_ICON = "https://statusinvest.com.br/img/favicon/favicon-48x48.png"
 STATUSINVEST_URL1 = "https://statusinvest.com.br/acoes/{}"
 STATUSINVEST_URL2 = "https://statusinvest.com.br/fundos-imobiliarios/{}"
+STATUSINVEST_URL_STOCK_ICON = "https://statusinvest.com.br/img/company/avatar/{}.jpg"
 
 FUNDAMENTUS_ICON = "https://fundamentus.com.br/img/fundamentus.ico"
 FUNDAMENTUS_URL = "https://fundamentus.com.br/detalhes.php?papel={}"
