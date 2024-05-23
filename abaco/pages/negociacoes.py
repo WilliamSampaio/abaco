@@ -25,7 +25,7 @@ def page_negociacoes():
 
     def btn_goto_add_form_callback():
         st.session_state.action = 'negociacoes.add'
-        st.rerun()
+        # st.rerun()
 
     def set_message(alert_func, message):
         st.session_state.message = {

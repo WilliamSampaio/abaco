@@ -19,11 +19,11 @@ def page_wallets():
 
     def btn_goto_access_form_callback():
         st.session_state.action = 'wallets.access'
-        st.rerun()
+        # st.rerun()
 
     def btn_goto_add_form_callback():
         st.session_state.action = 'wallets.add'
-        st.rerun()
+        # st.rerun()
 
     def set_message(alert_func, message):
         st.session_state.message = {
