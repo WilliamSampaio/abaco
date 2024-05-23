@@ -101,38 +101,39 @@ def page_negociacoes():
 
         submit_add_negociacao = st.form_submit_button('Adicionar')
 
-        if submit_add_negociacao:
+    if submit_add_negociacao:
 
-            st.session_state.nota = nota
-            st.session_state.data_pregao = data_pregao
+        st.session_state.nota = nota
+        st.session_state.data_pregao = data_pregao
 
-            if ticker == '':
-                set_message(st.error, 'Ticker não informado!')
-                st.rerun()
-
-            stock_info = get_stock_info(ticker)
-
-            if stock_info is False:
-                set_message(st.error, 'Ticker não listado na B3!')
-                st.rerun()
-
-            st.session_state.itens_df.append(
-                {
-                    'wallet_id': wallet_id,
-                    'nota': nota,
-                    'data_pregao': data_pregao,
-                    'observacao': observacao,
-                    'ticker': ticker.upper(),
-                    'movimentacao': movimentacao,
-                    'quantidade': quantidade,
-                    'preco_unitario': preco_unitario,
-                    'valor_total': quantidade * preco_unitario,
-                    'selecionado': False,
-                }
-            )
-
-            set_message(st.success, 'Item adicionado!')
+        if ticker == '':
+            set_message(st.error, 'Ticker não informado!')
             st.rerun()
+
+        stock_info = get_stock_info(ticker)
+
+        if stock_info is False:
+            set_message(st.error, 'Ticker não listado na B3!')
+            st.rerun()
+
+        st.session_state.itens_df.append(
+            {
+                'icon': stock_info['companyIcon'],
+                'wallet_id': wallet_id,
+                'nota': nota,
+                'data_pregao': data_pregao,
+                'observacao': observacao,
+                'ticker': ticker.upper(),
+                'movimentacao': movimentacao,
+                'quantidade': quantidade,
+                'preco_unitario': preco_unitario,
+                'valor_total': quantidade * preco_unitario,
+                'selecionado': False,
+            }
+        )
+
+        set_message(st.success, 'Item adicionado!')
+        st.rerun()
 
     if len(st.session_state.itens_df) > 0:
 
@@ -140,6 +141,7 @@ def page_negociacoes():
 
         df = df[
             [
+                'icon',
                 'ticker',
                 'movimentacao',
                 'quantidade',
@@ -166,7 +168,12 @@ def page_negociacoes():
             }
         )
 
-        table = st.data_editor(df, width=2000, hide_index=True)
+        table = st.data_editor(
+            df,
+            width=2000,
+            hide_index=True,
+            column_config={'icon': st.column_config.ImageColumn(label='')},
+        )
 
         col_btn_cadastrar, col_btn_remover_itens = st.columns(2)
 
