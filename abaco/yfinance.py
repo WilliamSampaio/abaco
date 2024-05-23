@@ -3,6 +3,7 @@ IMPLEMENTA CONSULTAS POR MEIO DA LIB yfinance
 """
 from datetime import datetime
 
+import streamlit as st
 import yfinance as yf
 
 from .cache import add_stock_info
@@ -10,6 +11,7 @@ from .cache import get_stock_info as cache_get_stock_info
 from .webscraping import company_icon
 
 
+@st.cache_data(show_spinner=False)
 def get_stock_info(ticker: str):
     stock = cache_get_stock_info(ticker)
     if stock is not False:

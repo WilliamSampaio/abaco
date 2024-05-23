@@ -6,7 +6,7 @@ def render_ticker_links(ticker: str) -> str:
 
     imglink = '[<img src="{}" style="width: 32px;">]({})'
 
-    stock = get_stock_info()
+    stock = get_stock_info(ticker)
     if stock:
         fii = stock['isFii']
 
