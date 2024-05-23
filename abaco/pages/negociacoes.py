@@ -3,7 +3,7 @@ from datetime import date, datetime
 import pandas as pd
 
 from abaco.database import Session
-from abaco.functions import render_ticker_links
+from abaco.functions import moeda, render_ticker_links
 from abaco.models import MovimentacaoEnum, Negociacoes
 from abaco.yfinance import get_stock_info
 
@@ -46,22 +46,7 @@ def page_negociacoes():
         if len(negociacoes) > 0:
             negociacoes.reverse()
             for negociacao in negociacoes:
-                data = negociacao.__dict__
-                dataset.append(
-                    {
-                        'Movimentação': data['movimentacao'].name,
-                        'Ticker': data['ticker'],
-                        'Quantidade': data['quantidade'],
-                        'Preço Unitário': data['preco_unitario'],
-                        'Valor Total': data['valor_total'],
-                        'N° Nota': data['nota'],
-                        'Data Pregão': data['data_pregao'].strftime(
-                            '%d/%m/%Y'
-                        ),
-                        'Observação': data['observacao'],
-                        'Consultar': render_ticker_links(data['ticker']),
-                    }
-                )
+                dataset.append(negociacao.__dict__)
         return dataset
 
     st.write('# ' + title)
@@ -77,7 +62,55 @@ def page_negociacoes():
             on_click=btn_goto_add_form_callback,
         )
 
-        st.data_editor(load_negociacoes(), width=2000)
+        st.divider()
+
+        c = st.container()
+
+        td1, td2, td3, td4, td5, td6, td7, td8 = c.columns(8)
+
+        td1.write('**Movimentação**')
+        td2.write('**Ticker**')
+        td3.write('**Quantidade**')
+        td4.write('**Preço Unitário**')
+        td5.write('**Valor Total**')
+        td6.write('**Data**')
+        td7.write('**Observação**')
+        td8.write('**Consultar**')
+
+        for item in load_negociacoes():
+
+            td1, td2, td3, td4, td5, td6, td7, td8 = c.columns(8)
+
+            if item['movimentacao'].name == 'Compra':
+                td1.html(
+                    '<span style="color: green"><b>{}</b></span>'.format(
+                        item['movimentacao'].name
+                    )
+                )
+            else:
+                td1.html(
+                    '<span style="color: red"><b>{}</b></span>'.format(
+                        item['movimentacao'].name
+                    )
+                )
+
+            td2.html(
+                '<img src="{}" style="width: 20px;"> {}'.format(
+                    get_stock_info(item['ticker'])['companyIcon'],
+                    item['ticker'],
+                )
+            )
+
+            td3.write('**{}**'.format(item['quantidade']))
+            td4.write('**R$ {}**'.format(moeda(item['preco_unitario'])))
+            td5.write('**R$ {}**'.format(moeda(item['valor_total'])))
+            td6.write(
+                '**{}**'.format(item['data_pregao'].strftime('%d/%m/%Y'))
+            )
+            td7.write(item['observacao'])
+            td8.markdown(
+                render_ticker_links(item['ticker']), unsafe_allow_html=True
+            )
 
     def add():
 

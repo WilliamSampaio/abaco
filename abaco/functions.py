@@ -1,10 +1,12 @@
+import locale
+
 from .config import settings as s
 from .yfinance import get_stock_info
 
 
 def render_ticker_links(ticker: str) -> str:
 
-    imglink = '[<img src="{}" style="width: 32px;">]({})'
+    imglink = '[<img src="{}" style="width: 20px;">]({})'
 
     stock = get_stock_info(ticker)
     if stock:
@@ -30,4 +32,9 @@ def render_ticker_links(ticker: str) -> str:
         else '',
     ]
 
-    return '{}'.format(''.join(list_links))
+    return '{}'.format(' '.join(list_links))
+
+
+def moeda(valor):
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+    return locale.currency(valor, grouping=True, symbol=None)
