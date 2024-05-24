@@ -4,10 +4,12 @@ Revision ID: 12ec0c78fed0
 Revises: 7ee0bfffcd1d
 Create Date: 2024-05-21 22:16:46.361907
 """
-import random
+import os
 from datetime import datetime
 from typing import Sequence, Union
 
+import numpy as np
+import pandas as pd
 import sqlalchemy as sa
 
 from abaco.config import settings
@@ -19,37 +21,6 @@ revision: str = '12ec0c78fed0'
 down_revision: Union[str, None] = '7ee0bfffcd1d'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
-
-tickers = [
-    'AFHI11',
-    'AURE3',
-    'ALZR11',
-    'SAPR11',
-    'BCFF11',
-    'CMIG3',
-    'BRCO11',
-    'VALE3',
-    'BTCI11',
-    'VLID3',
-    'BTLG11',
-    'BBAS3',
-    'CPTS11',
-    'PFRM3',
-    'CVBI11',
-    'RAIZ4',
-    'GARE11',
-    'RANI3',
-    'GGRC11',
-    'GGBR4',
-    'HABT11',
-    'SAPR4',
-    'HFOF11',
-    'JALL3',
-    'HGBS11',
-    'ROMI3',
-    'HGCR11',
-    'SANB4',
-]
 
 
 def upgrade() -> None:
@@ -80,35 +51,17 @@ def upgrade() -> None:
 
     if settings.ENV_FOR_DYNACONF == 'DEVELOPMENT':
 
-        operacoes_compra = []
+        data = pd.read_excel(
+            os.path.join(os.getcwd(), 'data', 'wallet.ods'), engine='odf'
+        )
 
-        for nota in range(1, 11):
-            for qtd in range(5, random.randint(5, 10)):
+        data.insert(0, 'wallet_id', 1, True)
+        data.insert(9, 'created_at', datetime.now(), True)
+        data.movimentacao = data.movimentacao.replace({np.nan: None})
+        data.nota = data.nota.replace({np.nan: ''})
+        data.observacao = data.observacao.replace({np.nan: ''})
 
-                str_date = '2023-{}-{}'.format(
-                    str(nota).zfill(2), str(qtd).zfill(2)
-                )
-
-                operacao = {'wallet_id': 1}
-                operacao['ticker'] = random.choice(tickers)
-                operacao['movimentacao'] = 'Compra'
-                operacao['quantidade'] = random.randint(100, 300)
-                operacao['preco_unitario'] = round(
-                    random.uniform(9.99, 99.99), 2
-                )
-                operacao['valor_total'] = (
-                    operacao['preco_unitario'] * operacao['quantidade']
-                )
-                operacao['nota'] = str(nota).zfill(10)
-                operacao['data_pregao'] = datetime.strptime(
-                    str_date, '%Y-%m-%d'
-                ).date()
-                operacao['created_at'] = datetime.strptime(
-                    str_date, '%Y-%m-%d'
-                )
-                operacoes_compra.append(operacao)
-
-        op.bulk_insert(tbl_negociacoes, operacoes_compra)
+        op.bulk_insert(tbl_negociacoes, data.to_dict('records'))
 
 
 def downgrade() -> None:

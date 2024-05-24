@@ -19,6 +19,7 @@ Base = declarative_base()
 class MovimentacaoEnum(enum.Enum):
     Compra = 1
     Venda = 2
+    Bonificacao = 3
 
     @classmethod
     def names(cls):

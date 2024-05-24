@@ -87,11 +87,15 @@ def page_negociacoes():
                         item['movimentacao'].name
                     )
                 )
-            else:
+            elif item['movimentacao'].name == 'Venda':
                 td1.html(
                     '<span style="color: red"><b>{}</b></span>'.format(
                         item['movimentacao'].name
                     )
+                )
+            elif item['movimentacao'].name == 'Bonificacao':
+                td1.html(
+                    '<span style="color: yellow"><b>Bonificação</b></span>'
                 )
 
             td2.html(
