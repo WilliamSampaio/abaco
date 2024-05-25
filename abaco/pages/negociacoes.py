@@ -99,7 +99,7 @@ def page_negociacoes():
 
             st.session_state.itens_df.append(
                 {
-                    'icon': stock_info['companyIcon'],
+                    'icon': stock_info['abaco_icon'],
                     'nota': nota,
                     'data_pregao': data_pregao,
                     'observacao': observacao,
@@ -119,7 +119,7 @@ def page_negociacoes():
 
             c = st.container()
 
-            headers = c.columns(9, gap='small')
+            headers = c.columns([0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 0.25])
 
             headers[0].write('**Movimentação**')
             headers[1].write('**Ticker**')
@@ -133,7 +133,7 @@ def page_negociacoes():
             for i in range(0, len(st.session_state.itens_df)):
 
                 item = st.session_state.itens_df[i]
-                row = c.columns(9, gap='small')
+                row = c.columns([0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5, 1, 0.25])
 
                 if item['movimentacao'] == 'Compra':
                     row[0].html(
@@ -154,7 +154,7 @@ def page_negociacoes():
 
                 row[1].html(
                     '<img src="{}" style="width: 20px;"> {}'.format(
-                        get_stock_info(item['ticker'])['companyIcon'],
+                        get_stock_info(item['ticker'])['abaco_icon'],
                         item['ticker'],
                     )
                 )
@@ -204,7 +204,7 @@ def page_negociacoes():
 
     c = st.container()
 
-    row = c.columns(9, gap='small')
+    row = c.columns(9)
 
     row[0].write('**Movimentação**')
     row[1].write('**Ticker**')
@@ -217,7 +217,7 @@ def page_negociacoes():
 
     for item in load_negociacoes():
 
-        row = c.columns(9, gap='small')
+        row = c.columns(9)
 
         if item['movimentacao'].name == 'Compra':
             row[0].html(
@@ -238,7 +238,7 @@ def page_negociacoes():
 
         row[1].html(
             '<img src="{}" style="width: 20px;"> {}'.format(
-                get_stock_info(item['ticker'])['companyIcon'],
+                get_stock_info(item['ticker'])['abaco_icon'],
                 item['ticker'],
             )
         )

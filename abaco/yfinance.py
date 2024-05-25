@@ -21,12 +21,12 @@ def get_stock_info(ticker: str):
         data = stock.get_info()
         data['updatedAt'] = int(datetime.now().timestamp())
         if str(data['shortName']).split(' ')[0] == 'FII':
-            data['isFii'] = True
+            data['abaco_tipo_ativo'] = 'fii'
         else:
-            data['isFii'] = False
-        icon = company_icon(ticker.lower(), data['isFii'])
+            data['abaco_tipo_ativo'] = 'acoes'
+        icon = company_icon(ticker.lower(), data['abaco_tipo_ativo'] == 'fii')
         if icon is not False:
-            data['companyIcon'] = icon
+            data['abaco_icon'] = icon
         if not add_stock_info(data):
             return False
         return data

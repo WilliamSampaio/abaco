@@ -10,7 +10,7 @@ def render_ticker_links(ticker: str) -> str:
 
     stock = get_stock_info(ticker)
     if stock:
-        fii = stock['isFii']
+        fii = stock['abaco_tipo_ativo'] == 'fii'
 
     list_links = [
         imglink.format(s.STATUSINVEST_ICON, s.STATUSINVEST_URL2.format(ticker))
