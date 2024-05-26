@@ -16,3 +16,12 @@ def get_stock_info(ticker: str):
     if len(results) == 0:
         return False
     return results[0]
+
+
+def update_stock_info(data: dict):
+    try:
+        Stock = get_query()
+        return get_stocks_tbl().update(data, Stock.symbol == data['symbol'])
+    except Exception as e:
+        print(e)
+        return False
