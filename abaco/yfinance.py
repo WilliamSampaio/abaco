@@ -28,7 +28,7 @@ def get_stock_info(ticker: str):
         if str(data['shortName']).split(' ')[0] == 'FII':
             data['abaco_tipo_ativo'] = 'fii'
         else:
-            data['abaco_tipo_ativo'] = 'acoes'
+            data['abaco_tipo_ativo'] = 'açoẽs'
         icon = company_icon(ticker.lower(), data['abaco_tipo_ativo'] == 'fii')
         if icon is not False:
             data['abaco_icon'] = icon
