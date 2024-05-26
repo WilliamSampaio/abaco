@@ -54,7 +54,7 @@ def page_wallets():
 
             if len(wallets) > 0:
                 for wallet in wallets:
-                    data = wallet.__dict__
+                    data = wallet.to_dict()
                     options.append(
                         '. '.join([str(data['id']), data['description']])
                     )
@@ -76,15 +76,15 @@ def page_wallets():
                 pass_md5 = m.hexdigest()
                 wallet = session.query(Wallet).get(int(id))
 
-                if not wallet or wallet.__dict__['password'] != pass_md5:
+                if not wallet or wallet.to_dict()['password'] != pass_md5:
                     set_message(
                         st.error, 'Carteira não existe ou senha inválida!'
                     )
                     btn_goto_access_form_callback()
 
                 st.session_state.wallet = {
-                    'id': wallet.__dict__['id'],
-                    'description': wallet.__dict__['description'],
+                    'id': wallet.to_dict()['id'],
+                    'description': wallet.to_dict()['description'],
                 }
                 st.session_state.pop('action')
                 st.rerun()

@@ -35,6 +35,15 @@ class Wallet(Base):
     created_at = Column(DateTime, nullable=False, default=datetime.now())
     updated_at = Column(DateTime, nullable=True)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'description': self.description,
+            'password': self.password,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+        }
+
 
 class Negociacoes(Base):
     __tablename__ = 'negociacoes'
@@ -50,3 +59,18 @@ class Negociacoes(Base):
     data_pregao = Column(Date, nullable=False)
     observacao = Column(String(100), nullable=False, default='')
     created_at = Column(DateTime, nullable=False, default=datetime.now())
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'wallet_id': self.wallet_id,
+            'ticker': self.ticker,
+            'movimentacao': self.movimentacao,
+            'quantidade': self.quantidade,
+            'preco_unitario': self.preco_unitario,
+            'valor_total': self.valor_total,
+            'nota': self.nota,
+            'data_pregao': self.data_pregao,
+            'observacao': self.observacao,
+            'created_at': self.created_at,
+        }

@@ -33,7 +33,7 @@ def page_negociacoes():
         if len(negociacoes) > 0:
             negociacoes.reverse()
             for negociacao in negociacoes:
-                dataset.append(negociacao.__dict__)
+                dataset.append(negociacao.to_dict())
         return dataset
 
     def remove_item(index: int):
@@ -82,7 +82,7 @@ def page_negociacoes():
 
         observacao = st.text_input('Observação', max_chars=100, value='')
 
-        if st.button('Adicionar'):
+        if st.button('Adicionar', 'btn_add_item'):
 
             st.session_state.nota = nota
             st.session_state.data_pregao = data_pregao
@@ -171,7 +171,7 @@ def page_negociacoes():
 
             st.write('')
 
-            if st.button('Cadastrar Negociação'):
+            if st.button('Cadastrar Negociação', 'btn_add_negociacao'):
 
                 data = []
                 for item in st.session_state.itens_df:
@@ -203,8 +203,9 @@ def page_negociacoes():
     st.divider()
 
     c = st.container()
+    columns_size = [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 1, 0.4, 0.2]
 
-    row = c.columns(9)
+    row = c.columns(columns_size)
 
     row[0].write('**Movimentação**')
     row[1].write('**Ticker**')
@@ -217,7 +218,7 @@ def page_negociacoes():
 
     for item in load_negociacoes():
 
-        row = c.columns(9)
+        row = c.columns(columns_size)
 
         if item['movimentacao'].name == 'Compra':
             row[0].html(

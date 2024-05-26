@@ -20,17 +20,24 @@ def page_dashboard():
         if len(negociacoes) > 0:
             negociacoes.reverse()
             for negociacao in negociacoes:
-                dataset.append(negociacao.__dict__)
+                dataset.append(negociacao.to_dict())
 
         df = pd.DataFrame(dataset)
 
-        st.write(df)
+        # st.write(df)
 
-        df = df.groupby(['data_pregao', 'movimentacao'])['valor_total'].sum()
+        # df = df.groupby(['data_pregao', 'movimentacao'])['valor_total'].sum()
 
-        st.write(df)
+        # st.write(df)
+
+        return df
 
     st.write('# ' + title)
     st.divider()
 
-    patrimonio_dataframe()
+    row = st.columns([1, 0.5])
+
+    row[0].success('oi')
+    row[1].error('oi')
+
+    st.dataframe(patrimonio_dataframe())
