@@ -24,9 +24,24 @@ def load_negociacoes_df():
 
 def load_posicoes_df():
     df = load_negociacoes_df()
+    df = df.drop(
+        columns=[
+            'id',
+            'wallet_id',
+            'preco_unitario',
+            'nota',
+            'data_pregao',
+            'observacao',
+            'created_at',
+        ],
+        axis=1,
+    )
+    df['movimentacao'] = ['add' if m.name != 'Venda' else 'sub' for m in df['movimentacao']]
+
+    df = df.groupby(['ticker', 'movimentacao']).sum().reset_index()
+
     df['tipo_ativo'] = [
-        get_stock_info(ticker)['abaco_tipo_ativo'] for ticker in df['ticker']
+        get_stock_info(ticker)['abaco_tipo_ativo'].upper() for ticker in df['ticker']
     ]
-    df['movimentacao'] = [m.name for m in df['movimentacao']]
 
     return df
